@@ -1,1 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workshop on Stream Processing - Kafka</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Workshop on Stream Processing - Kafka">
+  <meta name="author" content="Dr.Muthukumaran">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
 
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Workshop on Stream Processing - Kafka</h1>
+    <h2>Focus on Stream processing</h2>
+    <p>Dr.Muthukumaran<br/>http://profbmuthu.github.io/dataStream</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is Apache Kafka?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Apache Kafka was initially developed at LinkedIn and subsequently released as an open source project with the Apache Software Foundation.  </p></li>
+<li><p>Apache Kafka is a fast, scalable, distributed in nature by its design, partitioned and replicated commit service. </p></li>
+<li><p>It is a distributed service that is used to buffer data between producing systems. </p></li>
+<li><p>It buffers messages where, a message is just a simple and independent unit with a data structure which contains a meta header and the transmitted information.  Messages are committed to specific topics, each with many partitions. </p></li>
+<li><p>Within each partition, commits are guaranteed to be linearly ordered according to time, with Kafka providing an offset for each message</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Why Apache Kafka designed?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Apache Kafka is an open source, distributed publish-subscribe messaging system, mainly designed with the following characteristics:</p></li>
+<li><p>Persistent messaging: To derive the real value from big data, any kind of information loss cannot be afforded. Apache Kafka is designed with O(1) disk structures that provide constant-time performance even with very large volumes of stored messages, which is in order of TB.</p></li>
+<li><p>High throughput: Keeping big data in mind, Kafka is designed to work on commodity hardware and to support millions of messages per second.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Why Apache Kafka designed? Contd.</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Distributed: Apache Kafka explicitly supports messages partitioning over Kafka servers and distributing consumption over a cluster of consumer machines while maintaining per-partition ordering semantics.</p></li>
+<li><p>Multiple client support: Apache Kafka system supports easy integration of clients from different platforms such as Java, .NET, PHP, Ruby, and Python.</p></li>
+<li><p>Real time: Messages produced by the producer threads should be immediately visible to consumer threads; this feature is critical to event-based systems such as Complex Event Processing (CEP) systems.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Why Kafka is called as publish subscribe system?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Messaging is the art of moving the message across the producer consumer group. It integrates distributed applications to an overall system by providing message queues for communication between them. </p></li>
+<li><p>One application can publish its messages to the queue and another application can asynchronously read from it at any time. </p></li>
+<li><p>Message Broker systems are persisting incoming messages in an enhanced type of a message queue, named topic. </p></li>
+<li><p>Sending messages to the broker in the form of publishing to a specific topic and on the other hand receiving messages only for the specified topic, is called publish/subscribe.</p></li>
+<li><p>Kafka enables this. Hence kafka is apublish subscribe solution</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>What is a Topic in Kafka?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Kafka provides a high-level message abstraction called a Topic. It is a category or stream name to which messages are published. </p></li>
+<li><p>A topic allows the broker to deliver a message to multiple independent consumers. </p></li>
+<li><p>Users define a new Topic for each new category of messages. Kafka has a very simple storage layout. </p></li>
+<li><p>Every time a producer publishes a message to a partition, the broker simply appends the message to the last segment file.</p></li>
+<li><p>Each partition of a topic corresponds to a logical log. Physically, a log is implemented as a set of segment files of approximately the  same size. </p></li>
+<li><p>For better performance, we flush the segment files to disk only after a configurable number of messages have been published or a certain amount of time has elapsed. A message is only exposed to the consumers after it is flushed.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Where does Kafka store data?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Kafka stores data in topics, with each topic consisting of a configurable number of partitions. </p></li>
+<li><p>The number of partitions of a topic is very important for performance considerations as this number is an upper bound on the consumer parallelism: if a topic has N partitions, then your application can only consume this topic with a maximum of N threads in parallel. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What are BrokerHosts in kafka?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>In order to initialize your Kafka spout/emitter you need to construct an instance of the marker interface BrokerHosts. Currently, we support the following two implementations:</p></li>
+<li><p>ZkHosts is what you should use if you want to dynamically track Kafka broker to partition mapping. This class uses Kafka&#39;s ZooKeeper entries to track brokerHost -&gt; partition mapping. You can instantiate an object by calling java public ZkHosts(String brokerZkStr, String brokerZkPath) public ZkHosts(String brokerZkStr). brokerZkPath is the root directory under which all the topics and partition information is stored.  By default, the broker-partition mapping is refreshed every 60 seconds from ZooKeeper. If you want to change it, you should set host.refreshFreqSecs to your chosen value.</p></li>
+<li><p>StaticHosts This is an alternative implementation where broker -&gt; partition information is static. In order to construct an instance of this class, you need to first construct an instance of GlobalPartitionInformation.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>What is KafkaConfig with respect to kafkaSpout?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>KafkaSpout is an instance of KafkaConfig. java public KafkaConfig(BrokerHosts hosts, String topic) public KafkaConfig(BrokerHosts hosts, String topic, String clientId)</p></li>
+<li><p>There are 2 extensions of KafkaConfig currently in use.</p></li>
+<li><p>Spoutconfig is an extension of KafkaConfig that supports additional fields with ZooKeeper connection info and for controlling behavior specific to KafkaSpout. </p></li>
+<li><p>The Zkroot will be used as root to store your consumer&#39;s offset. The id should uniquely identify your spout. java public SpoutConfig(BrokerHosts hosts, String topic, String zkRoot, String id); public SpoutConfig(BrokerHosts hosts, String topic, String id); </p></li>
+<li><p>In addition to these parameters, SpoutConfig contains the following fields that control how KafkaSpout behaves: ```java // setting for how often to save the current Kafka offset to ZooKeeper public long stateUpdateIntervalMs = 2000;</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is Apache Kafka?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Why Apache Kafka designed?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Why Apache Kafka designed? Contd.'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Why Kafka is called as publish subscribe system?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What is a Topic in Kafka?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Where does Kafka store data?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What are BrokerHosts in kafka?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What is KafkaConfig with respect to kafkaSpout?'>
+         8
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
