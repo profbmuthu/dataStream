@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workshop on Stream Processing - Storm</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Workshop on Stream Processing - Storm">
+  <meta name="author" content="Dr.Muthukumaran">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Workshop on Stream Processing - Storm</h1>
+    <h2>Focus on Stream processing</h2>
+    <p>Dr.Muthukumaran<br/>http://profbmuthu.github.io/dataStream</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is storm ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Storm is a free and open source distributed realtime computation system. </p></li>
+<li><p>Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing. </p></li>
+<li><p>Storm is simple, can be used with any programming language, and is a lot of fun to use!</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is a stream in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The stream is the core abstraction in Storm. </p></li>
+<li><p>A stream is an unbounded sequence of tuples that is processed and created in parallel in a distributed fashion. </p></li>
+<li><p>Streams are defined with a schema that names the fields in the stream&#39;s tuples. By default, tuples can contain integers, longs, shorts, bytes, strings, doubles, floats, booleans, and byte arrays</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What is a spout in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A spout is a source of streams in a topology. </p></li>
+<li><p>Spouts will read tuples from an external source and emit them into the topology (e.g. a Kestrel queue ). </p></li>
+<li><p>Spouts can either be reliable or unreliable. A reliable spout is capable of replaying a tuple if it failed to be processed by Storm, whereas an unreliable spout forgets about the tuple as soon as it is emitted.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>What are the methods in spout?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Spouts can emit more than one stream. To do so, declare multiple streams using the declareStream method of OutputFieldsDeclarer and specify the stream to emit to when using the emit method on SpoutOutputCollector.</p></li>
+<li><p>The main method on spouts is nextTuple. nextTuple either emits a new tuple into the topology or simply returns if there are no new tuples to emit. </p></li>
+<li><p>It is imperative that nextTuple does not block for any spout implementation, because Storm calls all the spout methods on the same thread.</p></li>
+<li><p>The other main methods on spouts are ack and fail. These are called when Storm detects that a tuple emitted from the spout either successfully completed through the topology or failed to be completed. ack and fail are only called for reliable spouts</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>What are bolts in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Processing in topologies is carried out by bolts. Bolts can do anything from filtering, functions, aggregations, joins, talking to databases, and more.</p></li>
+<li><p>Bolts can do simple stream transformations. Bolts can emit more than one stream. </p></li>
+<li><p>Doing complex stream transformations often requires multiple steps and thus multiple bolts. For example, transforming a stream of tweets into a stream of trending images requires at least two steps: a bolt to do a rolling count of retweets for each image, and one or more bolts to stream out the top X images.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>What are the main methods in bolt?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The main method in bolts is the execute method which takes in as input a new tuple. </p></li>
+<li><p>Bolts emit new tuples using the OutputCollector object. Bolts must call the ack method on the OutputCollector for every tuple they process so that Storm knows when tuples are completed (and can eventually determine that its safe to ack the original spout tuples). </p></li>
+<li><p>For the common case of processing an input tuple, emitting 0 or more tuples based on that tuple, and then acking the input tuple, Storm provides an IBasicBolt interface which does the acking automatically.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What are the typical functions performed by bolts in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Typical functions performed by bolts include: Filtering tuples, Joins and aggregations, Calculations, Database reads/writes</p></li>
+<li></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>What are the kinds of nodes in storm cluster</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>There are two kind of nodes in a Storm cluster: master node and worker nodes. </p></li>
+<li><p>Master node run a daemon called Nimbus, which is responsible for distributing code around the cluster, assigning tasks to each worker node, and monitoring for failures.</p></li>
+<li><p>Worker nodes run a daemon called Supervisor, which executes a portion of a topology. A topology in Storm runs across many worker nodes on different machines.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <article data-timings="">
+    <p>What are the operation modes in Storm?</p>
+
+<ul>
+<li><p>In Local Mode, Storm topologies run on the local machine in a single JVM. This mode is used for development, testing, and debugging because itâ€™s the easiest way to see all topology components working together. In this mode, we can adjust parameters that enable us to see how our topology runs in different Storm configuration environments.</p></li>
+<li><p>In Remote Mode, we submit our topology to the Storm cluster, which is composed of many processes, usually running on different machines. Remote Mode doesnâ€™t show debugging information, which is why itâ€™s considered Production Mode. However, it is possible to create a Storm cluster on a single development machine, and itâ€™s a good idea to do so before deploying to production, to make sure there wonâ€™t be any problems running the topology in a production environment.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>What are Stream groupings in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Part of defining a topology is specifying for each bolt which streams it should receive as input. A stream grouping defines how that stream should be partitioned among the bolt&#39;s tasks.</p></li>
+<li><p>A Stream Grouping specifies which stream(s) are consumed by each bolt and how the stream will be consumed.</p></li>
+<li><p>There are eight built-in stream groupings in Storm, and you can implement a custom stream grouping by implementing the CustomStreamGrouping interface:</p></li>
+<li><p>the eight built in stream groupings are Shuffle grouping, Fields grouping</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Explain the built-in stream groupings in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Shuffle grouping: Tuples are randomly distributed across the bolt&#39;s tasks in a way such that each bolt is guaranteed to get an equal number of tuples.</p></li>
+<li><p>Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the &quot;user-id&quot; field, tuples with the same &quot;user-id&quot; will always go to the same task, but tuples with different &quot;user-id&quot;&#39;s may go to different tasks.</p></li>
+<li><p>Partial Key grouping: The stream is partitioned by the fields specified in the grouping, like the Fields grouping, but are load balanced between two downstream bolts, which provides better utilization of resources when the incoming data is skewed. This paper provides a good explanation of how it works and the advantages it provides.</p></li>
+<li><p>All grouping: The stream is replicated across all the bolt&#39;s tasks. Use this grouping with care.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Explain the built in stream groupings in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Global grouping: The entire stream goes to a single one of the bolt&#39;s tasks. Specifically, it goes to the task with the lowest id.</p></li>
+<li><p>None grouping: This grouping specifies that you don&#39;t care how the stream is grouped. Currently, none groupings are equivalent to shuffle groupings. Eventually though, Storm will push down bolts with none groupings to execute in the same thread as the bolt or spout they subscribe from (when possible).</p></li>
+<li><p>Direct grouping: This is a special kind of grouping. A stream grouped this way means that the producer of the tuple decides which task of the consumer will receive this tuple. Direct groupings can only be declared on streams that have been declared as direct streams. Tuples emitted to a direct stream must be emitted using one of the emitDirect methods. A bolt can get the task ids of its consumers by either using the provided TopologyContext or by keeping track of the output of the emit method in OutputCollector (which returns the task ids that the tuple was sent to).</p></li>
+<li><p>Local or shuffle grouping: If the target bolt has one or more tasks in the same worker process, tuples will be shuffled to just those in-process tasks. Otherwise, this acts like a normal shuffle grouping.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>What is a tuple?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The tuple is the main data structure in Storm. </p></li>
+<li><p>A tuple is a named list of values, where each value can be any type. </p></li>
+<li><p>Tuples are dynamically typed the types of the fields do not need to be declared. </p></li>
+<li><p>Tuples have helper methods like getInteger and getString to get field values without having to cast the result. </p></li>
+<li><p>Storm needs to know how to serialize all the values in a tuple. By default, Storm knows how to serialize the primitive types, strings, and byte arrays. If you want to use another type, you&#39;ll need to implement and register a serializer for that type</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>What is the method of killing a topology in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>To kill a topology, simply run: storm kill {stormname}</p></li>
+<li><p>Give the same name to storm kill as you used when submitting the topology.</p></li>
+<li><p>Storm won&#39;t kill the topology immediately. Instead, it deactivates all the spouts so that they don&#39;t emit any more tuples, and then Storm waits Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS seconds before destroying all the workers. </p></li>
+<li><p>This gives the topology enough time to complete any tuples it was processing when it got killed</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>What is task parallelism?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Task parallelism (also known as function parallelism and control parallelism) is a form of parallelization of computer code across multiple processors in parallel computing environments. </p></li>
+<li><p>Task parallelism focuses on distributing tasks â€“ concretely performed by processes or threads â€“ across different parallel computing nodes. </p></li>
+<li><p>It contrasts to data parallelism as another form of parallelism.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>How is storm implemented?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Storm is primarily implemented in Clojure. This is something to keep in mind if you want to look into the code to see how each system works or to make your own customizations. </p></li>
+<li><p>Storm was developed at BackType and Twitter; </p></li>
+</ul>
+
+<h2>What are the types of communication in Storm ?</h2>
+
+<ul>
+<li><p>Intra-worker communication in Storm (inter-thread on the same Storm node): LMAX Disruptor</p></li>
+<li><p>Inter-worker communication (node-to-node across the network): ZeroMQ or Netty</p></li>
+<li><p>Inter-topology communication: nothing built into Storm, you must take care of this yourself with e.g. a messaging system such as Kafka/RabbitMQ, a database, etc.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What is a topology in storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A Storm topology is analogous to a MapReduce job. One key difference is that a MapReduce job eventually finishes, whereas a topology runs forever. </p></li>
+<li><p>A topology is a graph of spouts and bolts that are connected with stream groupings.</p></li>
+<li><p>Storm distinguishes between the following three main entities that are used to actually run a topology in a Storm cluster:, Worker processes, Executors (threads), Tasks.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>What is a worker process in storm ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A worker process executes a subset of a topology, and runs in its own JVM. A worker process belongs to a specific topology and may run one or more executors for one or more components (spouts or bolts) of this topology. A running topology consists of many such processes running on many machines within a Storm cluster.</p></li>
+<li><p>To manage its incoming and outgoing messages each worker process has a single receive thread that listens on the workerâ€™s TCP port (as configured via supervisor.slots.ports). </p></li>
+<li><p>The parameter topology.receiver.buffer.size determines the batch size that the receive thread uses to place incoming messages into the incoming queues of the workerâ€™s executor threads. </p></li>
+<li><p>Each worker has a single send thread that is responsible for reading messages from the workerâ€™s transfer queue and sending them over the network to downstream consumers. </p></li>
+<li><p>The size of the transfer queue is configured via topology.transfer.buffer.size.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>What are executors in Storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>An executor is a thread that is spawned by a worker process and runs within the workerâ€™s JVM. An executor may run one or more tasks for the same component (spout or bolt). An executor always has one thread that it uses for all of its tasks, which means that tasks run serially on an executor.</p></li>
+<li><p>Each worker process controls one or more executor threads. </p></li>
+<li><p>Each executor thread has its own incoming queue and outgoing queue.  </p></li>
+<li><p>Each executor has its dedicated send thread that moves an executorâ€™s outgoing messages from its outgoing queue to the â€œparentâ€ workerâ€™s transfer queue. </p></li>
+<li><p>The sizes of the executorsâ€™ incoming and outgoing queues are configured via topology.executor.receive.buffer.size and topology.executor.send.buffer.size, respectively.</p></li>
+<li><p>Each executor thread has a single thread that handles the user logic for the spout/bolt (application code), and a single send thread which moves messages from the executorâ€™s outgoing queue to the workerâ€™s transfer queue.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <article data-timings="">
+    <p>What is a task in Storm?</p>
+
+<ul>
+<li>A task is a unit of work that will be sent to one executor. A task performs the actual data processing and is run within its parent executorâ€™s thread of execution.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>What are the spout implementations in Storm?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>storm-kestrel: Adapter to use Kestrel as a spout</p></li>
+<li><p>storm-amqp-spout: Adapter to use AMQP source as a spout</p></li>
+<li><p>storm-jms: Adapter to use a JMS source as a spout</p></li>
+<li><p>storm-redis-pubsub: A spout that subscribes to a Redis pubsub stream</p></li>
+<li><p>storm-beanstalkd-spout: A spout that subscribes to a beanstalkd queue</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is storm ?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is a stream in storm?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is a spout in storm?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What are the methods in spout?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What are bolts in storm?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What are the main methods in bolt?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What are the typical functions performed by bolts in storm?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What are the kinds of nodes in storm cluster'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='NA'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='What are Stream groupings in storm?'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Explain the built-in stream groupings in storm?'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Explain the built in stream groupings in storm?'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='What is a tuple?'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='What is the method of killing a topology in storm?'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='What is task parallelism?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='How is storm implemented?'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='What is a topology in storm?'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='What is a worker process in storm ?'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='What are executors in Storm?'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='NA'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='What are the spout implementations in Storm?'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='NA'>
+         22
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
