@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BigData - Data Management</title>
+  <meta charset="utf-8">
+  <meta name="description" content="BigData - Data Management">
+  <meta name="author" content="Dr.Muthukumaran">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>BigData - Data Management</h1>
+    <h2>Focus on MapReduce Basics</h2>
+    <p>Dr.Muthukumaran<br/>http://profbmuthu.github.io/dataStream</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h1> Let Us Discuss Map Reduce </h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is Big Data?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The term &quot;Big Data&quot; has been used to describe data sets that are so large that typical and traditional
+means of data storage, management, search, analytics, and other processing has become a challenge.</p></li>
+<li><p>Big Data is characterized by the magnitude of digital information that can come from many sources
+and data formats (structured and unstructured), and data that can be processed and analyzed to
+find insights and patterns used to make informed decisions.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What is Apache Hadoop Eco System?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Apache Hadoop ecosystem consists of the following major components:</li>
+<li>Core Hadoop framework: <strong>HDFS and MapReduce</strong></li>
+<li>Metadata management: <strong>HCatalog</strong></li>
+<li>Data storage and querying: <strong>HBase, Hive, and Pig</strong></li>
+<li>Data import/export: <strong>Flume, Sqoop</strong></li>
+<li>Analytics and machine learning: <strong>Mahout</strong></li>
+<li>Distributed coordination: <strong>Zookeeper</strong></li>
+<li>Cluster management: <strong>Ambari</strong></li>
+<li>Data storage and serialization: <strong>Avro</strong></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>What are the Hadoop daemons?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop has the following daemons:</p></li>
+<li><p>NameNode: Maintains the metadata for each file stored in the HDFS. Metadata includes the information about blocks comprising the file as well their locations on the DataNodes.</p></li>
+<li><p>Secondary NameNode: This is not a backup NameNode. In fact, it is a poorly named component of the Hadoop platform. It performs some housekeeping functions for the NameNode.</p></li>
+<li><p>DataNode: Stores the actual blocks of a file in the HDFS on its own local
+disk.</p></li>
+<li><p>JobTracker: One of the master components, it is responsible for managing the overall execution of a job. It performs functions such as scheduling child tasks (individual Mapper and Reducer) to individual nodes, keeping track of the health of each task and node, and even rescheduling failed tasks.</p></li>
+<li><p>TaskTracker: Runs on individual DataNodes and is responsible for starting and managing individual Map/Reduce tasks. Communicates with the JobTracker.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>What is MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop&#39;s main processing engine is MapReduce, which is currently one of the most popular big-data processing frameworks available. </p></li>
+<li><p>It enables you to seamlessly integrate existing Hadoop data storage into processing, and it provides a unique combination of simplicity and power.</p></li>
+<li><p>MapReduce is built on the proven concept of divide and conquer: itâ€™s much faster to break a massive task into smaller chunks and process them in parallel.</p></li>
+<li><p>In MapReduce, task-based programming logic is placed as close to the data as possible. This technique works very nicely with both structured and unstructured data.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>What is the responsibility of MapReduce framework?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>MapReduce framework (based on the user-supplied code) is to provide the overall coordination of execution. </p></li>
+<li><p>This includes choosing appropriate machines (nodes) for running mappers; starting and monitoring the mapper&#39;s execution; choosing appropriate locations for the reducer&#39;s execution; sorting and shuffling output of mappers and delivering the output to reducer nodes; and starting and monitoring the reducer&#39;s execution.</p></li>
+<li><p>The framework takes care of scheduling tasks, monitoring them, and re-executing failed tasks.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What is a map and reduce function?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>MapReduce works by breaking the processing into two phases: the map phase and the
+reduce phase. Each phase has key-value pairs as input and output, the types of which may be chosen by the programmer. The programmer also specifies two functions: the map function and the reduce function.</p></li>
+<li><p>a map takes as input a function and a sequence of values. It then applies the function to each value in the sequence. </p></li>
+<li><p>A reduce combines all the elements of a sequence using a binary operation.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>What is a map reduce job?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A MapReduce job is a unit of work that the client wants to be performed: it consists of the input data, the MapReduce program, and configuration information. </p></li>
+<li><p>A mapper and reducer together constitute a single Hadoop job. A mapper is a mandatory part of a job, and can produce zero or more key/value pairs (k2, v2). A reducer is an optional part of a job, and can produce zero or more key/value pairs (k3, v3).</p></li>
+<li><p>Hadoop runs the job by dividing it into tasks, of which there are two types: map tasks and reduce tasks.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>How are the map reduce jobs controlled?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>There are two types of nodes that control the job execution process: </p></li>
+<li><p>a jobtracker The jobtracker coordinates all the jobs run on the system by scheduling tasks to run on tasktrackers.</p></li>
+<li><p>a number of tasktrackers:  Tasktrackers run tasks and send progress reports to the jobtracker, which keeps a record of the overall progress of each job. If a task fails, the jobtracker can reschedule it on a different tasktracker.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>What are the nodes of mapreduce framework</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The MapReduce framework has two types of nodes, master node and slave node. </p></li>
+<li><p>JobTracker is the daemon on a master node.</p></li>
+<li><p>TaskTracker is the daemon on a slave node. </p></li>
+<li><p>The master node is the manager node of MapReduce jobs. It splits a job into smaller tasks, which will be assigned by the JobTracker to TaskTrackers on slave nodes to run. When a slave node receives a task, its TaskTracker will fork a Java process to run the task. </p></li>
+<li><p>The TaskTracker is also responsible for tracking and reporting the progress of individual tasks.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>What is a Job tracker ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The jobtracker is the master process, responsible for accepting job submissions from clients, scheduling tasks to run on worker nodes, and providing administrative functions such as worker health and task progress monitoring to the cluster. </p></li>
+<li><p>There is one jobtracker per MapReduce cluster and it usually runs on reliable hardware since a failure of the master will result in the failure of all running jobs.</p></li>
+<li><p>In order to provide job and task level-status, counters, and progress quickly, the jobtracker keeps metadata information about the last 100 (by default) jobs executed on the cluster in RAM</p></li>
+<li><p>Due to the way job data is retained in memory, jobtracker memory requirements can grow independent of cluster size.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>What is task tracker?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The second daemon, the tasktracker, accepts task assignments from the jobtracker,
+instantiates the user code, executes those tasks locally, and reports progress back to the jobtracker periodically. There is always a single tasktracker on each worker node.</p></li>
+<li><p>Both tasktrackers and datanodes run on the same machines, which makes each node both a compute node and a storage node, respectively. </p></li>
+<li><p>Each tasktracker is configured with a specific number of map and reduce task slots that indicate how many of each type of task it is capable of executing in parallel. </p></li>
+<li><p>A task slot is exactly what it sounds like; it is an allocation of available resources on a worker node to which a task may be assigned, in which case it is executed. </p></li>
+<li><p>A tasktracker executes some number of map tasks and reduce tasks in parallel, so there is concurrency both within a worker where many tasks run, and at the cluster level where many workers exist.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>what is a workload</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Workload: consists of a set of jobs, where each job (Ji) has a number of map tasks and reduce tasks. </p></li>
+<li><p>A map task performs a process on the slice where the required data for this task is located. A reduce task processes the results of a subset of a job&#39;s map tasks. </p></li>
+<li><p>The value m(Ji;Rj)defines the mean execution time of job Ji on resource Rj</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Why Map tasks are written to the local disk?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Map tasks write their output to the local disk, not to HDFS.  </p></li>
+<li><p>Map output is intermediate output: it&#39;s processed by reduce tasks to produce the final output, and once the job is complete, the map output can be thrown away. </p></li>
+<li><p>So storing it in HDFS with replication would be overkill. </p></li>
+<li><p>If the node running the map task fails before the map output has been consumed by the reduce task, then Hadoop will automatically rerun the map task on another node to re-create the map output.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>What are haoop splits?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop divides the input to a MapReduce job into fixed-size pieces called input splits, or just splits. Hadoop creates one map task for each split, which runs the userdefined map function for each record in the split.</p></li>
+<li><p>Having many splits means the time taken to process each split is small compared to the time to process the whole input. So if we are processing the splits in parallel, the processing is better load-balanced if the splits are small, since a faster machine will be able to process proportionally more splits over the course of the job than a slower machine. </p></li>
+<li><p>Even if the machines are identical, failed processes or other jobs running concurrently make load balancing desirable, and the quality of the load balancing increases as the splits become more fine-grained.</p></li>
+<li><p>if splits are too small, then the overhead of managing the splits and of map task creation begins to dominate the total job execution time. For most jobs, a good split size tends to be the size of an HDFS block, 64 MB by default.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>What is data locality optimization?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop does its best to run the map task on a node where the input data resides in HDFS. This is called the data locality optimization. </p></li>
+<li><p>It should now be clear why the optimal split size is the same as the block size: it is the largest size of input that can be guaranteed to be stored on a single node. </p></li>
+<li><p>If the split spanned two blocks, it would be unlikely that any HDFS node stored both blocks, so some of the split would have to be transferred across the network to the node running the map task, which is clearly less efficient than running the whole map task using local data.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What are the main components of the MapReduce execution pipeline?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Main components are </p></li>
+<li><p>driver</p></li>
+<li><p>context</p></li>
+<li><p>Input data</p></li>
+<li><p>Input format</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>What is a driver in mapreduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Driver - This is the main program that initializes a MapReduce job. It defines job-specific
+configuration, and specifies all of its components (including input and output formats,
+mapper and reducer, use of a combiner, use of a custom partitioner, and so on). The driver
+can also get back the status of the job execution</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>What is context in mapreduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Context - The driver, mappers, and reducers are executed in different processes, typically on multiple machines. </p></li>
+<li><p>A context object is available at any point of MapReduce execution. It provides a convenient mechanism for exchanging required system and job-wide information. </p></li>
+<li><p>Keep in mind that context coordination happens only when an appropriate phase (driver, map, reduce) of a MapReduce job starts. This means that, for example, values set by one mapper are not available in another mapper (even if another mapper starts after the first one completes), but is available in any reducer.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>What is inputdata for MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Input data - This is where the data for a MapReduce task is initially stored. </p></li>
+<li><p>This data can reside in HDFS, HBase, or other storage. </p></li>
+<li><p>Typically, the input data is very large - tens of gigabytes or more.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>What is InputFormat for MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>InputFormat - This defines how input data is read and split. </p></li>
+<li><p>It is responsible for defining two main things: InputSplit and RecordReader. InputSplit defines both the size of individual map tasks (and, consequently, the number of map tasks) and its &quot;ideal&quot; execution server (locality).</p></li>
+<li><p>InputFormat is a class that defines the InputSplits that break input data into tasks, and provides a factory for RecordReader objects that read the file. </p></li>
+<li><p>Several InputFormats are provided by Hadoop. InputFormat is invoked directly by a job&#39;s driver to decide (based on the InputSplits) the number and location of the map task execution.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>What is InputSplit in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A split implementation extends Hadoop&#39;s base abstract class - InputSplit - by defining both a
+split length and its locations. </p></li>
+<li><p>InputSplit - An InputSplit defines a unit of work for a single map task in a MapReduce program. </p></li>
+<li><p>Split locations are a hint for a scheduler to decide where to place a split execution</p></li>
+<li><p>A MapReduce program applied to a data set is made up of several (possibly several hundred) map tasks. The InputFormat (invoked directly by a job driver) defines the number of map tasks that make up the mapping phase. Each map task is given a single InputSplit to work on. </p></li>
+<li><p>After the InputSplits are calculated, the MapReduce framework starts the required number of mapper jobs in the desired locations.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>What is RecordReader?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>RecordReader - Although the InputSplit defines a data subset for a map task, it does not describe how to access the data. </p></li>
+<li><p>The RecordReader is responsible for actually reading records from the input file, and submitting them (as key/value pairs) to the mapper.</p></li>
+<li><p>The RecordReader class actually reads the data from its source (inside a mapper task), converts it into key/value pairs suitable for processing by the mapper, and delivers them to the map method. </p></li>
+<li><p>The RecordReader class is defined by the InputFormat.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>What is Mapper in MapReduce ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Mapper - The mapper performs the user-defined work of the first phase of the MapReduce
+program. </p></li>
+<li><p>From the implementation point of view, a mapper implementation takes input data in the form of a series of key/value pairs (k1, v1), which are used for individual map execution. </p></li>
+<li><p>The map typically transforms the input pair into an output pair (k2, v2), which is used as an input for shuffle and sort. </p></li>
+<li><p>A new instance of a mapper is instantiated in a separate JVM instance for each map task that makes up part of the total job input. </p></li>
+<li><p>The individual mappers are intentionally not provided with a mechanism to communicate with
+one another in any way. </p></li>
+<li><p>This allows the reliability of each map task to be governed solely by the reliability of the local machine.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>What is partition in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Partition - A subset of the intermediate key space (k2, v2) produced by each individual
+mapper is assigned to each reducer. </p></li>
+<li><p>These subsets (or partitions) are the inputs to the reduce tasks. </p></li>
+<li><p>Each map task may emit key/value pairs to any partition. All values for the same key are always reduced together, regardless of which mapper they originated from. </p></li>
+<li><p>As a result, all of the map nodes must agree on which reducer will process the different pieces of the intermediate data. </p></li>
+<li><p>The Partitioner class determines which reducer a given key/value pair will go to. The default Partitioner computes a hash value for the key, and assigns the partition based on this result.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>What is Shuffle in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Shuffle - Each node in a Hadoop cluster might execute several map tasks for a given job. </p></li>
+<li><p>Once at least one map function for a given node is completed, and the keys&#39; space is partitioned, the run time begins moving the intermediate outputs from the map tasks to where they are required by the reducers. </p></li>
+<li><p>This process of moving map outputs to the reducers is known as shuffling.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>What is Sort in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Sort - Each reduce task is responsible for processing the values associated with several intermediate keys. </p></li>
+<li><p>The set of intermediate key/value pairs for a given reducer is automatically sorted by Hadoop to form keys/values (k2, {v2, v2,.}) before they are presented to the reducer.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>What is Reducer in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Reducer - A reducer is responsible for an execution of user-provided code for the second
+phase of job-specific work. </p></li>
+<li><p>For each key assigned to a given reducer, the reducer&#39;s reduce() method is called once. This method receives a key, along with an iterator over all the values associated with the key. The values associated with a key are returned by the iterator in an undefined order. The reducer typically transforms the input key/value pairs into output pairs (k3, v3).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>What is OutputFormat in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>OutputFormat - The way that job output (job output can be produced by reducer or mapper, if a reducer is not present) is written is governed by the OutputFormat. </p></li>
+<li><p>The responsibility of the OutputFormat is to define a location of the output data and RecordWriter used for storing the resulting data. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>What are the methods of Mapper class?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Mapper class has three key methods (which you can overwrite): setup, cleanup, and map
+(the only one that is implemented here). </p></li>
+<li><p>Both setup and cleanup methods are invoked only once during a specific mapper life cycle - at the beginning and end of mapper execution, respectively.</p></li>
+<li><p>The setup method is used to implement the mapper&#39;s initialization (for example, reading shared resources, connecting to HBase tables, and so on), whereas cleanup is used for cleaning up the mapper&#39;s resources and, optionally, if the mapper implements an associative array or counter, to write out the information.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>What are the methods of Reducer class?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A reducer class has three key methods - setup, cleanup, and reduce - as well as a run method</p></li>
+<li><p>Functionally, the methods of the reducer class are similar to the methods of the mapper class.</p></li>
+<li><p>The difference is that, unlike a map method that is invoked with a single key/value pair, a reduce
+method is invoked with a single key and an iterable set of values (remember, a reducer is invoked
+after execution of shuffle and sort, at which point, all the input key/value pairs are sorted, and
+all the values for the same key are partitioned to a single reducer and come together). </p></li>
+<li><p>A typical implementation of the reduce method iterates over a set of values, transforms all the key/value pairs in the new ones, and writes them to the output.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>What is a job object in MapReduce?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A job object represents job submitter&#39;s view of the job. </p></li>
+<li><p>It allows the user to configure the job&#39;s parameters (they will be stored in the configuration object), submit it, control its execution, and query its state.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>What is serialization ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Serialization is the process of turning structured objects into a byte stream for transmission over a network or for writing to persistent storage. </p></li>
+<li><p>Deserialization is the reverse process of turning a byte stream back into a series of structured objects.</p></li>
+<li><p>Serialization appears in two quite distinct areas of distributed data processing: for interprocess communication and for persistent storage.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>What are serialization framework in Hadoop?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop has an API for pluggable serialization frameworks. </p></li>
+<li><p>A serialization framework is represented by an implementation of Serialization (in the org.apache.hadoop.io.serializer package). WritableSerialization, for example, is the implementation of Serialization for Writable types.</p></li>
+<li><p>A Serialization defines a mapping from types to Serializer instances (for turning an object into a byte stream) and Deserializer instances (for turning a byte stream into an object).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>Why not use Java object serialization?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Java comes with its own serialization mechanism, called Java Object Serialization (often
+referred to simply as &quot;Java Serialization&quot;), that is tightly integrated with the language,</p></li>
+<li><p>Java Serialization is not compact. Classes that implement java.io.Serializable or java.io.Externalizable write their classname and the object representation to the stream. </p></li>
+<li><p>Subsequent instances of the same class write a reference handle to the first occurrence, which occupies only 5 bytes. However, reference handles don&#39;t work well with random access, because the referent class may occur at any point in the preceding stream-that is, there is state stored in the stream</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>What is a write lease?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>When a file is opened for writing, opening client is granted an exclusive writing lease for the file. This means that no other client can write to this file until this client completes the operation. </p></li>
+<li><p>To ensure that no &quot;runaway&quot; clients are holding a lease, the lease periodically expires. The use of leases effectively ensures that no two applications can simultaneously write to a given file (compared to a write lock in the database).</p></li>
+<li><p>The lease duration is bound by a soft limit and a hard limit. </p></li>
+<li><p>For the duration of a soft limit, a writer has an exclusive access to the file. If the soft limit expires and the client fails to close the file or renew the lease (by sending a heartbeat to the NameNode), another client can preempt the lease. </p></li>
+<li><p>If the hard limit (one hour) expires and the client has failed to renew the lease, HDFS assumes that the client has quit, and automatically closes the file on behalf of the writer, and then recovers the lease.
+The writer&#39;s lease does not prevent other clients from reading the file. A file may have many concurrent readers.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Map Reduce API?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src = 'https://hadoop.apache.org/docs/r2.4.1/api/org/apache/hadoop/mapreduce/package-summary.html' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Get in touch</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Reach out to your instructor</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-39" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title=' Let Us Discuss Map Reduce '>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is Big Data?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is Apache Hadoop Eco System?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What are the Hadoop daemons?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='What is MapReduce?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What is the responsibility of MapReduce framework?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What is a map and reduce function?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What is a map reduce job?'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='How are the map reduce jobs controlled?'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='What are the nodes of mapreduce framework'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='What is a Job tracker ?'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='What is task tracker?'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='what is a workload'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Why Map tasks are written to the local disk?'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='What are haoop splits?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='What is data locality optimization?'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='What are the main components of the MapReduce execution pipeline?'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='What is a driver in mapreduce?'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='What is context in mapreduce?'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='What is inputdata for MapReduce?'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='What is InputFormat for MapReduce?'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='What is InputSplit in MapReduce?'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='What is RecordReader?'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='What is Mapper in MapReduce ?'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='What is partition in MapReduce?'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='What is Shuffle in MapReduce?'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='What is Sort in MapReduce?'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='What is Reducer in MapReduce?'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='What is OutputFormat in MapReduce?'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='What are the methods of Mapper class?'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='What are the methods of Reducer class?'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='What is a job object in MapReduce?'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='What is serialization ?'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='What are serialization framework in Hadoop?'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='Why not use Java object serialization?'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='What is a write lease?'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='Map Reduce API?'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Get in touch'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='NA'>
+         39
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
