@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Apache Hive foundations</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Apache Hive foundations">
+  <meta name="author" content="Dr.B.Muthukumaran">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Apache Hive foundations</h1>
+    <h2>focus on DB</h2>
+    <p>Dr.B.Muthukumaran<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HIVE is Hadoop InteractiVE(HIVE)</p></li>
+<li><p>A data warehouse infrastructure built on top of Hadoop for providing data summarization using Ad-hoc querying on large volumes of data.</p></li>
+<li><p>ETL.</p></li>
+<li><p>Structure.</p></li>
+<li><p>Access to different storage.</p></li>
+<li><p>SQL like query language.</p></li>
+<li><p>Query execution via MapReduce.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Hive structures data into the well-understood database concepts like tables, columns, rows, and partitions. </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What is the use of hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive is most suited for data warehouse applications, where relatively static data is analyzed,
+fast response times are not required, and when the data is not changing rapidly.</p></li>
+<li><p>Hive stores data in tables, where each table consists of a number of rows, and each row consists of a specified number of columns. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>What are the limitations of Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive is not a full database. </p></li>
+<li><p>The design constraints and limitations of Hadoop and HDFS impose limits on what Hive can do. The biggest limitation is that Hive does not provide record-level update, insert, nor delete. You can generate new tables from queries or output query results to files. </p></li>
+<li><p>Hadoop is a batch-oriented system, Hive queries have higher latency, due to the start-up overhead for MapReduce jobs. </p></li>
+<li><p>Queries that would finish in seconds for a traditional database take longer for Hive, even for
+relatively small data sets.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>How does Hive communicate to job tracker?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive communicates with the JobTracker to initiate the MapReduce job. </p></li>
+<li><p>Hive does not have to be running on the same master node with the JobTracker. In larger clusters,
+it&#39;s common to have edge nodes where tools like Hive run. </p></li>
+<li><p>They communicate remotely with the JobTracker on the master node to execute jobs. Usually, the data files to be processed are in HDFS, which is managed by the NameNode.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>What are the primitive data types supported by Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HIVE supports all the major primitive types - integers, floats, doubles and strings - as well as complex types such as maps, lists and structs. </p></li>
+<li><p>Hive supports  three collection data types that are rarely found in relational databases</p></li>
+<li><p>Primitive data types include;(a) TINYINT - 1 byte signed integer (b) SMALLINT 2 byte signed integer.
+(c) INT 4 byte signed integer.  (d) BIGINT 8 byte signed integer. (e) BOOLEAN Boolean true or false. (f) FLOAT Single precision floating point. ex: 3.14159 (g) DOUBLE Double precision floating point. ex. 3.14159 (h) STRING Sequence of characters. The character set can be specified. Single or double quotes can be used. &#39;Now is the time&#39;, &quot;for all good men&quot; (i) TIMESTAMP (v0.8.0+) Integer, float, or string. 1327882394 (Unix epoch seconds), 1327882394.123456789 (Unix epoch seconds plus nanoseconds), and &#39;2012-02-03 12:34:56.123456789&#39; (JDBCcompliant java.sql.Timestamp format) (j) BINARY (v0.8.0+) Array of bytes.</p></li>
+<li><p>Each column has an associated type. The type is either a primitive type or a complex type. Currently, the following primitive types are supported: (a) Integers - bigint(8 bytes), int(4 bytes), smallint(2 bytes),
+tinyint(1 byte). All integer types are signed. (b) Floating point numbers - float(single precision),
+double(double precision) (c) String</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>What are collection data types?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A collection or container is a grouping of some variable number of data items (possibly zero) that have some shared significance to the problem being solved and need to be operated upon together in some controlled fashion. </p></li>
+<li><p>Generally, the data items will be of the same type or, in languages supporting inheritance, derived from some common ancestor type. </p></li>
+<li><p>A collection is a concept applicable to abstract data types, and does not prescribe a specific implementation as a concrete data structure, though often there is a conventional choice</p></li>
+<li><p>Hive supports columns that are structs, maps, and arrays</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>What is schema on write?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>When you write data to a traditional database, either through loading external data,
+writing the output of a query, doing UPDATE statements, etc., the database has total
+control over the storage. </p></li>
+<li><p>The database is the &quot;gatekeeper.&quot; An important implication of this control is that the database can enforce the schema as data is written. This is called schema on write.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>What is schema on read?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive has no such control over the underlying storage. </p></li>
+<li><p>There are many ways to create, modify, and even damage the data that Hive will query. Therefore, Hive can only enforce queries on read. This is called schema on read.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>What is a database in Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Database is  a  namespace  for  tables.   </p></li>
+<li><p>The Hive concept of a database is essentially just a catalog or namespace of tables. </p></li>
+<li><p>They are very useful for larger clusters with multiple teams and users, as a way of avoiding table name collisions. </p></li>
+<li><p>Hive will create a directory for each database. Tables in that database will be stored in subdirectories of the database directory. </p></li>
+<li><p>The exception is tables in the default database, which doesn&#39;t have its own directory.</p></li>
+<li><p>The  database `default&#39; is used for tables with no user supplied database name.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>What Is Inside Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The core of a Hive binary distribution contains three parts. </p></li>
+<li><p>The main part is the Java code itself. Multiple JAR (Java archive) files such as  hive-exec<em>.jar and  hive-meta store</em>.jar  are found under the  $HIVE_HOME/lib  directory.  Each JAR file implements a particular subset of Hive&#39;s functionality.</p></li>
+<li><p>The  $HIVE_HOME/bin directory contains executable scripts that launch various Hive services, including the 
+hive command-line interface (CLI). </p></li>
+<li><p>The CLI is the most popular way to use Hive. We will use  hive (in lowercase, with a fixed-width font) to refer to the CLI, except where noted. The CLI can be used interactively to type in statements one at a time or it can be used to run &quot;scripts&quot; of Hive statements, as we&#39;ll see.</p></li>
+<li><p>Hive also has other components. </p></li>
+<li><p>A  Thrift service provides remote access from other processes. Access using  JDBC and ODBC are provided, too. They are implemented on top of the Thrift service</p></li>
+<li><p>Finally,  a simple web interface, called  Hive Web Interface (HWI), provides remote access to Hive.</p></li>
+<li><p>The  conf directory contains the files that configure Hive. Hive has a number of configuration properties that we will discuss as needed. </p></li>
+<li><p>These properties control features such  as  the  metastore  (where  data  is  stored),  various  optimizations,  and  &quot;safety controls,&quot; etc</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>What are the interfaces exposed by Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive exposes two interfaces to users to submit their statements. These interfaces are
+Command Line Interface (CLI) and HiveServer. </p></li>
+<li><p>The  command-line interface  or CLI is the most common way to interact with Hive. Using the CLI, you can create tables, inspect schema and query tables, etc.</p></li>
+<li><p>In the Hive CLI, the  hive&gt;  string is the  hive prompt, and the indented  &gt; is the secondary prompt</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>What does the interface do? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Through these two interfaces, a statement will be submitted to the Driver. The Driver first parses the statement and then passes the Abstract Syntax Tree (AST) corresponding to this statement to the Planner. </p></li>
+<li><p>The Planner then chooses a specific planner implementation to analyze different types of statements. </p></li>
+<li><p>During the process of analyzing a submitted statement, the Driver needs to contact the Metastore to retrieve needed metadata from a Relational Database Management System (RDBMS), e.g. PostgreSQL.</p></li>
+<li><p>Queries used for data retrieval and processing are analyzed by the Query Planner. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>What does the interface do? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive translates queries to executable jobs for an underlying data processing engine that is currently Hadoop MapReduce. </p></li>
+<li><p>For a submitted query, the query planner walks the AST of this query and assembles the operator tree to represent data operations of this query. An operator in Hive represents a specific
+data operation. </p></li>
+<li><p>For example, a FilterOperator is used to evaluate predicates on its input records. Because a query submitted to Hive will be evaluated in a distributed environment, the query planner will also figure out if an operator requires its input records to be</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>What is the use of Derby SQL Server?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>All Hive installations require a  metastore service, which Hive uses to store table schemas
+and other  metadata.  It is typically implemented using tables in a relational database. </p></li>
+<li><p>By default, Hive uses a built-in  Derby SQL  server, which provides limited, single process  storage. For example, when using Derby, you can&#39;t run two simultaneous instances of the Hive CLI.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Explain the following database commands  in Hive?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Commands </p></li>
+<li><p>hive&gt; CREATE DATABASE financials; creates database finantials</p></li>
+<li><p>hive&gt; CREATE DATABASE IF NOT EXISTS financials; Create when database does not exist</p></li>
+<li><p>hive&gt; SHOW DATABASES; list the databases</p></li>
+<li><p>hive&gt; CREATE DATABASE financials  LOCATION &#39;/my/preferred/directory&#39;; Create db in selected location</p></li>
+<li><p>hive&gt; CREATE DATABASE financials  COMMENT &#39;Holds all financial tables&#39;; Used for Describing Database</p></li>
+<li><p>hive&gt; USE financials; The USE command sets a database as your working database</p></li>
+<li><p>hive&gt; DROP DATABASE IF EXISTS financials; The IF EXISTS is optional and suppresses warnings if financials doesn&#39;t exist.</p></li>
+<li><p>hive&gt; DROP DATABASE IF EXISTS financials CASCADE; By default, Hive won&#39;t permit you to drop a database if it contains tables. You can either drop the tables first or append the CASCADE keyword to the command, which will cause the Hive to drop the tables in the database first:</p></li>
+<li><p>The tables created are serialized and deserialized using default serializers and deserializers already present in Hive. </p></li>
+<li><p>However, there are instances where the data for a table is prepared by some other programs or may even be legacy data. Hive provides the flexibility to incorporate that data into a table without having to transform the data, which can save substantial amount of time for large data sets.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What is HiveQl?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive  supports queries expressed in a SQL-like declarative language - HiveQL, which are compiled into mapreduce jobs executed on Hadoop.</p></li>
+<li><p>In addition, HiveQL supports custom map-reduce scripts to be plugged into queries.  The language includes a type system with support for tables containing primitive types, collections  like  arrays  and  maps,  and  nested  compositions  of the same.  </p></li>
+<li><p>The underlying IO libraries can be extended to query data in custom formats.  Hive also includes a system
+catalog, Hive-Metastore, containing schemas and statistics, which is useful in data exploration and query optimization</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HiveQL is the Hive query language. </p></li>
+<li><p>it doesn&#39;t fully conform to any particular revision of the ANSI SQL standard. </p></li>
+<li><p>Hive offers no support for rowlevel inserts, updates, and deletes. </p></li>
+<li><p>Hive doesn&#39;t support transactions. </p></li>
+<li><p>Hive adds extensions to provide better performance in the context of Hadoop and to integrate with custom extensions and even external programs.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Hive query language(HiveQL) comprises of a subset of SQL and some extensions that we have found useful in our environment. </p></li>
+<li><p>Traditional SQL features like from clause subqueries, various types of joins - inner, left outer, right outer and outer joins, cartesian products, group bys and aggregations, union all, create table as select and many useful functions on primitive and complex types make the language very SQL like.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>What is metastore?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The metastore is the system catalog which contains metadata about the tables stored in Hive.  </p></li>
+<li><p>This metadata is specified during table creation and reused every time the table is referenced in HiveQL. </p></li>
+<li><p>The metastore distinguishes Hive as a traditional warehousing solution (ala Oracle or DB2) when compared with similar data processing systems built on top of map-reduce like architectures like Pig</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>What is a table?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Metadata for table contains list of columns and their types, owner, storage and SerDe information.  </p></li>
+<li><p>It can also contain any user supplied key and value data; this facility can be used to store table statistics in the future. </p></li>
+<li><p>Storage information includes location of the table&#39;s data in the underlying le system, data formats and bucketing information.  </p></li>
+<li><p>SerDe metadata includes the implementation class of serializer and deserializer methods and any supporting information required by that implementation.  </p></li>
+<li><p>All this information can be provided during the creation of table.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>What is a partition?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Each  partition  can  have  its  own  columns and SerDe and storage information.  </p></li>
+<li><p>This can be used in  the  future  to  support  schema  evolution  in  a  Hive warehouse</p></li>
+<li><p>The storage system for the metastore should be optimized for online transactions with random accesses and updates. </p></li>
+<li><p>A file system like HDFS is not suited since it is optimized for  sequential  scans  and  not  for  random  access.   </p></li>
+<li><p>The metastore uses either a traditional relational database (like MySQL, Oracle) or le system (like local, NFS, AFS) and not HDFS. </p></li>
+<li><p>HiveQL statements which only access metadata objects are executed with very low latency.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>What is Hive SQL ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HiveSql exposes its own dialect of SQL to users and translates data manipulation statements (queries) to a directed acyclic graph (DAG) of MapReduce jobs. </p></li>
+<li><p>With an SQL interface, users do not need to write tedious and sometimes difficult Map Reduce programs to manipulate data stored in Hadoop Distributed Filesystem (HDFS). </p></li>
+<li><p>This highly abstracted SQL interface significantly improves the productivity of data management in Hadoop and accelerates the adoption of Hive. </p></li>
+<li><p>The efficiency and productivty of Hive are largely affected by how its data warehouse layer is designed, implemented, and optimized to best utilize the underlying data processing engine (e.g. Hadoop MapReduce) and HDFS. </p></li>
+<li><p>In order to make Hive continuously satisfy requirements of processing increasingly high volumes of data in a scalable and efficient way, we must improve both data storage as well as query execution aspect of Hive. First, Hive should be able to store datasets managed by it in an efficient way which guarantees both storage efficiency as well as fast data access. </p></li>
+<li><p>Second,Hive should be able to generate highly optimized query plans and execute them using a query execution model that utilizes hardware resources well</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>What is the mark logic data connector ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>MarkLogic Connector for Hadoop  Developer&#39;s Guide</p>
+
+<p><a href="https://docs.marklogic.com/guide/mapreduce.pdf">https://docs.marklogic.com/guide/mapreduce.pdf</a></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is Hive?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is Hive?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is the use of hive?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What are the limitations of Hive?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='How does Hive communicate to job tracker?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What are the primitive data types supported by Hive?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What are collection data types?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What is schema on write?'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='What is schema on read?'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='What is a database in Hive?'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='What Is Inside Hive?'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='What are the interfaces exposed by Hive?'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='What does the interface do? (1/2)'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='What does the interface do? (2/2)'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='What is the use of Derby SQL Server?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Explain the following database commands  in Hive?'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='What is HiveQl?'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='What is HiveQL?'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='What is HiveQL?'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='What is metastore?'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='What is a table?'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='What is a partition?'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='What is Hive SQL ?'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='What is the mark logic data connector ?'>
+         24
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
