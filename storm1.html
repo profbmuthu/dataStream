@@ -227,7 +227,7 @@
   <article data-timings="">
     <ul>
 <li><p>In Local Mode, Storm topologies run on the local machine in a single JVM. </p></li>
-<li><p>This mode is used for development, testing, and debugging because itâ€™s the easiest way to see all topology components working together. </p></li>
+<li><p>This mode is used for development, testing, and debugging because its the easiest way to see all topology components working together. </p></li>
 <li><p>In this mode, we can adjust parameters that enable us to see how our topology runs in different Storm configuration environments.</p></li>
 </ul>
 
@@ -272,10 +272,10 @@
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Shuffle grouping: Tuples are randomly distributed across the bolt&#39;s tasks in a way such that each bolt is guaranteed to get an equal number of tuples.</p></li>
-<li><p>Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the &quot;user-id&quot; field, tuples with the same &quot;user-id&quot; will always go to the same task, but tuples with different &quot;user-id&quot;&#39;s may go to different tasks.</p></li>
+<li><p>Shuffle grouping: Tuples are randomly distributed across the bolts tasks in a way such that each bolt is guaranteed to get an equal number of tuples.</p></li>
+<li><p>Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the user-id field, tuples with the same &quot;user-id&quot; will always go to the same task, but tuples with different &quot;user-id&quot;&#39;s may go to different tasks.</p></li>
 <li><p>Partial Key grouping: The stream is partitioned by the fields specified in the grouping, like the Fields grouping, but are load balanced between two downstream bolts, which provides better utilization of resources when the incoming data is skewed. This paper provides a good explanation of how it works and the advantages it provides.</p></li>
-<li><p>All grouping: The stream is replicated across all the bolt&#39;s tasks. Use this grouping with care.</p></li>
+<li><p>All grouping: The stream is replicated across all the bolts tasks. Use this grouping with care.</p></li>
 </ul>
 
   </article>
@@ -288,8 +288,8 @@
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Global grouping: The entire stream goes to a single one of the bolt&#39;s tasks. Specifically, it goes to the task with the lowest id.</p></li>
-<li><p>None grouping: This grouping specifies that you don&#39;t care how the stream is grouped. Currently, none groupings are equivalent to shuffle groupings. Eventually though, Storm will push down bolts with none groupings to execute in the same thread as the bolt or spout they subscribe from (when possible).</p></li>
+<li><p>Global grouping: The entire stream goes to a single one of the bolts tasks. Specifically, it goes to the task with the lowest id.</p></li>
+<li><p>None grouping: This grouping specifies that you dont care how the stream is grouped. Currently, none groupings are equivalent to shuffle groupings. Eventually though, Storm will push down bolts with none groupings to execute in the same thread as the bolt or spout they subscribe from (when possible).</p></li>
 <li><p>Direct grouping: This is a special kind of grouping. A stream grouped this way means that the producer of the tuple decides which task of the consumer will receive this tuple. Direct groupings can only be declared on streams that have been declared as direct streams. </p></li>
 </ul>
 
@@ -403,7 +403,7 @@
     <h2>Guidelines for topology development?</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src ='http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.2/bk_storm-user-guide/content/storm-topology-debugging.html' height=600px'></iframe>
+    <iframe src ='http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.2/bk_storm-user-guide/content/storm-topology-debugging.html' height='600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
