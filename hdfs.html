@@ -1813,13 +1813,25 @@ for that queue.</p></li>
 
 <slide class="" id="slide-114" style="background:;">
   <hgroup>
-    <h2>What is preemption?</h2>
+    <h2>What is preemption? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>When a job is submitted to an empty queue on a busy cluster, the job cannot start until resources free up from jobs that are already running on the cluster. To make the time taken for a job to start more predictable, the Fair Scheduler supports preemption.</p></li>
 <li><p>Preemption allows the scheduler to kill containers for queues that are running with more than their fair share of resources so that the resources can be allocated to a queue that is under its fair share.</p></li>
 <li><p>Preemption is enabled globally by setting yarn.scheduler.fair.preemption to true. There are two relevant preemption timeout settings: one for minimum share and one for fair share, both specified in seconds.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-115" style="background:;">
+  <hgroup>
+    <h2>What is preemption? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>If a queue waits for as long as its minimum share preemption timeout without receiving its minimum guaranteed share, then the scheduler may preempt other containers. </p></li>
 <li><p>The default timeout is set for all queues via the defaultMinSharePreemptionTimeout toplevel element in the allocation file, and on a per-queue basis by setting the minShare PreemptionTimeout element for a queue.</p></li>
 </ul>
@@ -1828,7 +1840,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-115" style="background:;">
+<slide class="" id="slide-116" style="background:;">
   <hgroup>
     <h2>What is Delay scheduling?</h2>
   </hgroup>
@@ -1844,7 +1856,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-116" style="background:;">
+<slide class="" id="slide-117" style="background:;">
   <hgroup>
     <h2>What is job initialization in Yarn? (1/2)</h2>
   </hgroup>
@@ -1855,19 +1867,19 @@ for that queue.</p></li>
 <li><p>The application master for MapReduce jobs is a Java application whose main class is MRAppMaster. </p></li>
 <li><p>It initializes the job by creating a number of bookkeeping objects to keep track of the job&#39;s progress, as it will receive progress and completion reports from the tasks</p></li>
 <li><p>Next, it retrieves the input splits computed in the client from the shared filesystem</p></li>
-<li><p>It then creates a map task object for each split, as well as a number of reduce task objects determined by the mapreduce.job.reduces property (set by the setNumReduceTasks() method on Job). Tasks are given IDs at this point.</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-117" style="background:;">
+<slide class="" id="slide-118" style="background:;">
   <hgroup>
     <h2>What is job initialization in Yarn? (2/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
+<li><p>It then creates a map task object for each split, as well as a number of reduce task objects determined by the mapreduce.job.reduces property (set by the setNumReduceTasks() method on Job). Tasks are given IDs at this point.</p></li>
 <li><p>The application master must decide how to run the tasks that make up the MapReduce job. </p></li>
 <li><p>If the job is small, the application master may choose to run the tasks in the same JVM as itself. </p></li>
 <li><p>This happens when it judges that the overhead of allocating and running tasks in new containers outweighs the gain to be had in running them in parallel, compared to running them sequentially on one node. Such a job is said to be uberized, or run as an uber task.</p></li>
@@ -1878,7 +1890,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-118" style="background:;">
+<slide class="" id="slide-119" style="background:;">
   <hgroup>
     <h2>What qualifies as a small job?</h2>
   </hgroup>
@@ -1891,7 +1903,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-119" style="background:;">
+<slide class="" id="slide-120" style="background:;">
   <hgroup>
     <h2>What is task assignment? (1/2)</h2>
   </hgroup>
@@ -1907,7 +1919,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-120" style="background:;">
+<slide class="" id="slide-121" style="background:;">
   <hgroup>
     <h2>What is task assignment? (2/2)</h2>
   </hgroup>
@@ -1923,7 +1935,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-121" style="background:;">
+<slide class="" id="slide-122" style="background:;">
   <hgroup>
     <h2>What is Task execution? (1/2)</h2>
   </hgroup>
@@ -1938,7 +1950,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-122" style="background:;">
+<slide class="" id="slide-123" style="background:;">
   <hgroup>
     <h2>What is Task execution? (2/2)</h2>
   </hgroup>
@@ -1953,7 +1965,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-123" style="background:;">
+<slide class="" id="slide-124" style="background:;">
   <hgroup>
     <h2>What does streaming task do  ?</h2>
   </hgroup>
@@ -1965,11 +1977,16 @@ for that queue.</p></li>
 <li><p>From the node manager&#39;s point of view, it is as if the child process ran the map or reduce code itself.</p></li>
 </ul>
 
-<hr>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<h2>What are the operations which constitutes progress?</h2>
-
-<ul>
+<slide class="" id="slide-125" style="background:;">
+  <hgroup>
+    <h2>What are the operations which constitutes progress?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>All of the following operations constitute progress:</li>
 <li> Reading an input record (in a mapper or reducer)</li>
 <li> Writing an output record (in a mapper or reducer)</li>
@@ -1982,14 +1999,26 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-124" style="background:;">
+<slide class="" id="slide-126" style="background:;">
   <hgroup>
-    <h2>What is progress status update?</h2>
+    <h2>What is progress status update?(1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>MapReduce jobs are long-running batch jobs, taking anything from tens of seconds to hours to run. Because this can be a significant length of time, it&#39;s important for the user to get feedback on how the job is progressing. </p></li>
 <li><p>A job and each of its tasks have a status, which includes such things as the state of the job or task (e.g., running, successfully completed, failed), the progress of maps and reduces, the values of the job&#39;s counters, and a status message or description (which may be set by user code).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-127" style="background:;">
+  <hgroup>
+    <h2>What is progress status update?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>When a task is running, it keeps track of its progress (i.e., the proportion of the task
 completed). </p></li>
 <li><p>For map tasks, this is the proportion of the input that has been processed.</p></li>
@@ -2000,7 +2029,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-125" style="background:;">
+<slide class="" id="slide-128" style="background:;">
   <hgroup>
     <h2>What is the use of Umblical interface?</h2>
   </hgroup>
@@ -2014,7 +2043,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-126" style="background:;">
+<slide class="" id="slide-129" style="background:;">
   <hgroup>
     <h2>What is job completion?</h2>
   </hgroup>
@@ -2030,7 +2059,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-127" style="background:;">
+<slide class="" id="slide-130" style="background:;">
   <hgroup>
     <h2>What is task failure? (1/6)</h2>
   </hgroup>
@@ -2046,7 +2075,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-128" style="background:;">
+<slide class="" id="slide-131" style="background:;">
   <hgroup>
     <h2>What is task failure? (2/6)</h2>
   </hgroup>
@@ -2062,7 +2091,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-129" style="background:;">
+<slide class="" id="slide-132" style="background:;">
   <hgroup>
     <h2>What is task failure? (3/6)</h2>
   </hgroup>
@@ -2079,7 +2108,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-130" style="background:;">
+<slide class="" id="slide-133" style="background:;">
   <hgroup>
     <h2>What is task failure? (4/6)</h2>
   </hgroup>
@@ -2094,7 +2123,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-131" style="background:;">
+<slide class="" id="slide-134" style="background:;">
   <hgroup>
     <h2>What is task failure? (5/6)</h2>
   </hgroup>
@@ -2109,7 +2138,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-132" style="background:;">
+<slide class="" id="slide-135" style="background:;">
   <hgroup>
     <h2>What is task failure? (6/6)</h2>
   </hgroup>
@@ -2128,7 +2157,7 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-133" style="background:;">
+<slide class="" id="slide-136" style="background:;">
   <hgroup>
     <h2>Get in touch</h2>
   </hgroup>
@@ -2141,7 +2170,7 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-134" style="background:;">
+<slide class="" id="slide-137" style="background:;">
   <article data-timings="">
     
   </article>
@@ -2832,128 +2861,146 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=114 title='What is preemption?'>
+        data-slide=114 title='What is preemption? (1/2)'>
          114
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=115 title='What is Delay scheduling?'>
+        data-slide=115 title='What is preemption? (1/2)'>
          115
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=116 title='What is job initialization in Yarn? (1/2)'>
+        data-slide=116 title='What is Delay scheduling?'>
          116
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=117 title='What is job initialization in Yarn? (2/2)'>
+        data-slide=117 title='What is job initialization in Yarn? (1/2)'>
          117
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=118 title='What qualifies as a small job?'>
+        data-slide=118 title='What is job initialization in Yarn? (2/2)'>
          118
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=119 title='What is task assignment? (1/2)'>
+        data-slide=119 title='What qualifies as a small job?'>
          119
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=120 title='What is task assignment? (2/2)'>
+        data-slide=120 title='What is task assignment? (1/2)'>
          120
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=121 title='What is Task execution? (1/2)'>
+        data-slide=121 title='What is task assignment? (2/2)'>
          121
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=122 title='What is Task execution? (2/2)'>
+        data-slide=122 title='What is Task execution? (1/2)'>
          122
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=123 title='What does streaming task do  ?'>
+        data-slide=123 title='What is Task execution? (2/2)'>
          123
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=124 title='What is progress status update?'>
+        data-slide=124 title='What does streaming task do  ?'>
          124
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=125 title='What is the use of Umblical interface?'>
+        data-slide=125 title='What are the operations which constitutes progress?'>
          125
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=126 title='What is job completion?'>
+        data-slide=126 title='What is progress status update?(1/2)'>
          126
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=127 title='What is task failure? (1/6)'>
+        data-slide=127 title='What is progress status update?(2/2)'>
          127
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=128 title='What is task failure? (2/6)'>
+        data-slide=128 title='What is the use of Umblical interface?'>
          128
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=129 title='What is task failure? (3/6)'>
+        data-slide=129 title='What is job completion?'>
          129
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=130 title='What is task failure? (4/6)'>
+        data-slide=130 title='What is task failure? (1/6)'>
          130
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=131 title='What is task failure? (5/6)'>
+        data-slide=131 title='What is task failure? (2/6)'>
          131
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=132 title='What is task failure? (6/6)'>
+        data-slide=132 title='What is task failure? (3/6)'>
          132
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=133 title='Get in touch'>
+        data-slide=133 title='What is task failure? (4/6)'>
          133
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=134 title='NA'>
+        data-slide=134 title='What is task failure? (5/6)'>
          134
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=135 title='What is task failure? (6/6)'>
+         135
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=136 title='Get in touch'>
+         136
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=137 title='NA'>
+         137
       </a>
     </li>
   </ul>
