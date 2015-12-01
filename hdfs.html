@@ -655,11 +655,16 @@ configuration. In the event of the failure of the active namenode, the standby t
 power distribution unit to forcibly power down the host machine  </p></li>
 </ul>
 
-<hr>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<h2>What are the choices for HA shared storage?</h2>
-
-<ul>
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>What are the choices for HA shared storage?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>There are two choices for the highly available shared storage: an NFS filer, or a quorum
 journal manager (QJM). </p></li>
 <li><p>The QJM is a dedicated HDFS implementation, designed for the sole purpose of providing a highly available edit log, and is the recommended choice for most HDFS installations. The QJM runs as a group of journal nodes, and each edit must be written to a majority of the journal nodes. Typically, there are three journal
@@ -670,9 +675,9 @@ nodes, so the system can tolerate the loss of one of them. This arrangement is s
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-41" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
-    <h2>How is the file stored in Data Node?</h2>
+    <h2>How is the file stored in Data Node?(1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
@@ -680,6 +685,18 @@ nodes, so the system can tolerate the loss of one of them. This arrangement is s
 <li><p>The DataNode stores each HDFS data block in a separate file on its local filesystem with no
 knowledge about the HDFS files themselves.  </p></li>
 <li><p>They are stored on different DataNodes (individual machines in the cluster) chosen randomly on a block-by-block basis. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-43" style="background:;">
+  <hgroup>
+    <h2>How is the file stored in Data Node?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>To improve throughput even further, the DataNode does not create all files in the same directory. Instead, it uses heuristics to determine the optimal number of files per directory, and creates subdirectories appropriately.</p></li>
 <li><p>As a result, access to a file usually requires access to multiple DataNodes, which means that HDFS supports file sizes far larger than a single-machine disk capacity.</p></li>
 </ul>
@@ -688,7 +705,7 @@ knowledge about the HDFS files themselves.  </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-42" style="background:;">
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>What are file permissions in HDFS? (1/2)</h2>
   </hgroup>
@@ -706,7 +723,7 @@ and the execute permission (x). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-43" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>What are file permissions in HDFS? (2/2) contd..</h2>
   </hgroup>
@@ -721,9 +738,9 @@ members of the group.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-44" style="background:;">
+<slide class="" id="slide-46" style="background:;">
   <hgroup>
-    <h2>What are the data formats in HDFS?</h2>
+    <h2>What are the data formats in HDFS?(1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
@@ -731,6 +748,18 @@ members of the group.</p></li>
 <li><p>A splittable format is one in which a file can be reliably split into multiple pieces called splits at record boundaries. </p></li>
 <li><p>A splittable file format can seek to the start of a record from any point. </p></li>
 <li><p>Splittable file formats are MapReduce-friendly, since MapReduce splits files to read data from a file in parallel from different mappers.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-47" style="background:;">
+  <hgroup>
+    <h2>What are the data formats in HDFS?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>A sequence file is a splittable file format that is typically used with MapReduce jobs. It is represented as a list of keys and values, each of which is an instance of a Writable, which basically represents a serializable class.</p></li>
 <li><p>There are compression formats that are splittable, like bz2, preprocessed LZO, etc</p></li>
 </ul>
@@ -739,7 +768,7 @@ members of the group.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-45" style="background:;">
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>How does a client access the filesystem?</h2>
   </hgroup>
@@ -754,30 +783,41 @@ and datanodes. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-46" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
-    <h2>How can HDFS be accessed?</h2>
+    <h2>How can HDFS be accessed?(1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>Access to HDFS is through an instance of the FileSystem object. </p></li>
-<li><p>A FileSystem class is an abstract base class for a generic filesystem. (In addition to HDFS, Apache provides implementation of FileSystem objects for other filesystems, including KosmosFileSystem, NativeS3FileSystem,
-RawLocalFileSystem, and S3FileSystem.) </p></li>
+<li><p>A FileSystem class is an abstract base class for a generic filesystem. (In addition to HDFS, Apache provides implementation of FileSystem objects for other filesystems, including KosmosFileSystem, NativeS3FileSystem, RawLocalFileSystem, and S3FileSystem.) </p></li>
 <li><p>It may be implemented as a distributed filesystem, or as a &quot;local&quot; one that uses the locally connected disk. The local version exists for small Hadoop instances and for testing</p></li>
-<li><p>HDFS can be accessed in the following different ways:</p></li>
-<li><p>Java APIs</p></li>
-<li><p>Hadoop command line APIs (FS shell)</p></li>
-<li><p>C/C++ language wrapper APIs</p></li>
-<li><p>WebDAV (work in progress)</p></li>
-<li><p>DFSAdmin (command set for administration)</p></li>
-<li><p>RESTful APIs for HDFS</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-47" style="background:;">
+<slide class="" id="slide-50" style="background:;">
+  <hgroup>
+    <h2>How can HDFS be accessed?(1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>HDFS can be accessed in the following different ways:</li>
+<li> Java APIs</li>
+<li> Hadoop command line APIs (FS shell)</li>
+<li> C/C++ language wrapper APIs</li>
+<li> WebDAV (work in progress)</li>
+<li> DFSAdmin (command set for administration)</li>
+<li> RESTful APIs for HDFS</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-51" style="background:;">
   <hgroup>
     <h2>What are Hadoop interfaces?</h2>
   </hgroup>
@@ -794,7 +834,7 @@ WebHDFS must be enabled by setting dfs.webhdfs.enabled to true, which allows you
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-48" style="background:;">
+<slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>What are Hadoop interfaces? contd..</h2>
   </hgroup>
@@ -808,7 +848,7 @@ WebHDFS must be enabled by setting dfs.webhdfs.enabled to true, which allows you
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-49" style="background:;">
+<slide class="" id="slide-53" style="background:;">
   <hgroup>
     <h2>What is data ingress and egress in hadoop?</h2>
   </hgroup>
@@ -823,7 +863,7 @@ WebHDFS must be enabled by setting dfs.webhdfs.enabled to true, which allows you
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-50" style="background:;">
+<slide class="" id="slide-54" style="background:;">
   <hgroup>
     <h2>What are Hadoop specific file types ?</h2>
   </hgroup>
@@ -841,7 +881,7 @@ WebHDFS must be enabled by setting dfs.webhdfs.enabled to true, which allows you
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-51" style="background:;">
+<slide class="" id="slide-55" style="background:;">
   <hgroup>
     <h2>What is a sequentialFile ?</h2>
   </hgroup>
@@ -859,31 +899,43 @@ Block-Compressed files typically are the smallest, while Uncompressed are the la
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-52" style="background:;">
+<slide class="" id="slide-56" style="background:;">
   <hgroup>
-    <h2>What is the structure of sequence file? (1/2)</h2>
+    <h2>What is the structure of sequence file? (1/3)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>A sequence file consists of a header followed by one or more records. The first three bytes of a sequence file are the bytes SEQ, which act as a magic number; these are followed by a single byte representing the version number. </p></li>
 <li><p>The header contains other fields, including the names of the key and value classes, compression details, userdefined metadata, and the sync marker.</p></li>
 <li><p>Recall that the sync marker is used to allow a reader to synchronize to a record boundary from any position in the file. Each file has a randomly generated sync marker, whose value is stored in the header. </p></li>
-<li><p>Sync markers appear between records in the sequence file. They are designed to incur less than a 1%
-storage overhead, so they don&#39;t necessarily appear between every pair of records.</p></li>
-<li><p>The internal format of the records depends on whether compression is enabled, and if it is, whether it is record compression or block compression. </p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-53" style="background:;">
+<slide class="" id="slide-57" style="background:;">
   <hgroup>
-    <h2>What is the structure of sequence file? (2/2)</h2>
+    <h2>What is the structure of sequence file? (2/3)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
+<li><p>Sync markers appear between records in the sequence file. They are designed to incur less than a 1%
+storage overhead, so they don&#39;t necessarily appear between every pair of records.</p></li>
+<li><p>The internal format of the records depends on whether compression is enabled, and if it is, whether it is record compression or block compression. </p></li>
 <li><p>If no compression is enabled (the default), each record is made up of the record length (in bytes), the key length, the key, and then the value. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-58" style="background:;">
+  <hgroup>
+    <h2>What is the structure of sequence file? (3/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>The length fields are written as 4-byte integers adhering to the contract of the writeInt() method of java.io.DataOut put. </p></li>
 <li><p>Keys and values are serialized using the Serialization defined for the class being written to the sequence file.</p></li>
 <li><p>The format for record compression is almost identical to that for no compression, except the value bytes are compressed using the codec defined in the header</p></li>
@@ -893,14 +945,7 @@ storage overhead, so they don&#39;t necessarily appear between every pair of rec
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-54" style="background:;">
-  <article data-timings="">
-    
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-55" style="background:;">
+<slide class="" id="slide-59" style="background:;">
   <hgroup>
     <h2>What is a MapFile</h2>
   </hgroup>
@@ -921,7 +966,7 @@ by default). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-56" style="background:;">
+<slide class="" id="slide-60" style="background:;">
   <hgroup>
     <h2>What is Map File varients?</h2>
   </hgroup>
@@ -938,7 +983,7 @@ element in the array and the value is a Writable value.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-57" style="background:;">
+<slide class="" id="slide-61" style="background:;">
   <hgroup>
     <h2>What are row oriented file formats?</h2>
   </hgroup>
@@ -953,7 +998,7 @@ element in the array and the value is a Writable value.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-58" style="background:;">
+<slide class="" id="slide-62" style="background:;">
   <hgroup>
     <h2>What are column oriented file formats?</h2>
   </hgroup>
@@ -968,7 +1013,7 @@ element in the array and the value is a Writable value.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-59" style="background:;">
+<slide class="" id="slide-63" style="background:;">
   <hgroup>
     <h2>What is file compression?</h2>
   </hgroup>
@@ -979,15 +1024,27 @@ element in the array and the value is a Writable value.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-60" style="background:;">
+<slide class="" id="slide-64" style="background:;">
   <hgroup>
-    <h2>What is file compression in Hadoop?</h2>
+    <h2>What is file compression in Hadoop? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>File compression brings two major benefits: it reduces the space needed to store files, and it speeds up data transfer across the network or to or from disk. </p></li>
 <li><p>When dealing with large volumes of data, both of these savings can be significant, so it pays to carefully consider how to use compression in Hadoop.</p></li>
 <li><p>All compression algorithms exhibit a space/time trade-off: faster compression and decompression speeds usually come at the expense of smaller space savings.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-65" style="background:;">
+  <hgroup>
+    <h2>What is file compression in Hadoop? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>A codec is the implementation of a compression-decompression algorithm. In Hadoop, a codec is represented by an implementation of the CompressionCodec interface.</p></li>
 <li><p>CompressionCodecFactory finds codecs from a list defined by the io.compression. codecs configuration property</p></li>
 <li><p>Each codec knows its default filename extension, thus permitting CompressionCodecFactory to search through
@@ -998,7 +1055,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-61" style="background:;">
+<slide class="" id="slide-66" style="background:;">
   <hgroup>
     <h2>What are file compression tools in Hadoop?</h2>
   </hgroup>
@@ -1013,7 +1070,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-62" style="background:;">
+<slide class="" id="slide-67" style="background:;">
   <hgroup>
     <h2>What are the methods of compression codec?</h2>
   </hgroup>
@@ -1029,7 +1086,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-63" style="background:;">
+<slide class="" id="slide-68" style="background:;">
   <hgroup>
     <h2>What is MapReduce?</h2>
   </hgroup>
@@ -1045,7 +1102,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-64" style="background:;">
+<slide class="" id="slide-69" style="background:;">
   <hgroup>
     <h2>What is the responsibility of MapReduce framework?</h2>
   </hgroup>
@@ -1060,14 +1117,26 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-65" style="background:;">
+<slide class="" id="slide-70" style="background:;">
   <hgroup>
-    <h2>What are haoop splits?</h2>
+    <h2>What are haoop splits? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>Hadoop divides the input to a MapReduce job into fixed-size pieces called input splits, or just splits. Hadoop creates one map task for each split, which runs the userdefined map function for each record in the split.</p></li>
 <li><p>Having many splits means the time taken to process each split is small compared to the time to process the whole input. So if we are processing the splits in parallel, the processing is better load-balanced if the splits are small, since a faster machine will be able to process proportionally more splits over the course of the job than a slower machine. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-71" style="background:;">
+  <hgroup>
+    <h2>What are haoop splits? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>Even if the machines are identical, failed processes or other jobs running concurrently make load balancing desirable, and the quality of the load balancing increases as the splits become more fine-grained.</p></li>
 <li><p>if splits are too small, then the overhead of managing the splits and of map task creation begins to dominate the total job execution time. For most jobs, a good split size tends to be the size of an HDFS block, 64 MB by default.</p></li>
 </ul>
@@ -1076,7 +1145,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-66" style="background:;">
+<slide class="" id="slide-72" style="background:;">
   <hgroup>
     <h2>What is data locality optimization?</h2>
   </hgroup>
@@ -1091,7 +1160,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-67" style="background:;">
+<slide class="" id="slide-73" style="background:;">
   <hgroup>
     <h2>What is hadoop hardware?</h2>
   </hgroup>
@@ -1106,7 +1175,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-68" style="background:;">
+<slide class="" id="slide-74" style="background:;">
   <hgroup>
     <h2>What are site and default configuration xml files?</h2>
   </hgroup>
@@ -1120,7 +1189,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-69" style="background:;">
+<slide class="" id="slide-75" style="background:;">
   <hgroup>
     <h2>What does core-site.xml refer to?</h2>
   </hgroup>
@@ -1134,7 +1203,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-70" style="background:;">
+<slide class="" id="slide-76" style="background:;">
   <hgroup>
     <h2>What does hdfs-site.xml refer to?</h2>
   </hgroup>
@@ -1148,7 +1217,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-71" style="background:;">
+<slide class="" id="slide-77" style="background:;">
   <hgroup>
     <h2>What does mapred-site.xml refer to?</h2>
   </hgroup>
@@ -1163,7 +1232,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-72" style="background:;">
+<slide class="" id="slide-78" style="background:;">
   <hgroup>
     <h2>What does the term master and slave refer to?</h2>
   </hgroup>
@@ -1178,7 +1247,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-73" style="background:;">
+<slide class="" id="slide-79" style="background:;">
   <hgroup>
     <h2>What is YARN?</h2>
   </hgroup>
@@ -1194,7 +1263,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-74" style="background:;">
+<slide class="" id="slide-80" style="background:;">
   <hgroup>
     <h2>What is the need for Yarn?</h2>
   </hgroup>
@@ -1210,7 +1279,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-75" style="background:;">
+<slide class="" id="slide-81" style="background:;">
   <hgroup>
     <h2>What is the core service of Yarn?</h2>
   </hgroup>
@@ -1225,7 +1294,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-76" style="background:;">
+<slide class="" id="slide-82" style="background:;">
   <hgroup>
     <h2>What are the components of Yarn ?</h2>
   </hgroup>
@@ -1243,7 +1312,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-77" style="background:;">
+<slide class="" id="slide-83" style="background:;">
   <hgroup>
     <h2>What is a container in Yarn? (1/4)</h2>
   </hgroup>
@@ -1259,7 +1328,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-78" style="background:;">
+<slide class="" id="slide-84" style="background:;">
   <hgroup>
     <h2>What is a container in Yarn? (2/4)</h2>
   </hgroup>
@@ -1274,7 +1343,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-79" style="background:;">
+<slide class="" id="slide-85" style="background:;">
   <hgroup>
     <h2>What is a container in Yarn? (3/4)</h2>
   </hgroup>
@@ -1292,7 +1361,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-80" style="background:;">
+<slide class="" id="slide-86" style="background:;">
   <hgroup>
     <h2>What is a container in Yarn? (4/4)</h2>
   </hgroup>
@@ -1308,7 +1377,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-81" style="background:;">
+<slide class="" id="slide-87" style="background:;">
   <hgroup>
     <h2>What is a Node Manager in Yarn? (1/5)</h2>
   </hgroup>
@@ -1326,7 +1395,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-82" style="background:;">
+<slide class="" id="slide-88" style="background:;">
   <hgroup>
     <h2>What are the tasks of Node Manager in Yarn?(2/5)</h2>
   </hgroup>
@@ -1342,7 +1411,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-83" style="background:;">
+<slide class="" id="slide-89" style="background:;">
   <hgroup>
     <h2>What are the tasks of Node Manager in Yarn?(3/5)</h2>
   </hgroup>
@@ -1359,7 +1428,7 @@ the registered codecs to find a match for a given extension</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-84" style="background:;">
+<slide class="" id="slide-90" style="background:;">
   <hgroup>
     <h2>What are the tasks of Node Manager in Yarn?(4/5)</h2>
   </hgroup>
@@ -1376,7 +1445,7 @@ resources (eventually allocated to form containers) are available. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-85" style="background:;">
+<slide class="" id="slide-91" style="background:;">
   <hgroup>
     <h2>What are the tasks of Node Manager in Yarn?(5/5)</h2>
   </hgroup>
@@ -1392,7 +1461,7 @@ turn  can  point  to  any  hardware/software  issues.  </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-86" style="background:;">
+<slide class="" id="slide-92" style="background:;">
   <hgroup>
     <h2>What is a Resource Manager in Yarn?(1/5)</h2>
   </hgroup>
@@ -1407,7 +1476,7 @@ turn  can  point  to  any  hardware/software  issues.  </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-87" style="background:;">
+<slide class="" id="slide-93" style="background:;">
   <hgroup>
     <h2>What is a Resource Manager in Yarn?(2/5)</h2>
   </hgroup>
@@ -1422,7 +1491,7 @@ turn  can  point  to  any  hardware/software  issues.  </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-88" style="background:;">
+<slide class="" id="slide-94" style="background:;">
   <hgroup>
     <h2>What is a Resource Manager in Yarn?(3/5)</h2>
   </hgroup>
@@ -1438,7 +1507,7 @@ turn  can  point  to  any  hardware/software  issues.  </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-89" style="background:;">
+<slide class="" id="slide-95" style="background:;">
   <hgroup>
     <h2>What is a Resource Manager in Yarn? (4/5)</h2>
   </hgroup>
@@ -1456,7 +1525,7 @@ The  RM assembles its global view from these snapshots of NM state.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-90" style="background:;">
+<slide class="" id="slide-96" style="background:;">
   <hgroup>
     <h2>How does Resource Manager manage jobs? (5/5)</h2>
   </hgroup>
@@ -1473,7 +1542,7 @@ failure.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-91" style="background:;">
+<slide class="" id="slide-97" style="background:;">
   <hgroup>
     <h2>What is Application Master in Yarn? (1/3)</h2>
   </hgroup>
@@ -1489,7 +1558,7 @@ failure.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-92" style="background:;">
+<slide class="" id="slide-98" style="background:;">
   <hgroup>
     <h2>What are the benefits of Application Master? (2/3)</h2>
   </hgroup>
@@ -1506,7 +1575,7 @@ failure.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-93" style="background:;">
+<slide class="" id="slide-99" style="background:;">
   <hgroup>
     <h2>What is an application with Respect to AM? (3/3)</h2>
   </hgroup>
@@ -1524,7 +1593,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-94" style="background:;">
+<slide class="" id="slide-100" style="background:;">
   <hgroup>
     <h2>What are the interfaces exposed by ResoureManager?</h2>
   </hgroup>
@@ -1537,7 +1606,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-95" style="background:;">
+<slide class="" id="slide-101" style="background:;">
   <hgroup>
     <h2>What are schedulers?</h2>
   </hgroup>
@@ -1551,7 +1620,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-96" style="background:;">
+<slide class="" id="slide-102" style="background:;">
   <hgroup>
     <h2>What are schedulers in YARN?</h2>
   </hgroup>
@@ -1566,7 +1635,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-97" style="background:;">
+<slide class="" id="slide-103" style="background:;">
   <hgroup>
     <h2>What are the schedulers available in Yarn?</h2>
   </hgroup>
@@ -1579,7 +1648,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-98" style="background:;">
+<slide class="" id="slide-104" style="background:;">
   <hgroup>
     <h2>What is FIFO scheduler ? (1/4)</h2>
   </hgroup>
@@ -1596,7 +1665,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-99" style="background:;">
+<slide class="" id="slide-105" style="background:;">
   <hgroup>
     <h2>What is FairShare Scheduler? (1/4)</h2>
   </hgroup>
@@ -1612,7 +1681,7 @@ its execution plan to accommodate perceived abundance or scarcity.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-100" style="background:;">
+<slide class="" id="slide-106" style="background:;">
   <hgroup>
     <h2>What is FairShare Scheduler? Contd(2/4)</h2>
   </hgroup>
@@ -1630,7 +1699,7 @@ jobs to finish in a reasonable time  while not starving longer jobs.  This also 
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-101" style="background:;">
+<slide class="" id="slide-107" style="background:;">
   <hgroup>
     <h2>What is FairShare Scheduler? Contd(3/4)</h2>
   </hgroup>
@@ -1645,7 +1714,7 @@ jobs to finish in a reasonable time  while not starving longer jobs.  This also 
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-102" style="background:;">
+<slide class="" id="slide-108" style="background:;">
   <hgroup>
     <h2>What is FairShare Scheduler? Contd(4/4)</h2>
   </hgroup>
@@ -1661,7 +1730,7 @@ is loaded from the classpath</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-103" style="background:;">
+<slide class="" id="slide-109" style="background:;">
   <hgroup>
     <h2>What is capacity Scheduler? (1/3)</h2>
   </hgroup>
@@ -1677,7 +1746,7 @@ is loaded from the classpath</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-104" style="background:;">
+<slide class="" id="slide-110" style="background:;">
   <hgroup>
     <h2>What is capacity Scheduler? (2/3)</h2>
   </hgroup>
@@ -1693,7 +1762,7 @@ is loaded from the classpath</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-105" style="background:;">
+<slide class="" id="slide-111" style="background:;">
   <hgroup>
     <h2>What is queue elasticity? (3/3)</h2>
   </hgroup>
@@ -1708,7 +1777,7 @@ is loaded from the classpath</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-106" style="background:;">
+<slide class="" id="slide-112" style="background:;">
   <hgroup>
     <h2>What are Queues?</h2>
   </hgroup>
@@ -1727,7 +1796,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-107" style="background:;">
+<slide class="" id="slide-113" style="background:;">
   <hgroup>
     <h2>What is queue placement?</h2>
   </hgroup>
@@ -1742,7 +1811,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-108" style="background:;">
+<slide class="" id="slide-114" style="background:;">
   <hgroup>
     <h2>What is preemption?</h2>
   </hgroup>
@@ -1759,7 +1828,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-109" style="background:;">
+<slide class="" id="slide-115" style="background:;">
   <hgroup>
     <h2>What is Delay scheduling?</h2>
   </hgroup>
@@ -1775,7 +1844,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-110" style="background:;">
+<slide class="" id="slide-116" style="background:;">
   <hgroup>
     <h2>What is job initialization in Yarn? (1/2)</h2>
   </hgroup>
@@ -1793,7 +1862,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-111" style="background:;">
+<slide class="" id="slide-117" style="background:;">
   <hgroup>
     <h2>What is job initialization in Yarn? (2/2)</h2>
   </hgroup>
@@ -1809,7 +1878,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-112" style="background:;">
+<slide class="" id="slide-118" style="background:;">
   <hgroup>
     <h2>What qualifies as a small job?</h2>
   </hgroup>
@@ -1822,7 +1891,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-113" style="background:;">
+<slide class="" id="slide-119" style="background:;">
   <hgroup>
     <h2>What is task assignment? (1/2)</h2>
   </hgroup>
@@ -1838,7 +1907,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-114" style="background:;">
+<slide class="" id="slide-120" style="background:;">
   <hgroup>
     <h2>What is task assignment? (2/2)</h2>
   </hgroup>
@@ -1854,7 +1923,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-115" style="background:;">
+<slide class="" id="slide-121" style="background:;">
   <hgroup>
     <h2>What is Task execution? (1/2)</h2>
   </hgroup>
@@ -1869,7 +1938,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-116" style="background:;">
+<slide class="" id="slide-122" style="background:;">
   <hgroup>
     <h2>What is Task execution? (2/2)</h2>
   </hgroup>
@@ -1884,7 +1953,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-117" style="background:;">
+<slide class="" id="slide-123" style="background:;">
   <hgroup>
     <h2>What does streaming task do  ?</h2>
   </hgroup>
@@ -1913,7 +1982,7 @@ for that queue.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-118" style="background:;">
+<slide class="" id="slide-124" style="background:;">
   <hgroup>
     <h2>What is progress status update?</h2>
   </hgroup>
@@ -1931,7 +2000,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-119" style="background:;">
+<slide class="" id="slide-125" style="background:;">
   <hgroup>
     <h2>What is the use of Umblical interface?</h2>
   </hgroup>
@@ -1945,7 +2014,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-120" style="background:;">
+<slide class="" id="slide-126" style="background:;">
   <hgroup>
     <h2>What is job completion?</h2>
   </hgroup>
@@ -1961,7 +2030,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-121" style="background:;">
+<slide class="" id="slide-127" style="background:;">
   <hgroup>
     <h2>What is task failure? (1/6)</h2>
   </hgroup>
@@ -1977,7 +2046,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-122" style="background:;">
+<slide class="" id="slide-128" style="background:;">
   <hgroup>
     <h2>What is task failure? (2/6)</h2>
   </hgroup>
@@ -1993,7 +2062,7 @@ completed). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-123" style="background:;">
+<slide class="" id="slide-129" style="background:;">
   <hgroup>
     <h2>What is task failure? (3/6)</h2>
   </hgroup>
@@ -2010,7 +2079,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-124" style="background:;">
+<slide class="" id="slide-130" style="background:;">
   <hgroup>
     <h2>What is task failure? (4/6)</h2>
   </hgroup>
@@ -2025,7 +2094,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-125" style="background:;">
+<slide class="" id="slide-131" style="background:;">
   <hgroup>
     <h2>What is task failure? (5/6)</h2>
   </hgroup>
@@ -2040,7 +2109,7 @@ execution of the task. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-126" style="background:;">
+<slide class="" id="slide-132" style="background:;">
   <hgroup>
     <h2>What is task failure? (6/6)</h2>
   </hgroup>
@@ -2059,7 +2128,7 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-127" style="background:;">
+<slide class="" id="slide-133" style="background:;">
   <hgroup>
     <h2>Get in touch</h2>
   </hgroup>
@@ -2072,7 +2141,7 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-128" style="background:;">
+<slide class="" id="slide-134" style="background:;">
   <article data-timings="">
     
   </article>
@@ -2325,530 +2394,566 @@ mapred job to see the options). Jobs may be killed by the same mechanisms.</p></
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='How is the file stored in Data Node?'>
+        data-slide=41 title='What are the choices for HA shared storage?'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='What are file permissions in HDFS? (1/2)'>
+        data-slide=42 title='How is the file stored in Data Node?(1/2)'>
          42
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='What are file permissions in HDFS? (2/2) contd..'>
+        data-slide=43 title='How is the file stored in Data Node?(2/2)'>
          43
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=44 title='What are the data formats in HDFS?'>
+        data-slide=44 title='What are file permissions in HDFS? (1/2)'>
          44
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=45 title='How does a client access the filesystem?'>
+        data-slide=45 title='What are file permissions in HDFS? (2/2) contd..'>
          45
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='How can HDFS be accessed?'>
+        data-slide=46 title='What are the data formats in HDFS?(1/2)'>
          46
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='What are Hadoop interfaces?'>
+        data-slide=47 title='What are the data formats in HDFS?(2/2)'>
          47
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='What are Hadoop interfaces? contd..'>
+        data-slide=48 title='How does a client access the filesystem?'>
          48
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='What is data ingress and egress in hadoop?'>
+        data-slide=49 title='How can HDFS be accessed?(1/2)'>
          49
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=50 title='What are Hadoop specific file types ?'>
+        data-slide=50 title='How can HDFS be accessed?(1/2)'>
          50
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=51 title='What is a sequentialFile ?'>
+        data-slide=51 title='What are Hadoop interfaces?'>
          51
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=52 title='What is the structure of sequence file? (1/2)'>
+        data-slide=52 title='What are Hadoop interfaces? contd..'>
          52
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=53 title='What is the structure of sequence file? (2/2)'>
+        data-slide=53 title='What is data ingress and egress in hadoop?'>
          53
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=54 title='NA'>
+        data-slide=54 title='What are Hadoop specific file types ?'>
          54
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=55 title='What is a MapFile'>
+        data-slide=55 title='What is a sequentialFile ?'>
          55
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=56 title='What is Map File varients?'>
+        data-slide=56 title='What is the structure of sequence file? (1/3)'>
          56
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=57 title='What are row oriented file formats?'>
+        data-slide=57 title='What is the structure of sequence file? (2/3)'>
          57
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=58 title='What are column oriented file formats?'>
+        data-slide=58 title='What is the structure of sequence file? (3/3)'>
          58
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=59 title='What is file compression?'>
+        data-slide=59 title='What is a MapFile'>
          59
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=60 title='What is file compression in Hadoop?'>
+        data-slide=60 title='What is Map File varients?'>
          60
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=61 title='What are file compression tools in Hadoop?'>
+        data-slide=61 title='What are row oriented file formats?'>
          61
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=62 title='What are the methods of compression codec?'>
+        data-slide=62 title='What are column oriented file formats?'>
          62
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=63 title='What is MapReduce?'>
+        data-slide=63 title='What is file compression?'>
          63
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=64 title='What is the responsibility of MapReduce framework?'>
+        data-slide=64 title='What is file compression in Hadoop? (1/2)'>
          64
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=65 title='What are haoop splits?'>
+        data-slide=65 title='What is file compression in Hadoop? (2/2)'>
          65
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=66 title='What is data locality optimization?'>
+        data-slide=66 title='What are file compression tools in Hadoop?'>
          66
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=67 title='What is hadoop hardware?'>
+        data-slide=67 title='What are the methods of compression codec?'>
          67
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=68 title='What are site and default configuration xml files?'>
+        data-slide=68 title='What is MapReduce?'>
          68
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=69 title='What does core-site.xml refer to?'>
+        data-slide=69 title='What is the responsibility of MapReduce framework?'>
          69
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=70 title='What does hdfs-site.xml refer to?'>
+        data-slide=70 title='What are haoop splits? (1/2)'>
          70
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=71 title='What does mapred-site.xml refer to?'>
+        data-slide=71 title='What are haoop splits? (1/2)'>
          71
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=72 title='What does the term master and slave refer to?'>
+        data-slide=72 title='What is data locality optimization?'>
          72
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=73 title='What is YARN?'>
+        data-slide=73 title='What is hadoop hardware?'>
          73
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=74 title='What is the need for Yarn?'>
+        data-slide=74 title='What are site and default configuration xml files?'>
          74
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=75 title='What is the core service of Yarn?'>
+        data-slide=75 title='What does core-site.xml refer to?'>
          75
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=76 title='What are the components of Yarn ?'>
+        data-slide=76 title='What does hdfs-site.xml refer to?'>
          76
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=77 title='What is a container in Yarn? (1/4)'>
+        data-slide=77 title='What does mapred-site.xml refer to?'>
          77
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=78 title='What is a container in Yarn? (2/4)'>
+        data-slide=78 title='What does the term master and slave refer to?'>
          78
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=79 title='What is a container in Yarn? (3/4)'>
+        data-slide=79 title='What is YARN?'>
          79
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=80 title='What is a container in Yarn? (4/4)'>
+        data-slide=80 title='What is the need for Yarn?'>
          80
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=81 title='What is a Node Manager in Yarn? (1/5)'>
+        data-slide=81 title='What is the core service of Yarn?'>
          81
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=82 title='What are the tasks of Node Manager in Yarn?(2/5)'>
+        data-slide=82 title='What are the components of Yarn ?'>
          82
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=83 title='What are the tasks of Node Manager in Yarn?(3/5)'>
+        data-slide=83 title='What is a container in Yarn? (1/4)'>
          83
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=84 title='What are the tasks of Node Manager in Yarn?(4/5)'>
+        data-slide=84 title='What is a container in Yarn? (2/4)'>
          84
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=85 title='What are the tasks of Node Manager in Yarn?(5/5)'>
+        data-slide=85 title='What is a container in Yarn? (3/4)'>
          85
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=86 title='What is a Resource Manager in Yarn?(1/5)'>
+        data-slide=86 title='What is a container in Yarn? (4/4)'>
          86
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=87 title='What is a Resource Manager in Yarn?(2/5)'>
+        data-slide=87 title='What is a Node Manager in Yarn? (1/5)'>
          87
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=88 title='What is a Resource Manager in Yarn?(3/5)'>
+        data-slide=88 title='What are the tasks of Node Manager in Yarn?(2/5)'>
          88
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=89 title='What is a Resource Manager in Yarn? (4/5)'>
+        data-slide=89 title='What are the tasks of Node Manager in Yarn?(3/5)'>
          89
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=90 title='How does Resource Manager manage jobs? (5/5)'>
+        data-slide=90 title='What are the tasks of Node Manager in Yarn?(4/5)'>
          90
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=91 title='What is Application Master in Yarn? (1/3)'>
+        data-slide=91 title='What are the tasks of Node Manager in Yarn?(5/5)'>
          91
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=92 title='What are the benefits of Application Master? (2/3)'>
+        data-slide=92 title='What is a Resource Manager in Yarn?(1/5)'>
          92
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=93 title='What is an application with Respect to AM? (3/3)'>
+        data-slide=93 title='What is a Resource Manager in Yarn?(2/5)'>
          93
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=94 title='What are the interfaces exposed by ResoureManager?'>
+        data-slide=94 title='What is a Resource Manager in Yarn?(3/5)'>
          94
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=95 title='What are schedulers?'>
+        data-slide=95 title='What is a Resource Manager in Yarn? (4/5)'>
          95
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=96 title='What are schedulers in YARN?'>
+        data-slide=96 title='How does Resource Manager manage jobs? (5/5)'>
          96
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=97 title='What are the schedulers available in Yarn?'>
+        data-slide=97 title='What is Application Master in Yarn? (1/3)'>
          97
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=98 title='What is FIFO scheduler ? (1/4)'>
+        data-slide=98 title='What are the benefits of Application Master? (2/3)'>
          98
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=99 title='What is FairShare Scheduler? (1/4)'>
+        data-slide=99 title='What is an application with Respect to AM? (3/3)'>
          99
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=100 title='What is FairShare Scheduler? Contd(2/4)'>
+        data-slide=100 title='What are the interfaces exposed by ResoureManager?'>
          100
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=101 title='What is FairShare Scheduler? Contd(3/4)'>
+        data-slide=101 title='What are schedulers?'>
          101
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=102 title='What is FairShare Scheduler? Contd(4/4)'>
+        data-slide=102 title='What are schedulers in YARN?'>
          102
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=103 title='What is capacity Scheduler? (1/3)'>
+        data-slide=103 title='What are the schedulers available in Yarn?'>
          103
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=104 title='What is capacity Scheduler? (2/3)'>
+        data-slide=104 title='What is FIFO scheduler ? (1/4)'>
          104
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=105 title='What is queue elasticity? (3/3)'>
+        data-slide=105 title='What is FairShare Scheduler? (1/4)'>
          105
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=106 title='What are Queues?'>
+        data-slide=106 title='What is FairShare Scheduler? Contd(2/4)'>
          106
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=107 title='What is queue placement?'>
+        data-slide=107 title='What is FairShare Scheduler? Contd(3/4)'>
          107
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=108 title='What is preemption?'>
+        data-slide=108 title='What is FairShare Scheduler? Contd(4/4)'>
          108
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=109 title='What is Delay scheduling?'>
+        data-slide=109 title='What is capacity Scheduler? (1/3)'>
          109
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=110 title='What is job initialization in Yarn? (1/2)'>
+        data-slide=110 title='What is capacity Scheduler? (2/3)'>
          110
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=111 title='What is job initialization in Yarn? (2/2)'>
+        data-slide=111 title='What is queue elasticity? (3/3)'>
          111
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=112 title='What qualifies as a small job?'>
+        data-slide=112 title='What are Queues?'>
          112
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=113 title='What is task assignment? (1/2)'>
+        data-slide=113 title='What is queue placement?'>
          113
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=114 title='What is task assignment? (2/2)'>
+        data-slide=114 title='What is preemption?'>
          114
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=115 title='What is Task execution? (1/2)'>
+        data-slide=115 title='What is Delay scheduling?'>
          115
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=116 title='What is Task execution? (2/2)'>
+        data-slide=116 title='What is job initialization in Yarn? (1/2)'>
          116
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=117 title='What does streaming task do  ?'>
+        data-slide=117 title='What is job initialization in Yarn? (2/2)'>
          117
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=118 title='What is progress status update?'>
+        data-slide=118 title='What qualifies as a small job?'>
          118
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=119 title='What is the use of Umblical interface?'>
+        data-slide=119 title='What is task assignment? (1/2)'>
          119
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=120 title='What is job completion?'>
+        data-slide=120 title='What is task assignment? (2/2)'>
          120
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=121 title='What is task failure? (1/6)'>
+        data-slide=121 title='What is Task execution? (1/2)'>
          121
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=122 title='What is task failure? (2/6)'>
+        data-slide=122 title='What is Task execution? (2/2)'>
          122
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=123 title='What is task failure? (3/6)'>
+        data-slide=123 title='What does streaming task do  ?'>
          123
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=124 title='What is task failure? (4/6)'>
+        data-slide=124 title='What is progress status update?'>
          124
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=125 title='What is task failure? (5/6)'>
+        data-slide=125 title='What is the use of Umblical interface?'>
          125
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=126 title='What is task failure? (6/6)'>
+        data-slide=126 title='What is job completion?'>
          126
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=127 title='Get in touch'>
+        data-slide=127 title='What is task failure? (1/6)'>
          127
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=128 title='NA'>
+        data-slide=128 title='What is task failure? (2/6)'>
          128
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=129 title='What is task failure? (3/6)'>
+         129
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=130 title='What is task failure? (4/6)'>
+         130
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=131 title='What is task failure? (5/6)'>
+         131
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=132 title='What is task failure? (6/6)'>
+         132
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=133 title='Get in touch'>
+         133
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=134 title='NA'>
+         134
       </a>
     </li>
   </ul>
