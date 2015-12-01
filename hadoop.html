@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workshop on BigData</title>
+  <title>BigData - Data Management</title>
   <meta charset="utf-8">
-  <meta name="description" content="Workshop on BigData">
+  <meta name="description" content="BigData - Data Management">
   <meta name="author" content="Dr.Muthukumaran">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -32,8 +32,8 @@
     <!-- LOGO SLIDE -->
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
-    <h1>Workshop on BigData</h1>
-    <h2>Focus on Hadoop Basics</h2>
+    <h1>BigData - Data Management</h1>
+    <h2>Focus on BigData</h2>
     <p>Dr.Muthukumaran<br/>http://profbmuthu.github.io/dataStream</p>
   </hgroup>
   <article></article>  
@@ -43,13 +43,13 @@
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>What is distributed Systems?</h2>
+    <h2>What is Big Data? (1/5)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Distributed systems are often complex pieces of software of which the components
-are by definition dispersed across multiple machines.</p></li>
-<li><p>It is a system  in which hardware or software components located at networked computers communicate and coordinate their actions only by passing messages.</p></li>
+<li><p>Recent trends suggest a rapid growth in the use of large server infrastructure like data centers and cloud computing platforms for scalable services. </p></li>
+<li><p>Internet services, like Google and Yahoo!, are using their computing infrastructure to run applications that compute on massive amounts of input data. </p></li>
+<li><p>The volume of data being made publicly available increases every year, too. Organizations no longer have to merely manage their own data. Success in the future will be dictated to a large extent by their ability to extract value from other organization&#39;s data</p></li>
 </ul>
 
   </article>
@@ -58,16 +58,14 @@ are by definition dispersed across multiple machines.</p></li>
 
 <slide class="" id="slide-2" style="background:;">
   <hgroup>
-    <h2>What is File system Namespace ?</h2>
+    <h2>What is Big Data? (2/5)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Traditional local file systems support a persistent name space. Local file system
-views devices as being locally attached, the devices are not shared, and hence
-there is no need in the file system design to enforce device sharing semantics.
-HDFS supports a traditional hierarchical file organization. </p></li>
-<li><p>A user or an application can create directories and store files inside these directories. </p></li>
-<li><p>The file system namespace hierarchy is similar to most other existing file systems; one can create and remove files, move a file from one directory to another, or rename a file.</p></li>
+<li><p>The term &quot;Big Data&quot; has been used to describe data sets that are so large that typical and traditional
+means of data storage, management, search, analytics, and other processing has become a challenge.</p></li>
+<li><p>Big data is data that exceeds the processing capacity of conventional database defined systems. </p></li>
+<li><p>The data is too big, moves too fast, or doesn&#39;t fit the strictures of conventional database architectures. Within this data lie valuable patterns and information, previously hidden because of the amount of work required to extract them. </p></li>
 </ul>
 
   </article>
@@ -76,12 +74,14 @@ HDFS supports a traditional hierarchical file organization. </p></li>
 
 <slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>What is data ingress and egress in hadoop?</h2>
+    <h2>What is Big Data? (3/5)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Moving data in and out of Hadoop, which I’ll refer to in this chapter as data ingress and egress, is the process by which data is transported from an external system into an internal system, and vice versa. Hadoop supports ingress and egress at a low level in HDFS and MapReduce. </p></li>
-<li><p>Files can be moved in and out of HDFS, and data can be pulled from external data sources and pushed to external data sinks using MapReduce.</p></li>
+<li><p>The term Big Data applies to information that can&#39;t be processed or analyzed using traditional processes or tools.</p></li>
+<li><p>Big Data is characterized by the magnitude of digital information that can come from many sources
+and data formats (structured and unstructured), and data that can be processed and analyzed to
+find insights and patterns used to make informed decisions.</p></li>
 </ul>
 
   </article>
@@ -90,21 +90,14 @@ HDFS supports a traditional hierarchical file organization. </p></li>
 
 <slide class="" id="slide-4" style="background:;">
   <hgroup>
-    <h2>What is Hadoop?</h2>
+    <h2>What is Bigdata? (4/5)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Hadoop is a platform that provides both distributed storage and computational capabilities. Hadoop was first conceived to fix a scalability issue that existed in Nutch, an open source crawler and search engine.</p></li>
-<li><p>Hadoop proper, is a distributed master-slave architecture that consists of the Hadoop Distributed File System (HDFS) for storage and Map-Reduce for computational capabilities.</p></li>
-<li><p>The Apache Software Foundation is where all Apache Hadoop development happens.
-Administrators can download Hadoop directly from the project website at http://ha
-doop.apache.org.</p></li>
+<li><p>Big data is the information generated by social networking, sensors, financial transactions, mobile applications and so much more. </p></li>
+<li><p>Big data analytics reveals insights hidden previously by data too costly to process, such as peer influence among customers, revealed by analyzing shoppers&#39; transactions and social and geographical data in real time. The meaning of &quot;real time&quot; can vary depending on the context in which it is used. </p></li>
+<li><p>Real-time denotes the ability to process data as it arrives, rather than storing the data and retrieving it at some point in the future. </p></li>
 </ul>
-
-<p>-Hadoop was created by Doug Cutting, the creator of Apache Lucene, the widely used
-text search library. Hadoop has its origins in Apache Nutch, an open source web search engine, itself a part of the Lucene project. Apache Hadoop is distributed as tarballs containing both source and binary artifacts.</p>
-
-<p>-Hadoop is designed to abstract away much of the complexity of distributed processing.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -112,15 +105,17 @@ text search library. Hadoop has its origins in Apache Nutch, an open source web 
 
 <slide class="" id="slide-5" style="background:;">
   <hgroup>
-    <h2>What is Cloudera?</h2>
+    <h2>What is Bigdata? (5/5)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Cloudera, a company that provides support, consulting, and management tools for
-Hadoop, also has a distribution of software called Cloudera’s Distribution Including Apache Hadoop, or just CDH.</li>
+<li><p>But &quot;the present&quot; also has different meanings to different users. </p></li>
+<li><p>From the perspective of an online merchant, &quot;the present&quot; means the attention span of a potential customer. If the processing time of a transaction exceeds the customer&#39;s attention span, the merchant doesn&#39;t consider
+it real time. From the perspective of an options trader, however, real time means milliseconds. </p></li>
+<li><p>From the perspective of a guided missile, real time means microseconds. </p></li>
+<li><p>Real-time big data analytics is an iterative process involving multiple tools and systems.</p></li>
+<li><p>Companies are realizing that big data can be mined for trends and other information that can drive business decisions, but searching through such vast amounts of often unstructured data can takes weeks, if not months, using traditional methods</p></li>
 </ul>
-
-<p>-Cloudera starts with a stable Apache Hadoop release, puts it on a steady release cadence, backports critical fixes, provides packages for a number of different operating systems, and has a commercial-grade QA and testing process</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -128,14 +123,13 @@ Hadoop, also has a distribution of software called Cloudera’s Distribution Inc
 
 <slide class="" id="slide-6" style="background:;">
   <hgroup>
-    <h2>What is HDFS?</h2>
+    <h2>What are the types of bigdata ?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>HDFS is the storage component of Hadoop. </p></li>
-<li><p>It’s a distributed filesystem that’s modeled after the Google File System (GFS) paper. </p></li>
-<li><p>HDFS is optimized for high throughput and works best when reading and writing large files (gigabytes and larger).  </p></li>
-<li><p>To support this throughput HDFS leverages unusually large (for a filesystem) block sizes and data locality optimizations to reduce network input/output (I/O).</p></li>
+<li><p>Structured data is data that is organized into entities that have a defined format, such as XML documents or database tables that conform to a particular predefined schema. This is the realm of the RDBMS. </p></li>
+<li><p>Semi-structured data, on the other hand, is looser, and though there may be a schema, it is often ignored, so it may be used only as a guide to the structure of the data: for example, a spreadsheet, in which the structure is the grid of cells, although the cells themselves may hold any form of data. </p></li>
+<li><p>Unstructured data does not have any particular internal structure: for example, plain text or image data.</p></li>
 </ul>
 
   </article>
@@ -144,17 +138,14 @@ Hadoop, also has a distribution of software called Cloudera’s Distribution Inc
 
 <slide class="" id="slide-7" style="background:;">
   <hgroup>
-    <h2>What are the Hadoop daemons?</h2>
+    <h2>What are Big Data Issues ? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Hadoop has the following daemons:</p></li>
-<li><p>NameNode: Maintains the metadata for each file stored in the HDFS. Metadata includes the information about blocks comprising the file as well their locations on the DataNodes.</p></li>
-<li><p>Secondary NameNode: This is not a backup NameNode. In fact, it is a poorly named component of the Hadoop platform. It performs some housekeeping functions for the NameNode.</p></li>
-<li><p>DataNode: Stores the actual blocks of a file in the HDFS on its own local
-disk.</p></li>
-<li><p>JobTracker: One of the master components, it is responsible for managing the overall execution of a job. It performs functions such as scheduling child tasks (individual Mapper and Reducer) to individual nodes, keeping track of the health of each task and node, and even rescheduling failed tasks.</p></li>
-<li><p>TaskTracker: Runs on individual DataNodes and is responsible for starting and managing individual Map/Reduce tasks. Communicates with the JobTracker.</p></li>
+<li><p>organizations which deal with such high volumes of data face the following problems:</p></li>
+<li><p><strong>Data acquisition</strong>: There is lot of raw data that gets generated out of various data sources. The challenge is to filter and compress the data, and extract the information out of it once it is cleaned.</p></li>
+<li><p><strong>Information storage and organization</strong>: Once the information is captured out of raw data, the data model will be created and stored in a storage device. To store a huge dataset effectively, traditional relational system stops being effective at such a high scale. There has been a new breed of databases called NOSQL databases, which are mainly used to work with big data. NOSQL databases are non-relational databases.</p></li>
+<li><p><strong>Information search and analytics</strong>: Storing data is only a part of building a warehouse. Data is useful only when it is computed. Big data is often noisy, dynamic, and heterogeneous. This information is searched, mined, and analyzed for behavioral modeling.</p></li>
 </ul>
 
   </article>
@@ -163,18 +154,14 @@ disk.</p></li>
 
 <slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>What is a disk block?</h2>
+    <h2>What are Big Data Issues ? (2/2) contd.</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>A disk has a block size, which is the minimum amount of data that it can read or
-write. </p></li>
-<li><p>Filesystems for a single disk build on this by dealing with data in blocks,
-which are an integral multiple of the disk block size. </p></li>
-<li><p>Filesystem blocks are typically a few kilobytes in size, whereas disk blocks are normally 512 bytes. </p></li>
-<li><p>This is generally transparent to the filesystem user who is simply reading or writing a file of whatever length. There are tools to perform filesystem maintenance, such as df and fsck, that operate on the filesystem block level. </p></li>
-<li><p>HDFS, has the concept of a block, but it is a much larger unit—64 MB by default. </p></li>
-<li><p>Like in a filesystem for a single disk, files in HDFS are broken into block-sized chunks, which are stored as independent units.</p></li>
+<li><p><strong>Data security and privacy</strong>: While bringing in linked data from multiple sources, organizations need to worry about data security and privacy at the most.</p></li>
+<li><p>Bigdata requires large quantities of data processing within the finite timeframe. </p></li>
+<li><p>This  brings in technologies such as massively parallel processing (MPP) technologies and
+distributed file systems.</p></li>
 </ul>
 
   </article>
@@ -183,17 +170,15 @@ which are an integral multiple of the disk block size. </p></li>
 
 <slide class="" id="slide-9" style="background:;">
   <hgroup>
-    <h2>Why HDFS blocks are large?</h2>
+    <h2>What are common characteristics of bigdata approaches?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>HDFS blocks are large compared to disk blocks, and the reason is to minimize
-the cost of seeks. </p></li>
-<li><p>By making a block large enough, the time to transfer the data from the disk can be significantly longer than the time to seek to the start of the block. Thus the time to transfer a large file made of multiple blocks operates at the disk transfer rate.</p></li>
-<li><p>Having a block abstraction for a distributed filesystem brings several benefits.
-The first benefit is the most obvious: a file can be larger than any single disk
-in the network. There’s nothing that requires the blocks from a file to be stored on the same disk, so they can take advantage of any of the disks in the cluster.
-In fact, it would be possible, if unusual, to store a single file on an HDFS cluster whose blocks filled all the disks in the cluster.</p></li>
+<li>Some of the common characteristics of all Big Data methods are the following:</li>
+<li> Data is distributed across several nodes (Network I/O speed &lt;&lt; Local Disk I/O Speed).</li>
+<li> Applications are distributed to data (nodes in the cluster) instead of the other way around.</li>
+<li> As much as possible, data is processed local to the node (Network I/O speed &lt;&lt; Local Disk I/O Speed).</li>
+<li> Random disk I/O is replaced by sequential disk I/O (Transfer Rate &lt;&lt; Disk Seek Time).</li>
 </ul>
 
   </article>
@@ -201,6 +186,294 @@ In fact, it would be possible, if unusual, to store a single file on an HDFS clu
 </slide>
 
 <slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>What are the major types of bigdata models?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Major types of Big Data programming models you will encounter are the following:</p></li>
+<li><p>Massively parallel processing (MPP) database system: EMC&#39;s Greenplum and IBM&#39;s Netezza are examples of such systems.</p></li>
+<li><p>In-memory database systems: Examples include Oracle Exalytics and SAP HANA.</p></li>
+<li><p>MapReduce systems: These systems include Hadoop, which is the most general-purpose of all
+the Big Data systems.</p></li>
+<li><p>Bulk synchronous parallel (BSP) systems: Examples include Apache HAMA and Apache Giraph.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>What is Apache Hadoop Eco System?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Apache Hadoop ecosystem consists of the following major components:</li>
+<li>Core Hadoop framework: <strong>HDFS and MapReduce</strong></li>
+<li>Metadata management: <strong>HCatalog</strong></li>
+<li>Data storage and querying: <strong>HBase, Hive, and Pig</strong></li>
+<li>Data import/export: <strong>Flume, Sqoop</strong></li>
+<li>Analytics and machine learning: <strong>Mahout</strong></li>
+<li>Distributed coordination: <strong>Zookeeper</strong></li>
+<li>Cluster management: <strong>Ambari</strong></li>
+<li>Data storage and serialization: <strong>Avro</strong></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>What is distributed Systems?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>When a dataset outgrows the storage capacity of a single physical machine, it becomes necessary to partition it across a number of separate machines. </p></li>
+<li><p>Filesystems that manage the storage across a network of machines are called distributed filesystems. </p></li>
+<li><p>Since they are network based, all the complications of network programming kick in, thus making distributed filesystems more complex than regular disk filesystems.</p></li>
+<li><p>Distributed systems are often complex pieces of software of which the components are by definition dispersed across multiple machines.</p></li>
+<li><p>It is a system  in which hardware or software components located at networked computers communicate and coordinate their actions only by passing messages.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>What is Hadoop? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop is a platform that provides both distributed storage and computational capabilities. Hadoop was first conceived to fix a scalability issue that existed in Nutch, an open source crawler and search engine.</p></li>
+<li><p>Hadoop proper, is a distributed master-slave architecture that consists of the Hadoop Distributed File System (HDFS) for storage and Map-Reduce for computational capabilities.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>What is Hadoop? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Apache Software Foundation is where all Apache Hadoop development happens.
+Administrators can download Hadoop directly from the project website at <a href="http://hadoop.apache.org">http://hadoop.apache.org</a>.</p></li>
+<li><p>Hadoop was created by Doug Cutting, the creator of Apache Lucene, the widely used
+text search library. Hadoop has its origins in Apache Nutch, an open source web search engine, itself a part of the Lucene project. Apache Hadoop is distributed as tarballs containing both source and binary artifacts.</p></li>
+<li><p>Hadoop is designed to abstract away much of the complexity of distributed processing.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>How is Hadoop different?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Hadoop is different from previous distributed approaches in the following ways:</li>
+<li>Data is distributed in advance.</li>
+<li>Data is replicated throughout a cluster of computers for reliability and availability.</li>
+<li>Data processing tries to occur where the data is stored, thus eliminating bandwidth bottlenecks.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>What is Cloudera?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Cloudera is a company that provides support, consulting, and management tools for Hadoop, also has a distribution of software called Clouderaâ€™s Distribution Including Apache Hadoop .</p></li>
+<li><p>Cloudera starts with a stable Apache Hadoop release, puts it on a steady release cadence, backports critical fixes, provides packages for a number of different operating systems, and has a commercial-grade QA and testing process</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What are hadoop distributions of Amazon and Microsoft?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Two interesting Hadoop distributions were released by Amazon and Microsoft. Both provide a
+prepackaged version of Hadoop running in the corresponding cloud (Amazon or Azure) as Platform
+as a Service (PaaS). </p></li>
+<li><p>Both provide extensions that allow developers to utilize not only Hadoop&#39;s native HDFS, but also the mapping of HDFS to their own data storage mechanisms (S3 in the case of Amazon, and Windows Azure storage in the case of Azure).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>What is Hortonworks data platform?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hartonworks is a company that provides support consulting and management tools for Hadoop. </p></li>
+<li><p>Based on Hadoop 2, this distribution includes HDFS, YARN, HBase, MapReduce, Hive, Pig, HCatalog, Zookeeper, Oozie, Mahout, Hue, Ambari, Tez, and a realtime version of Hive (Stinger) and other open source tools. Provides Hortonworks high-availability support, a high-performance Hive ODBC driver, and Talend Open Studio for Big Data.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>What is MAPR?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hartonworks is a company that provides support consulting and management tools for Hadoop. </p></li>
+<li><p>Based on Hadoop, this distribution includes HDFS, HBase, MapReduce, Hive, Mahout, Oozie, Pig, ZooKeeper, Hue, and other open source tools. </p></li>
+<li><p>It also includes direct NFS access, snapshots, and mirroring for &quot;high availability,&quot; a proprietary HBase implementation that is fully compatible with Apache APIs, and a MapR management console.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>What is Amazon EMR?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>This is based on Hadoop Amazon EMR is a web service that enables users to easily and cost-effectively process vast amounts of data. </p></li>
+<li><p>It utilizes a hosted Hadoop framework running on the web-scale infrastructure of Amazon Elastic Compute Cloud (Amazon EC2) and Amazon Simple Storage Service (Amazon S3). </p></li>
+<li><p>It includes HDFS (with S3 support), HBase (proprietary backup recovery), MapReduce, Hive (added support for Dynamo), Pig, and Zookeeper.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>What is HDFS?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HDFS is the storage component of Hadoop. </p></li>
+<li><p>Itâ€™s a distributed filesystem thatâ€™s modeled after the Google File System (GFS) paper. </p></li>
+<li><p>HDFS is optimized for high throughput and works best when reading and writing large files (gigabytes and larger).  </p></li>
+<li><p>To support this throughput HDFS leverages unusually large (for a filesystem) block sizes and data locality optimizations to reduce network input/output (I/O).</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>What are the Hadoop daemons? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop has the following daemons:</p></li>
+<li><p>NameNode: Maintains the metadata for each file stored in the HDFS. Metadata includes the information about blocks comprising the file as well their locations on the DataNodes.</p></li>
+<li><p>Secondary NameNode: This is not a backup NameNode. In fact, it is a poorly named component of the Hadoop platform. It performs some housekeeping functions for the NameNode.</p></li>
+<li><p>DataNode: Stores the actual blocks of a file in the HDFS on its own local
+disk.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>What are the Hadoop daemons? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>JobTracker: One of the master components, it is responsible for managing the overall execution of a job. It performs functions such as scheduling child tasks (individual Mapper and Reducer) to individual nodes, keeping track of the health of each task and node, and even rescheduling failed tasks.</p></li>
+<li><p>TaskTracker: Runs on individual DataNodes and is responsible for starting and managing individual Map/Reduce tasks. Communicates with the JobTracker.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>What is a disk block?(1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A disk has a block size, which is the minimum amount of data that it can read or
+write. </p></li>
+<li><p>Filesystems for a single disk build on this by dealing with data in blocks,
+which are an integral multiple of the disk block size. </p></li>
+<li><p>Filesystem blocks are typically a few kilobytes in size, whereas disk blocks are normally 512 bytes. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>What is a disk block?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>This is generally transparent to the filesystem user who is simply reading or writing a file of whatever length. There are tools to perform filesystem maintenance, such as df and fsck, that operate on the filesystem block level. </p></li>
+<li><p>HDFS, has the concept of a block, but it is a much larger unitâ€”64 MB by default. </p></li>
+<li><p>Like in a filesystem for a single disk, files in HDFS are broken into block-sized chunks, which are stored as independent units.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Why HDFS blocks are large? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HDFS blocks are large compared to disk blocks, and the reason is to minimize
+the cost of seeks. </p></li>
+<li><p>By making a block large enough, the time to transfer the data from the disk can be significantly longer than the time to seek to the start of the block. Thus the time to transfer a large file made of multiple blocks operates at the disk transfer rate.</p></li>
+<li><p>Having a block abstraction for a distributed filesystem brings several benefits.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Why HDFS blocks are large? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The first benefit is the most obvious: a file can be larger than any single disk
+in the network. </p></li>
+<li><p>There iâ€™s nothing that requires the blocks from a file to be stored on the same disk, so they can take advantage of any of the disks in the cluster.</p></li>
+<li><p>In fact, it would be possible, if unusual, to store a single file on an HDFS cluster whose blocks filled all the disks in the cluster.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>What is name node?</h2>
   </hgroup>
@@ -217,7 +490,7 @@ tree and the metadata for all the files and directories are maintained. </p></li
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>What is a Data Node?</h2>
   </hgroup>
@@ -233,13 +506,13 @@ the datanode (DN). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>What is data node storage?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>Each Data Node stores HDFS blocks on behalf of local or remote clients. Each block is saved as a separate file in the node’s local file system. Because the Data Node abstracts away details of the local storage arrangement, all nodes do not have to use the same local file system. </p></li>
+<li><p>Each Data Node stores HDFS blocks on behalf of local or remote clients. Each block is saved as a separate file in the nodeâ€™s local file system. Because the Data Node abstracts away details of the local storage arrangement, all nodes do not have to use the same local file system. </p></li>
 <li><p>Blocks are created or destroyed on Data Nodes at the request of the Name Node, which validates and processes requests from clients. </p></li>
 <li><p>Although the Name Node manages the namespace, clients communicate directly with Data Nodes in order to read or write data at the HDFS block level. </p></li>
 </ul>
@@ -248,13 +521,13 @@ the datanode (DN). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>What is map reduce?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>MapReduce is built on the proven concept of divide and conquer: it’s much faster to break a massive task into smaller chunks and process them in parallel.</p></li>
+<li><p>MapReduce is built on the proven concept of divide and conquer: itâ€™s much faster to break a massive task into smaller chunks and process them in parallel.</p></li>
 <li><p>In MapReduce, task-based programming logic is placed as close to the data as possible. This technique works very nicely with both structured and unstructured data.</p></li>
 <li><p>MapReduce works by breaking the processing into two phases: the map phase and the
 reduce phase. Each phase has key-value pairs as input and output, the types of which may be chosen by the programmer. The programmer also specifies two functions: the map function and the reduce function.</p></li>
@@ -264,7 +537,7 @@ reduce phase. Each phase has key-value pairs as input and output, the types of w
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>What is a map reduce job?</h2>
   </hgroup>
@@ -279,18 +552,22 @@ information. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>How are the map reduce jobs controlled?</h2>
   </hgroup>
   <article data-timings="">
-    <p>There are two types of nodes that control the job execution process: a jobtracker and a number of tasktrackers. The jobtracker coordinates all the jobs run on the system by scheduling tasks to run on tasktrackers. Tasktrackers run tasks and send progress reports to the jobtracker, which keeps a record of the overall progress of each job. If a task fails, the jobtracker can reschedule it on a different tasktracker.</p>
+    <ul>
+<li><p>There are two types of nodes that control the job execution process: a jobtracker and a number of tasktrackers. </p></li>
+<li><p>The jobtracker coordinates all the jobs run on the system by scheduling tasks to run on tasktrackers. Tasktrackers run tasks and send progress reports to the jobtracker, which keeps a record of the overall progress of each job. </p></li>
+<li><p>If a task fails, the jobtracker can reschedule it on a different tasktracker.</p></li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>What are the nodes of mapreduce framework</h2>
   </hgroup>
@@ -306,7 +583,7 @@ information. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>What is a Job tracker ?</h2>
   </hgroup>
@@ -322,9 +599,9 @@ information. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
-    <h2>What is task tracker?</h2>
+    <h2>What is task tracker? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
@@ -333,6 +610,18 @@ instantiates the user code, executes those tasks locally, and reports progress b
 <li><p>Both tasktrackers and datanodes run on the same machines, which makes each node
 both a compute node and a storage node, respectively. </p></li>
 <li><p>Each tasktracker is configured with a specific number of map and reduce task slots that indicate how many of each type of task it is capable of executing in parallel. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>What is task tracker? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li><p>A task slot is exactly what it sounds like; it is an allocation of available resources on a worker node to which a task may be assigned, in which case it is executed. </p></li>
 <li><p>A tasktracker executes some number of map tasks and reduce tasks in parallel, so there is concurrency both within a worker where many tasks run, and at the cluster level where many workers exist.</p></li>
 </ul>
@@ -341,25 +630,39 @@ both a compute node and a storage node, respectively. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
-    <h2>What are haoop splits?</h2>
+    <h2>What are haoop splits? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>Hadoop divides the input to a MapReduce job into fixed-size pieces called input
-splits, or just splits. Hadoop creates one map task for each split, which runs the userdefined map function for each record in the split.</p></li>
+splits, or just splits. </p></li>
+<li><p>Hadoop creates one map task for each split, which runs the userdefined map function for each record in the split.</p></li>
 <li><p>Having many splits means the time taken to process each split is small compared to the time to process the whole input. So if we are processing the splits in parallel, the processing is better load-balanced if the splits are small, since a faster machine will be able to process proportionally more splits over the course of the job than a slower machine. </p></li>
-<li><p>Even if the machines are identical, failed processes or other jobs running concurrently make load balancing desirable, and the quality of the load balancing increases as the splits become more fine-grained.</p></li>
-<li><p>if splits are too small, then the overhead of managing the splits and
-of map task creation begins to dominate the total job execution time. For most jobs, a good split size tends to be the size of an HDFS block, 64 MB by default</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-39" style="background:;">
+  <hgroup>
+    <h2>What are haoop splits? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Even if the machines are identical, failed processes or other jobs running concurrently make load balancing desirable, and the quality of the load balancing increases as the splits become more fine-grained.</p></li>
+<li><p>if splits are too small, then the overhead of managing the splits and
+of map task creation begins to dominate the total job execution time. </p></li>
+<li><p>For most jobs, a good split size tends to be the size of an HDFS block, 64 MB by default</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>What is data locality optimization?</h2>
   </hgroup>
@@ -374,42 +677,41 @@ of map task creation begins to dominate the total job execution time. For most j
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>What is a federation?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>Federation is a feature,  created to overcome the limitation that all filesystem metadata must fit in memory. It differs from namenode high availability in that rather than a single namespace being served from one of two possible namenodes, multiple namenodes each serve a different slice of a larger namespace. </p></li>
-<li><p>It’s possible to enable either federation or high availability, or even both simultaneously. Sometimes, federation is used to provide a different level of service to a slice of a global namespace.</p></li>
+<li><p>Itâ€™s possible to enable either federation or high availability, or even both simultaneously. Sometimes, federation is used to provide a different level of service to a slice of a global namespace.</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h2>What is hadoop hardware?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>The term commodity hardware is often used to describe Hadoop hardware requirements.</li>
+<li><p>The term commodity hardware is often used to describe Hadoop hardware requirements.</p></li>
+<li><p>commodity refers to mid-level rack servers with dual sockets, as much error-correcting RAM as is affordable, and SATA drives optimized for RAID storage.</p></li>
 </ul>
-
-<p>-commodity refers to mid-level rack servers with dual sockets, as much error-correcting RAM as is affordable, and SATA drives optimized for RAID storage.</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-43" style="background:;">
   <hgroup>
     <h2>What are site and default configuration xml files?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li><p>The site XML files (those with site in their filenames) will grow as you start customizing your Hadoop cluster, and it can quickly become challenging to keep track of what changes you’ve made, and how they relate to the default configuration values.</p></li>
+<li><p>The site XML files (those with site in their filenames) will grow as you start customizing your Hadoop cluster, and it can quickly become challenging to keep track of what changes youâ€™ve made, and how they relate to the default configuration values.</p></li>
 <li><p>default files</p></li>
 </ul>
 
@@ -417,7 +719,7 @@ of map task creation begins to dominate the total job execution time. For most j
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>What does core-site.xml refer to?</h2>
   </hgroup>
@@ -431,7 +733,7 @@ of map task creation begins to dominate the total job execution time. For most j
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>What does hdfs-site.xml refer to?</h2>
   </hgroup>
@@ -445,7 +747,7 @@ of map task creation begins to dominate the total job execution time. For most j
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-46" style="background:;">
   <hgroup>
     <h2>What does mapred-site.xml refer to?</h2>
   </hgroup>
@@ -460,23 +762,21 @@ of map task creation begins to dominate the total job execution time. For most j
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-47" style="background:;">
   <hgroup>
     <h2>What des the term masters refer to?</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Contains a list of hosts that are Hadoop masters. This name is misleading and
-should have been called secondary-masters. When you start Hadoop it’ll launch
-NameNode and JobTracker on the local host from which you issued the start command,
-and then SSH to all the nodes in this file to launch the SecondaryNameNode.</li>
+<li><p>Contains a list of hosts that are Hadoop masters. </p></li>
+<li><p>This name is misleading and should have been called secondary-masters. When you start Hadoop itâ€™ll launch NameNode and JobTracker on the local host from which you issued the start command, and then SSH to all the nodes in this file to launch the SecondaryNameNode.</p></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>What des the term slaves refer to?</h2>
   </hgroup>
@@ -489,7 +789,7 @@ and then SSH to all the nodes in this file to launch the SecondaryNameNode.</li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>Get in touch</h2>
   </hgroup>
@@ -498,14 +798,11 @@ and then SSH to all the nodes in this file to launch the SecondaryNameNode.</li>
 <li>Reach out to your instructor</li>
 </ul>
 
-<li><p>Index page<a href="http://profbmuthu.github.com/dataStream/index.html"> Back to Index </a></td> 
-</td></p></li>
-
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-50" style="background:;">
   <article data-timings="">
     
   </article>
@@ -518,182 +815,302 @@ and then SSH to all the nodes in this file to launch the SecondaryNameNode.</li>
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='What is distributed Systems?'>
+        data-slide=1 title='What is Big Data? (1/5)'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='What is File system Namespace ?'>
+        data-slide=2 title='What is Big Data? (2/5)'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='What is data ingress and egress in hadoop?'>
+        data-slide=3 title='What is Big Data? (3/5)'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='What is Hadoop?'>
+        data-slide=4 title='What is Bigdata? (4/5)'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='What is Cloudera?'>
+        data-slide=5 title='What is Bigdata? (5/5)'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='What is HDFS?'>
+        data-slide=6 title='What are the types of bigdata ?'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='What are the Hadoop daemons?'>
+        data-slide=7 title='What are Big Data Issues ? (1/2)'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='What is a disk block?'>
+        data-slide=8 title='What are Big Data Issues ? (2/2) contd.'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Why HDFS blocks are large?'>
+        data-slide=9 title='What are common characteristics of bigdata approaches?'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='What is name node?'>
+        data-slide=10 title='What are the major types of bigdata models?'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='What is a Data Node?'>
+        data-slide=11 title='What is Apache Hadoop Eco System?'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='What is data node storage?'>
+        data-slide=12 title='What is distributed Systems?'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='What is map reduce?'>
+        data-slide=13 title='What is Hadoop? (1/2)'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='What is a map reduce job?'>
+        data-slide=14 title='What is Hadoop? (2/2)'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='How are the map reduce jobs controlled?'>
+        data-slide=15 title='How is Hadoop different?'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='What are the nodes of mapreduce framework'>
+        data-slide=16 title='What is Cloudera?'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='What is a Job tracker ?'>
+        data-slide=17 title='What are hadoop distributions of Amazon and Microsoft?'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='What is task tracker?'>
+        data-slide=18 title='What is Hortonworks data platform?'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='What are haoop splits?'>
+        data-slide=19 title='What is MAPR?'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='What is data locality optimization?'>
+        data-slide=20 title='What is Amazon EMR?'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='What is a federation?'>
+        data-slide=21 title='What is HDFS?'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='What is hadoop hardware?'>
+        data-slide=22 title='What are the Hadoop daemons? (1/2)'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='What are site and default configuration xml files?'>
+        data-slide=23 title='What are the Hadoop daemons? (2/2)'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='What does core-site.xml refer to?'>
+        data-slide=24 title='What is a disk block?(1/2)'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='What does hdfs-site.xml refer to?'>
+        data-slide=25 title='What is a disk block?(2/2)'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='What does mapred-site.xml refer to?'>
+        data-slide=26 title='Why HDFS blocks are large? (1/2)'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='What des the term masters refer to?'>
+        data-slide=27 title='Why HDFS blocks are large? (2/2)'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='What des the term slaves refer to?'>
+        data-slide=28 title='What is name node?'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='Get in touch'>
+        data-slide=29 title='What is a Data Node?'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='NA'>
+        data-slide=30 title='What is data node storage?'>
          30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='What is map reduce?'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='What is a map reduce job?'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='How are the map reduce jobs controlled?'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='What are the nodes of mapreduce framework'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='What is a Job tracker ?'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='What is task tracker? (1/2)'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='What is task tracker? (2/2)'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='What are haoop splits? (1/2)'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='What are haoop splits? (2/2)'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='What is data locality optimization?'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='What is a federation?'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='What is hadoop hardware?'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='What are site and default configuration xml files?'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='What does core-site.xml refer to?'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='What does hdfs-site.xml refer to?'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='What does mapred-site.xml refer to?'>
+         46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='What des the term masters refer to?'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='What des the term slaves refer to?'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='Get in touch'>
+         49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='NA'>
+         50
       </a>
     </li>
   </ul>
