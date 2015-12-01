@@ -241,13 +241,9 @@
   </hgroup>
   <article data-timings="">
     <ul>
-<li>In Remote Mode, we submit our topology to the Storm cluster, which is composed of many processes, usually running on different machines. </li>
-</ul>
-
-<p>Remote Mode doesnâ€™t show debugging information, which is why itâ€™s considered Production Mo.de</p>
-
-<ul>
-<li>However, it is possible to create a Storm cluster on a single development machine, and itâ€™s a good idea to do so before deploying to production, to make sure there wonâ€™t be any problems running the topology in a production environment.</li>
+<li><p>In Remote Mode, we submit our topology to the Storm cluster, which is composed of many processes, usually running on different machines. </p></li>
+<li><p>Remote Mode doesnt show debugging information, which is why its considered Production Mode</p></li>
+<li><p>However, it is possible to create a Storm cluster on a single development machine, and its a good idea to do so before deploying to production, to make sure there wont  be any problems running the topology in a production environment.</p></li>
 </ul>
 
   </article>
@@ -288,14 +284,13 @@
 
 <slide class="" id="slide-18" style="background:;">
   <hgroup>
-    <h2>Explain the built in stream groupings in storm?</h2>
+    <h2>Explain the built in stream groupings in storm? (1/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li><p>Global grouping: The entire stream goes to a single one of the bolt&#39;s tasks. Specifically, it goes to the task with the lowest id.</p></li>
 <li><p>None grouping: This grouping specifies that you don&#39;t care how the stream is grouped. Currently, none groupings are equivalent to shuffle groupings. Eventually though, Storm will push down bolts with none groupings to execute in the same thread as the bolt or spout they subscribe from (when possible).</p></li>
-<li><p>Direct grouping: This is a special kind of grouping. A stream grouped this way means that the producer of the tuple decides which task of the consumer will receive this tuple. Direct groupings can only be declared on streams that have been declared as direct streams. Tuples emitted to a direct stream must be emitted using one of the emitDirect methods. A bolt can get the task ids of its consumers by either using the provided TopologyContext or by keeping track of the output of the emit method in OutputCollector (which returns the task ids that the tuple was sent to).</p></li>
-<li><p>Local or shuffle grouping: If the target bolt has one or more tasks in the same worker process, tuples will be shuffled to just those in-process tasks. Otherwise, this acts like a normal shuffle grouping.</p></li>
+<li><p>Direct grouping: This is a special kind of grouping. A stream grouped this way means that the producer of the tuple decides which task of the consumer will receive this tuple. Direct groupings can only be declared on streams that have been declared as direct streams. </p></li>
 </ul>
 
   </article>
@@ -303,6 +298,21 @@
 </slide>
 
 <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Explain the built in stream groupings in storm? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Tuples emitted to a direct stream must be emitted using one of the emitDirect methods. </p></li>
+<li><p>A bolt can get the task ids of its consumers by either using the provided TopologyContext or by keeping track of the output of the emit method in OutputCollector (which returns the task ids that the tuple was sent to).</p></li>
+<li><p>Local or shuffle grouping: If the target bolt has one or more tasks in the same worker process, tuples will be shuffled to just those in-process tasks. Otherwise, this acts like a normal shuffle grouping.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>What is a tuple?</h2>
   </hgroup>
@@ -319,18 +329,18 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>What are the methods in tuple?</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src = 'https://storm.apache.org/apidocs/backtype/storm/tuple/Tuple.html' height = '600px'></iframe>
+    <iframe src = 'https://storm.apache.org/apidocs/backtype/storm/tuple/Tuple.html' height ='600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>What is a topology in storm?</h2>
   </hgroup>
@@ -345,7 +355,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>What is lifecycle of a topology?</h2>
   </hgroup>
@@ -356,7 +366,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>What is the method of killing a topology in storm?</h2>
   </hgroup>
@@ -372,7 +382,23 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>Current running Storm topologies from storm cli?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>You can run</p></li>
+<li><p>$STORM_HOME/bin/storm list</p></li>
+<li><p>storm provides a web based UI for monitoring such informations.</p></li>
+<li><p>However you can start writing your own Thrift client to connect to the broker and get various matrix based on your need. If you are from Java background or similar then it should be easy to write and execute from the prompt.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
   <hgroup>
     <h2>Guidelines for topology development?</h2>
   </hgroup>
@@ -383,7 +409,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>Topology Parallism units in Harton Works?</h2>
   </hgroup>
@@ -394,7 +420,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>What is task parallelism? (1/2)</h2>
   </hgroup>
@@ -409,7 +435,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>What is task parallelism? (1/2)</h2>
   </hgroup>
@@ -420,7 +446,18 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Parallelism in storm topology?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src ='https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>What is distributed RPC in storm?</h2>
   </hgroup>
@@ -431,7 +468,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>How is storm implemented?</h2>
   </hgroup>
@@ -445,7 +482,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>What are the types of communication in Storm ?</h2>
   </hgroup>
@@ -460,7 +497,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>What is a worker process in storm ?</h2>
   </hgroup>
@@ -477,7 +514,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-32" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>What are executors in Storm?</h2>
   </hgroup>
@@ -495,7 +532,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>What is a task in Storm?</h2>
   </hgroup>
@@ -508,7 +545,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>What are the spout implementations in Storm?</h2>
   </hgroup>
@@ -525,7 +562,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>Waht are common patterns in Storm topologies.</h2>
   </hgroup>
@@ -547,7 +584,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>Testing: Storm unit testing?</h2>
   </hgroup>
@@ -558,7 +595,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>Testing: Error handling in storm trident topologies?</h2>
   </hgroup>
@@ -569,7 +606,7 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>Compare Apache storm and apache spark?</h2>
   </hgroup>
@@ -688,128 +725,146 @@
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='Explain the built in stream groupings in storm?'>
+        data-slide=18 title='Explain the built in stream groupings in storm? (1/2)'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='What is a tuple?'>
+        data-slide=19 title='Explain the built in stream groupings in storm? (2/2)'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='What are the methods in tuple?'>
+        data-slide=20 title='What is a tuple?'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='What is a topology in storm?'>
+        data-slide=21 title='What are the methods in tuple?'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='What is lifecycle of a topology?'>
+        data-slide=22 title='What is a topology in storm?'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='What is the method of killing a topology in storm?'>
+        data-slide=23 title='What is lifecycle of a topology?'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Guidelines for topology development?'>
+        data-slide=24 title='What is the method of killing a topology in storm?'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Topology Parallism units in Harton Works?'>
+        data-slide=25 title='Current running Storm topologies from storm cli?'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='What is task parallelism? (1/2)'>
+        data-slide=26 title='Guidelines for topology development?'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='What is task parallelism? (1/2)'>
+        data-slide=27 title='Topology Parallism units in Harton Works?'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='What is distributed RPC in storm?'>
+        data-slide=28 title='What is task parallelism? (1/2)'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='How is storm implemented?'>
+        data-slide=29 title='What is task parallelism? (1/2)'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='What are the types of communication in Storm ?'>
+        data-slide=30 title='Parallelism in storm topology?'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='What is a worker process in storm ?'>
+        data-slide=31 title='What is distributed RPC in storm?'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='What are executors in Storm?'>
+        data-slide=32 title='How is storm implemented?'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='What is a task in Storm?'>
+        data-slide=33 title='What are the types of communication in Storm ?'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='What are the spout implementations in Storm?'>
+        data-slide=34 title='What is a worker process in storm ?'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='Waht are common patterns in Storm topologies.'>
+        data-slide=35 title='What are executors in Storm?'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='Testing: Storm unit testing?'>
+        data-slide=36 title='What is a task in Storm?'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='Testing: Error handling in storm trident topologies?'>
+        data-slide=37 title='What are the spout implementations in Storm?'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Compare Apache storm and apache spark?'>
+        data-slide=38 title='Waht are common patterns in Storm topologies.'>
          38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='Testing: Storm unit testing?'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='Testing: Error handling in storm trident topologies?'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='Compare Apache storm and apache spark?'>
+         41
       </a>
     </li>
   </ul>
