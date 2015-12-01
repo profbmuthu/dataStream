@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Workshop BigData for developers</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Workshop BigData for developers">
+  <meta name="author" content="Dr.BM">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Workshop BigData for developers</h1>
+    <h2>Focus on Flume</h2>
+    <p>Dr.BM<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is Flume?(1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Apache Flume is a distributed, reliable, and available service for efficiently collecting, aggregating, and moving large amounts of streaming data into the Hadoop Distributed File System (HDFS). </p></li>
+<li><p>It has a simple and flexible architecture based on streaming data flows; </p></li>
+<li><p>It is robust and fault tolerant with tunable reliability mechanisms for failover and recovery.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>What is Flume? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Apache Flume was conceived as a system to write data to Apache Hadoop and Apache HBase in a reliable and scalable fashion. </p></li>
+<li><p>As a result, Flume&#39;s HDFS and HBase Sinks provide a very rich set of features that makes it possible to write data in any format that is supported by these systems and in a MapReduce/Hive/Impala/Pig-friendly way</p></li>
+<li><p>Flume is primarily meant to push data from a large number of production servers to HDFS, HBase, etc</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Why do we really need a system like Flume? (1/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Why not simply write data directly to HDFS from every application server that produces data?</p></li>
+<li><p>Messaging systems that isolate systems from each other have existed for a long time-Flume does this in the Hadoop context. </p></li>
+<li><p>Flume is specifically designed to push data from a massive number of sources to the various storage systems in the Hadoop ecosystem, like HDFS and HBase.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Why do we really need a system like Flume? (2/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HDFS requires that exactly one client writes to a file-as a result, there could be thousands of files being written to at the same time. </p></li>
+<li><p>Each time a file is created or a new block is allocated, there is a complex set of operations that takes place on the name node. </p></li>
+<li><p>Such a huge number of operations happening simultaneously on a single server can cause the server to come under severe stress. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Why do we really need a system like Flume? (3/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Also, when thousands of machines are writing a large amount of data to a small number of machines, the network connecting these machines may get overwhelmed and start experiencing severe latency.</p></li>
+<li><p>To ensure an application that is writing directly to HDFS or HBase does not lose data or need to buffer a lot of data, the HDFS or HBase cluster needs to be configured to be able to handle peak traffic with little or no latency. </p></li>
+<li><p>All these cases make it clear that it is important to isolate the production applications from HDFS or HBase and ensure that production applications push data to these systems in a controlled and organized fashion.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is the use of Flume?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume lets Hadoop users ingest high-volume streaming data into HDFS for storage. Specifically, Flume allows users to:</p></li>
+<li><p><strong>Stream data</strong>: Ingest streaming data from multiple sources into Hadoop for storage and analysis</p></li>
+<li><p><strong>Insulate systems</strong>  Buffer storage platform from transient spikes, when the rate of incoming data exceeds the rate at which data can be written to the destination</p></li>
+<li><p><strong>Guarantee data delivery</strong>   Flume NG uses channel-bmased transactions to guarantee reliable message delivery. When a message moves from one agent to another, two transactions are started, one on the agent that delivers the event and the other on the agent that receives the event. This ensures guaranteed delivery semantics</p></li>
+<li><p><strong>Scale horizontally</strong>    To ingest new data streams and additional volume as needed</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is a flume event ? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>When a Flume source receives an event, it stores it into one or more channels. </p></li>
+<li><p>A <strong>Flume event</strong> is defined as a unit of data flow having a byte payload and an optional set of string attributes. </p></li>
+<li><p>The basic payload of data transported by Flume is called an event. An event is composed of zero or more headers and a body.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is a flume event ? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The headers are key/value pairs that can be used to make routing decisions or carry other structured information (such as the timestamp of the event or hostname of the server where the event originated). You can think of it as serving the same function as HTTP headers-a way to pass additional information that is distinct from the body.</p></li>
+<li><p>The body is an array of bytes that contains the actual payload. If your input is comprised of tailed logfiles, the array is most likely a UTF-8 encoded String containing a line of text.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is a flume agent ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>A Flume agent is a (JVM) process that hosts the components through which events flow from an external source to the next destination (hop). </li>
+</ul>
+
+<h2>What are the components of a flume agent?</h2>
+
+<ul>
+<li><p>Each Flume agent has three components: the source, the channel, and the sink. </p></li>
+<li><p>The source is responsible for getting events into the Flume agent, </p></li>
+<li><p>The sink is responsible for removing the events from the agent and forwarding them to the next agent in the topology, or to HDFS, HBase, Solr, etc. </p></li>
+<li><p>The channel is a buffer that stores data that the source has received, until a sink has successfully written the data out to the next hop or the eventual destination.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>What are sources in agents (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>An input is called a <strong>source</strong> with respect to Flume</p></li>
+<li><p>Sources are active components that receive data from some other application that is producing the data. </p></li>
+<li><p>There are sources that produce data themselves, though such sources are mostly used for testing purposes. </p></li>
+<li><p>Sources can listen to one or more network ports to receive data or can read data from the local file system. </p></li>
+<li><p>A Flume source <strong>consumes events</strong> delivered to it by an external source like a web server. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>What are sources in agents (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Each source must be connected to at least one channel. A source can write to several channels, replicating the events to all or some of the channels, based on some criteria.</p></li>
+<li><p>The external source sends events to Flume in a format that is recognized by the target Flume source. </p></li>
+<li><p>For example, an Avro Flume source can be used to receive Avro events from Avro clients or other Flume agents in the flow that send events from an Avro sink. </p></li>
+<li><p>A similar flow can be defined using a Thrift Flume Source to receive events from a Thrift Sink or a Flume Thrift Rpc Client or Thrift clients written in any language generated from the Flume thrift protocol. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is a agent pipeline?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume agents can be configured to send data from one agent to another to form a pipeline before the data is written out to the destination. </p></li>
+<li><p>The durability of the data once the data has reached a Flume agent depends completely upon the durability guarantees of the channel used by the agent. </p></li>
+<li><p>In general, when a Flume agent is configured to use any of the built-in sources or sinks together with one of the durable channels, the agent is guaranteed to not lose data. </p></li>
+<li><p>By virtue of individual agents not losing data, it is guaranteed that a Flume pipeline will not lose data either.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is a channel? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>In Flume, a channel is the construct used between sources and sinks. </p></li>
+<li><p>It provides a holding area for your in-flight events after they are read from sources until they can be written to sinks in your data processing pipelines.</p></li>
+<li><p>The <strong>channel</strong> is a passive store that keeps the event until it&#39;s consumed by a Flume sink.  The file channel is one example - it is backed by the local filesystem. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>What is a  channel?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Channels are, in general, passive components that buffer data that has been received by the agent, but not yet written out to another agent or to a storage system. </p></li>
+<li><p>Channels behave like queues, with sources writing to them and sinks reading from them. </p></li>
+<li><p>Multiple sources can write to the same channel safely, and multiple sinks can read from the same channel.</p></li>
+<li><p>Channels may run their own threads for cleanup or garbage collection</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What are the types of channels?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Memory-backed/non-durable channel and a local filesystem backed/durable channel. </p></li>
+<li><p>The durable file channel flushes all changes to disk before acknowledging receipt of the event to the sender. This is considerably slower than using the non-durable memory channel, but provides recoverability in the event of system or Flume agent restarts. </p></li>
+<li><p>Conversely, the memory channel is much faster, but failure results in data loss and has much lower storage capacity when compared with the multi-terabyte disks backing the file channel. Which channel you choose depends on your specific use cases, failure scenarios, and risk tolerance.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>What is Channel exception?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Regardless of what channel you choose, if your rate of ingest from the sources into the channel is greater than the rate the sink can write data, you will exceed the capacity of the channel and you will throw a ChannelException.</p></li>
+<li><p>In fact, you always want your sink to be able to write faster than your source input. Otherwise, you may get into a situation where once your sink falls behind you can never catch up. If your data volume tracks with site usage, you may have higher volumes during the day and lower volumes at night, giving your channels time to drain.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What is a memory channel ? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A memory channel, as expected, is a channel where in-flight events are stored in memory. Since memory is (usually) orders of magnitude faster than disk, events can be ingested much more quickly resulting in reduced hardware needs. </p></li>
+<li><p>The memory channel is a volatile channel, as it buffers events in memory only: if the Java process dies, any events stored in the memory channel are lost. </p></li>
+<li><p>The memory channel also exhibits very low put/take latencies compared to the file channel, even for a batch size of 1.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>What is a memory channel ? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The downside of using this channel is that an agent failure (hardware problem, power outage, JVM crash, Flume restart, and so on) results in loss of data. MemoryChannel provides high throughput but loses data in the event of a crash or loss of power.</p></li>
+<li><p>To use the memory channel, set the type parameter on your named channel to memory.</p></li>
+<li><p>agent.channels.c1.type=memory </p></li>
+<li><p>This defines a memory channel named c1 for the agent named agent</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>What is a file channel? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The goal of FileChannel is to provide a reliable high throughput channel. </p></li>
+<li><p>The file channel is a durable channel, as it persists all events that are stored in it to disk. So, even if the Java virtual machine is killed, or the operating system crashes or reboots, events that were not successfully transferred to the next agent in the pipeline will still be there when the Flume agent is restarted. </p></li>
+<li><p>FileChannel guarantees that when a transaction is committed, no data will be lost due to a subsequent crash or loss of power.</p></li>
+<li><p>FileChannel does not do any replication of data itself. As such, it is only as reliable as the underlying disks. Users who use FileChannel because of its durability should take this into account when purchasing and configuring hardware.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>What is a file channel?(2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>FileChannel is based on a write ahead log or WAL in addition to an in-memory queue. </p></li>
+<li><p>Each transaction is written to the WAL based on the transaction type (Take or Put) and the queue is modified accordingly. Each time a transaction is committed, fsync is called on the appropriate file to ensure the data is actually on disk and a pointer to that event is placed on a queue. </p></li>
+<li><p>The queue serves just like any other queue: it manages what is yet to be consumed by the sink. During a take, a pointer is removed from the queue. </p></li>
+<li><p>The event is then read directly from the WAL. Due to the large amount of RAM available today, it&#39;s very common for that read to occur from the operating system file cache.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>What are sinks in agents?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Sinks poll their respective channels continuously to read and remove events. </p></li>
+<li><p>The sinks push events to the next hop (in the case of RPC sinks), or to the final destination. </p></li>
+<li><p>Once the data is safely at the next hop or at its destination, the sinks inform the channels, via transaction commits, that those events can now be deleted from the channels.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>What are sink runners?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Sink runners run a sink group, which may contain one or more sinks. </p></li>
+<li><p>If there is only one sink in a group, it is more efficient to not have a group at all. </p></li>
+<li><p>The sink runner is simply a thread that asks the sink group (or the sink) to process the next batch of events. </p></li>
+<li><p>Each sink group has a sink processor that selects one of the sinks in the group to process the next set of events. </p></li>
+<li><p>Each sink can take data from exactly one channel, though multiple sinks could take data from the same channel. The sink selected (or the lone sink, if there is no group) takes events from the channel and writes them to the next hop or final destination</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h2>What is a sink group ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>A sink group allows multiple sinks to be treated as one, for failover or load-balancing purposes</p></li>
+<li><p>To configure a sink group, the agent&#39;s  sinkgroups property is set to define the sink group&#39;s name; then the sink group lists the sinks in the group, and also the type of the sink processor, which sets the policy for choosing a sink. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>What are transactions in Flume?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume is a transactional system and multiple events can be either Put or Taken in a single transaction. The batch size can be used to control throughput. </p></li>
+<li><p>Transactions are a critical concept in Flume, because the delivery and durability guarantees made by channels only take effect at the end of each successful transaction</p></li>
+<li><p>For example, when a source receives or generates an event, in order to store that event into a channel a transaction must first be opened on that channel. Within the transaction, the source puts up to the batch size number of events into the channel, and on success commits the tr  ansaction. </p></li>
+<li><p>A sink must go through the same process of operating within a transaction when taking events from a channel.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>What is a batch size?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The batch size is the maximum number of events that a sink or client will attempt to take from a channel in a single transaction. </p></li>
+<li><p>Tuning the batch size trades throughput vs. latency and duplication under failure. With a small batch size, throughput decreases, but the risk of event duplication is reduced if a failure were to occur. With a large batch size, you get much better throughput, but increased latency, and in the case of a transaction failure, the number of possible duplicates increases.</p></li>
+<li><p>Batch size is configured at the sink level. The larger the batch, the faster the channels operate </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>What is a flume transaction?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>A Flume transaction consists of either Puts or Takes, but not both, and either a commit or a rollback. Each transaction implements both a Put and Take method. Sources do Puts onto the channel and Sinks do Takes from the channel.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>What is transaction capacity?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>This is the maximum number of events that can be written, also called a put, by a source&#39;s
+ChannelProcessor, the component responsible for moving data from the source to the channel in a single transaction. </p></li>
+<li><p>This is also the number of events that can be read, also called a take, in a single transaction by SinkProcessor, the component responsible for moving data from the channel to the sink.</p></li>
+<li><p>The default capacity of a channel is 100 Events. This can be adjusted by setting the capacity property as follows:</p></li>
+<li><p>agent.channels.c1.capacity=200</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>What is a channel selector? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><strong>Channel selectors</strong> are responsible for how data moves from a source to one or more channels.</li>
+<li><p>Flume comes packaged with two channel selectors, which cover most use cases.</p></li>
+<li><p>A <strong>replicating channel</strong> selector (the default) simply puts a copy of the event into each channel assuming you have configured more than one. </p></li>
+<li><p>In contrast, a <strong>multiplexing channel</strong> selector can write to different channels depending on certain header information. Combined with Interceptor logic, this duo forms the foundation for routing input to different channels.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>What is a channel selector? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The selector for any channel can be specified using the selector.type property. Any selector specific properties begin with the usual source prefix; agent name, the keyword sources, and the source name: agent.sources.s1.selector.type=replicating</p></li>
+<li><p>The sink removes the event from the channel and puts it into an external repository like HDFS (via Flume HDFS sink) or forwards it to the Flume source of the next Flume agent (next hop) in the flow. </p></li>
+<li><p>The source and sink within the given agent run asynchronously with the events staged in the channel.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is an interceptor?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>An interceptor is a point in your data flow where you can inspect and alter Flume events. </p></li>
+<li><p>You can chain zero or more interceptors after a source creates an event or before a sink sends the event wherever it is destined.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Where is the flume agent configuration?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume agent configuration is stored in a local configuration file. </p></li>
+<li><p>This is a text file that follows the Java properties file format. </p></li>
+<li><p>A Flume agent&#39;s default configuration provider uses a simple Java property file of key/value pairs that you pass as an argument to the agent upon startup.</p></li>
+<li><p>Configurations for one or more agents can be specified in the same configuration file. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What are the basic parameters</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Each agent is configured starting with three parameters:</p></li>
+<li><p>agent.sources= list of sources </p></li>
+<li><p>agent.channels= list of channels</p></li>
+<li><p>agent.sinks= list of sinks</p></li>
+<li><p>The configuration file includes properties of each source, sink and channel in an agent and how they are wired together to form data flows.Each source, channel, and sink also has a unique name within the context of that agent.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>How to start a flume agent?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>An agent is started using a shell script called flume-ng which is located in the bin directory of the Flume distribution. You need to specify the agent name, the config directory, and the config file on the command line:</p></li>
+<li><p>bin/flume-ng agent -n $agent_name -c conf -f conf/flume-conf.properties.template</p></li>
+<li><p>Now the agent will start running source and sinks configured in the given properties file.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>What is a flume agent?(1/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The simplest unit of Flume deployment is a Flume agent. </p></li>
+<li><p>It is possible to connect one Flume agent to one or more other agents. </p></li>
+<li><p>It is also possible for an agent to receive data from one or more agents. </p></li>
+<li><p>By connecting multiple Flume agents to each other, a flow is established.</p></li>
+<li><p>By having a number of Flume agents receive data from application servers, which then write the data to HDFS or HBase (either directly or via other Flume agents), it is possible to scale the number of servers and the amount of data that can be written to HDFS by simply adding more Flume agents.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>What is a flume agent?(2/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>To use Flume, we need to run a Flume  agent, which is a long-lived Java process that runs sources and sinks, connected by  channels. </p></li>
+<li><p>A source in Flume produces  events and delivers them to the channel, which stores the events until they are forwarded to the sink.</p></li>
+<li><p>You can think of the source-channel-sink combination as a basic Flume building block. </p></li>
+<li><p>A Flume installation is made up of a collection of connected agents running in a dis- tributed topology. Agents on the edge of the system (co-located on web server machines, for example) collect data and forward it to agents that are responsible for aggregating and then storing the data in its final destination. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>What is a flume agent?(2/3)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Agents are configured to run a collection of particular sources and sinks, so using Flume is mainly a configuration exercise in wiring the pieces together. </p></li>
+<li><p>The configuration properties that are available for a component depend on the type of the component.</p></li>
+</ul>
+
+<p>The  --conf  flag tells Flume where to find its general configuration, such as environment settings.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What are the codecs supported by flume ? (1/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Codecs (coder/decoders) are used to compress and decompress data using various
+compression algorithms. gzip, bzip2, lzo, and snappy are supported by Flume,</p></li>
+<li><p>to specify compression for your data, you set the hdfs.codeC property</p></li>
+<li><p>The property is also used as the file suffix for the files written to HDFS. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What are the codecs supported by flume ? (2/2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>For example, if you specify the codec as follows all files written will have a .gzip extension, so you don&#39;t need to specify a hdfs.fileSuffix property in this case:</p></li>
+<li><p>agent.sinks.k1.hdfs.codeC=gzip</p></li>
+<li><p>There are arguments for using gzip or bzip2 for their higher compression ratios at the
+cost of longer compression times, especially if your data is written once but will be read hundreds or thousands of times. On the other hand, using snappy or lzo results in faster compression performance, but results in a lower compression ratio.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is an event serializer?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>An event serializer is the mechanism by which a Flume event is converted into another format for output. </p></li>
+<li><p>It is similar in function to the Layout class in log4j. </p></li>
+<li><p>By default, the text serializer, which outputs just the Flume event body. There is
+another, header-and-text, which outputs both the headers and the body. </p></li>
+<li><p>Finally, there is an avro_event serializer that can be used to create an Avro representation
+of the event. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-40" style="background:;">
+  <hgroup>
+    <h2>What is data in flume?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume represents data as events. Events are very simple data structures, with a body and a set of headers. The body of the event is a byte array that usually is the payload that Flume is transporting. </p></li>
+<li><p>The headers are represented as a map with string keys and string values. Headers are not meant to transfer data, but for routing purposes and to keep track of priority, severity of events being sent, etc. </p></li>
+<li><p>The headers can be used to add event IDs or UUIDs to events as well.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>What are transactions in flume?(1/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume uses separate transactions to guarantee delivery from the source to the channel and from the channel to the sink.</p></li>
+<li><p>The source will only mark the file as completed once the transactions encapsulating the delivery of the events to the channel have been successfully committed</p></li>
+<li><p>A transaction is used for the delivery of the events from the channel to the sink. </p></li>
+<li><p>If for some unlikely reason the events could not be logged, the transaction would be rolled back and the events would remain in the channel for later redelivery</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-42" style="background:;">
+  <hgroup>
+    <h2>What are transactions in flume?(2/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume uses a separate transaction to deliver each batch of events from the spooling directory source to each channel.</p></li>
+<li><p>Aggregating Flume events is achieved by having tiers of Flume agents. The first tier collects events from the original sources (such as web servers) and sends them to a smaller set of agents in the second tier, which aggregate events from the first tier before writing them to HDFS </p></li>
+<li><p>Tiers are constructed by using a special sink that sends events over the network, and a corresponding source that receives events. For example The Avro sink sends events over Avro RPC to an Avro source running in another Flume agent. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-43" style="background:;">
+  <hgroup>
+    <h2>What are transactions in flume?(3/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Flume uses transactions to ensure that each batch of events is reliably delivered from a source to a channel, and from a channel to a sink. In the context of the Avro sink-source connection, transactions ensure that events are reliably delivered from one agent to the next.</p></li>
+<li><p>The operation to read a batch of events from the file channel in  agent1 by the Avro sink will be wrapped in a transaction. </p></li>
+<li><p>The transaction will only be committed once the Avro sink has received the (synchronous) confirmation that the write to the Avro source&#39;s RPC endpoint was successful. </p></li>
+<li><p>This confirmation will only be sent once  agent2&#39;s transaction wrapping the operation to write the batch of events to its file channel has been successfully committed. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-44" style="background:;">
+  <hgroup>
+    <h2>What are transactions in flume?(4/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Thus, the Avro sink-source pair guarantees that an event is delivered from one Flume agent&#39;s channel to another Flume agent&#39;s channel</p></li>
+<li><p>If either agent is not running, then clearly events cannot be delivered to HDFS. </p></li>
+<li><p>For example, if  agent1 stops running, then files will accumulate in the spooling directory, to be processed once agent1 starts up again. </p>
+
+<ul>
+<li>Also, any events in an agent&#39;s own file channel at the point the agent stopped running will be available on restart, due to the durability guarantee that file channel provides.</li>
+</ul></li>
+</ul>
+
+<hr>
+
+<h2>What are transactions in flume?(5/5)</h2>
+
+<p>If agent2 stops running, then events will be stored in agent1&#39;s file channel until agent2 starts again. Note, however, that channels necessarily have a limited capacity; if agent1&#39;s channel fills up while agent2 is not running, then any new events will be lost. </p>
+
+<ul>
+<li>By default, a file channel will not recover more than one million events (this can be overridden by its capacity property), and it will stop accepting events if the free disk space for its checkpoint directory falls below 500 MB (controlled by the minimumRequiredSpace property).</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-45" style="background:;">
+  <hgroup>
+    <h2>What is fan out?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Fan out is the term  for delivering events from one source to multiple channels, so they reach multiple sinks.</p></li>
+<li><p>In normal fan-out flow, events are replicated to all channels-but sometimes more selective behavior might be desirable, so that some events are sent to one channel and others to another. </p></li>
+<li><p>This can be achieved by setting a  multiplexing selector on the source, and defining routing rules that map particular event header values to channels.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-46" style="background:;">
+  <hgroup>
+    <h2>More Information with User Guide</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src = 'https://flume.apache.org/releases/content/1.6.0/FlumeUserGuide.pdf' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is Flume?(1/2)'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is Flume? (2/2)'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Why do we really need a system like Flume? (1/3)'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Why do we really need a system like Flume? (2/3)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Why do we really need a system like Flume? (3/3)'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='What is the use of Flume?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='What is a flume event ? (1/2)'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What is a flume event ? (2/2)'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='What is a flume agent ?'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='What are sources in agents (1/2)'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='What are sources in agents (2/2)'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='What is a agent pipeline?'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='What is a channel? (1/2)'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='What is a  channel?(2/2)'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='What are the types of channels?'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='What is Channel exception?'>
+         16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='What is a memory channel ? (1/2)'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='What is a memory channel ? (1/2)'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='What is a file channel? (1/2)'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='What is a file channel?(2/2)'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='What are sinks in agents?'>
+         21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='What are sink runners?'>
+         22
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=23 title='What is a sink group ?'>
+         23
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=24 title='What are transactions in Flume?'>
+         24
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=25 title='What is a batch size?'>
+         25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='What is a flume transaction?'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='What is transaction capacity?'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='What is a channel selector? (1/2)'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='What is a channel selector? (2/2)'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='What is an interceptor?'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='Where is the flume agent configuration?'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='What are the basic parameters'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='How to start a flume agent?'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='What is a flume agent?(1/3)'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='What is a flume agent?(2/3)'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='What is a flume agent?(2/3)'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title='What are the codecs supported by flume ? (1/2)'>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='What are the codecs supported by flume ? (2/2)'>
+         38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='What is an event serializer?'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='What is data in flume?'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='What are transactions in flume?(1/5)'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='What are transactions in flume?(2/5)'>
+         42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='What are transactions in flume?(3/5)'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='What are transactions in flume?(4/5)'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='What is fan out?'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='More Information with User Guide'>
+         46
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
