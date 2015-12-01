@@ -1,0 +1,387 @@
+---
+title       : Workshop on Stream Processing - Storm
+subtitle    : Focus on Stream processing
+author      : Dr.Muthukumaran
+job         : http://profbmuthu.github.io/dataStream
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+---
+
+## What is storm ?
+
+- Storm is a free and open source distributed realtime computation system. 
+
+- Storm makes it easy to reliably process unbounded streams of data, doing for realtime processing what Hadoop did for batch processing. 
+
+- Storm is simple, can be used with any programming language, and is a lot of fun to use!
+
+---
+## What is a stream in storm?
+
+- The stream is the core abstraction in Storm. 
+
+- A stream is an unbounded sequence of tuples that is processed and created in parallel in a distributed fashion. 
+
+- Streams are defined with a schema that names the fields in the stream's tuples. By default, tuples can contain integers, longs, shorts, bytes, strings, doubles, floats, booleans, and byte arrays
+
+---
+
+## What are the commands for storm cli?
+
+<iframe src ='http://storm.apache.org/documentation/Command-line-client.html' height='600px'></iframe>
+
+---
+
+## What is a spout in storm?
+
+- A spout is a source of streams in a topology. 
+
+- Spouts will read tuples from an external source and emit them into the topology (e.g. a Kestrel queue ). 
+
+- Spouts can either be reliable or unreliable. A reliable spout is capable of replaying a tuple if it failed to be processed by Storm, whereas an unreliable spout forgets about the tuple as soon as it is emitted.
+
+--- 
+
+## What are the methods in spout?
+
+- Spouts can emit more than one stream. To do so, declare multiple streams using the declareStream method of OutputFieldsDeclarer and specify the stream to emit to when using the emit method on SpoutOutputCollector.
+
+- The main method on spouts is nextTuple. nextTuple either emits a new tuple into the topology or simply returns if there are no new tuples to emit. 
+
+- It is imperative that nextTuple does not block for any spout implementation, because Storm calls all the spout methods on the same thread.
+
+- The other main methods on spouts are ack and fail. These are called when Storm detects that a tuple emitted from the spout either successfully completed through the topology or failed to be completed. ack and fail are only called for reliable spouts
+
+---
+## Discuss Ispout methods?
+
+<iframe src = 'https://storm.apache.org/apidocs/backtype/storm/spout/ISpout.html' height='600px'></iframe>
+
+---
+## What are trident spouts and types?
+
+<iframe src = 'https://storm.apache.org/documentation/Trident-spouts.html' height='600px'></iframe>
+
+---
+## Discuss trident API?
+
+<iframe src = 'https://storm.apache.org/documentation/Trident-API-Overview.html' height='600px'></iframe>
+
+---
+
+## What are bolts in storm?
+
+- Processing in topologies is carried out by bolts. Bolts can do anything from filtering, functions, aggregations, joins, talking to databases, and more.
+
+- Bolts can do simple stream transformations. Bolts can emit more than one stream. 
+
+- Doing complex stream transformations often requires multiple steps and thus multiple bolts. For example, transforming a stream of tweets into a stream of trending images requires at least two steps: a bolt to do a rolling count of retweets for each image, and one or more bolts to stream out the top X images.
+
+--- 
+
+## What are the main methods in bolt?
+
+- The main method in bolts is the execute method which takes in as input a new tuple. 
+
+- Bolts emit new tuples using the OutputCollector object. Bolts must call the ack method on the OutputCollector for every tuple they process so that Storm knows when tuples are completed (and can eventually determine that its safe to ack the original spout tuples). 
+
+- For the common case of processing an input tuple, emitting 0 or more tuples based on that tuple, and then acking the input tuple, Storm provides an IBasicBolt interface which does the acking automatically.
+
+---
+
+## What are the typical functions performed by bolts in storm?
+
+- Typical functions performed by bolts include: Filtering tuples, Joins and aggregations, Calculations, Database reads/writes
+
+- 
+
+---
+## What are the kinds of nodes in storm cluster
+
+- There are two kind of nodes in a Storm cluster: master node and worker nodes. 
+
+- Master node run a daemon called Nimbus, which is responsible for distributing code around the cluster, assigning tasks to each worker node, and monitoring for failures.
+
+
+- Worker nodes run a daemon called Supervisor, which executes a portion of a topology. A topology in Storm runs across many worker nodes on different machines.
+
+---
+
+## What are the operation modes in Storm?
+
+- Operational modes in Storm include
+
+- Local Mode
+
+- Remote Mode
+
+---
+
+## what is local mode operation in Storm?
+
+- In Local Mode, Storm topologies run on the local machine in a single JVM. 
+
+- This mode is used for development, testing, and debugging because its the easiest way to see all topology components working together. 
+
+- In this mode, we can adjust parameters that enable us to see how our topology runs in different Storm configuration environments.
+
+---
+
+## What is Remote mode operation in Storm?
+
+- In Remote Mode, we submit our topology to the Storm cluster, which is composed of many processes, usually running on different machines. 
+
+Remote Mode doesnt show debugging information, which is why its considered Production Mo.de
+
+- However, it is possible to create a Storm cluster on a single development machine, and its a good idea to do so before deploying to production, to make sure there wont be any problems running the topology in a production environment.
+
+---
+
+## What are Stream groupings in storm?
+
+- Part of defining a topology is specifying for each bolt which streams it should receive as input. A stream grouping defines how that stream should be partitioned among the bolt's tasks.
+
+-  A Stream Grouping specifies which stream(s) are consumed by each bolt and how the stream will be consumed.
+
+- There are eight built-in stream groupings in Storm, and you can implement a custom stream grouping by implementing the CustomStreamGrouping interface:
+
+- the eight built in stream groupings are Shuffle grouping, Fields grouping
+
+
+---
+
+## Explain the built-in stream groupings in storm? 
+
+- Shuffle grouping: Tuples are randomly distributed across the bolt's tasks in a way such that each bolt is guaranteed to get an equal number of tuples.
+   
+- Fields grouping: The stream is partitioned by the fields specified in the grouping. For example, if the stream is grouped by the "user-id" field, tuples with the same "user-id" will always go to the same task, but tuples with different "user-id"'s may go to different tasks.
+    
+- Partial Key grouping: The stream is partitioned by the fields specified in the grouping, like the Fields grouping, but are load balanced between two downstream bolts, which provides better utilization of resources when the incoming data is skewed. This paper provides a good explanation of how it works and the advantages it provides.
+    
+- All grouping: The stream is replicated across all the bolt's tasks. Use this grouping with care.
+
+
+---
+
+## Explain the built in stream groupings in storm? 
+    
+- Global grouping: The entire stream goes to a single one of the bolt's tasks. Specifically, it goes to the task with the lowest id.
+    
+- None grouping: This grouping specifies that you don't care how the stream is grouped. Currently, none groupings are equivalent to shuffle groupings. Eventually though, Storm will push down bolts with none groupings to execute in the same thread as the bolt or spout they subscribe from (when possible).
+    
+- Direct grouping: This is a special kind of grouping. A stream grouped this way means that the producer of the tuple decides which task of the consumer will receive this tuple. Direct groupings can only be declared on streams that have been declared as direct streams. Tuples emitted to a direct stream must be emitted using one of the emitDirect methods. A bolt can get the task ids of its consumers by either using the provided TopologyContext or by keeping track of the output of the emit method in OutputCollector (which returns the task ids that the tuple was sent to).
+    
+- Local or shuffle grouping: If the target bolt has one or more tasks in the same worker process, tuples will be shuffled to just those in-process tasks. Otherwise, this acts like a normal shuffle grouping.
+
+---
+
+## What is a tuple?
+
+- The tuple is the main data structure in Storm. 
+
+- A tuple is a named list of values, where each value can be any type. 
+
+- Tuples are dynamically typed the types of the fields do not need to be declared. 
+
+- Tuples have helper methods like getInteger and getString to get field values without having to cast the result. 
+
+- Storm needs to know how to serialize all the values in a tuple. By default, Storm knows how to serialize the primitive types, strings, and byte arrays. If you want to use another type, you'll need to implement and register a serializer for that type
+
+---
+## What are the methods in tuple?
+
+<iframe src = 'https://storm.apache.org/apidocs/backtype/storm/tuple/Tuple.html' height = '600px'></iframe>
+
+---
+
+## What is a topology in storm?
+
+- A Storm topology is analogous to a MapReduce job. One key difference is that a MapReduce job eventually finishes, whereas a topology runs forever. 
+
+- A topology is a graph of spouts and bolts that are connected with stream groupings.
+
+- Storm distinguishes between the following three main entities that are used to actually run a topology in a Storm cluster:, Worker processes, Executors (threads), Tasks.
+
+---
+
+## What is lifecycle of a topology?
+
+
+<iframe src = 'http://storm.apache.org/documentation/Lifecycle-of-a-topology.html' height='600px'></iframe>
+
+
+
+---
+## What is the method of killing a topology in storm?
+
+- To kill a topology, simply run: storm kill {stormname}
+
+- Give the same name to storm kill as you used when submitting the topology.
+
+- Storm won't kill the topology immediately. Instead, it deactivates all the spouts so that they don't emit any more tuples, and then Storm waits Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS seconds before destroying all the workers. 
+
+- This gives the topology enough time to complete any tuples it was processing when it got killed
+
+---
+
+## Current running Storm topologies from storm cli?
+
+- You can run
+
+- $STORM_HOME/bin/storm list
+
+- storm provides a web based UI for monitoring such informations.
+
+- However you can start writing your own Thrift client to connect to the broker and get various matrix based on your need. If you are from Java background or similar then it should be easy to write and execute from the prompt.
+
+---
+## Guidelines for topology development?
+
+<iframe src ='http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.2/bk_storm-user-guide/content/storm-topology-debugging.html' height=600px'></iframe>
+
+
+---
+
+## Topology Parallism units in Harton Works?
+
+<iframe src ='http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.2/bk_storm-user-guide/content/storm-topology-parallelism.html' height='600px'></iframe>
+
+
+---
+## What is task parallelism? (1/2)
+
+- Task parallelism (also known as function parallelism and control parallelism) is a form of parallelization of computer code across multiple processors in parallel computing environments. 
+
+- Task parallelism focuses on distributing tasks  concretely performed by processes or threads  across different parallel computing nodes. 
+
+- It contrasts to data parallelism as another form of parallelism.
+
+---
+## What is task parallelism? (1/2)
+
+<iframe src = 'https://en.wikipedia.org/wiki/Task_parallelism' height='600px'></iframe>
+
+---
+## Parallelism in storm topology?
+
+<iframe src ='https://storm.apache.org/documentation/Understanding-the-parallelism-of-a-Storm-topology.html' height='600px'></iframe>
+
+---
+## What is distributed RPC in storm?
+
+
+<iframe src ='https://storm.apache.org/documentation/Distributed-RPC.html' height='600px'></iframe>
+
+
+---
+## How is storm implemented?
+
+- Storm is primarily implemented in Clojure. This is something to keep in mind if you want to look into the code to see how each system works or to make your own customizations. 
+
+- Storm was developed at BackType and Twitter; 
+
+---
+
+## What are the types of communication in Storm ?
+
+- Intra-worker communication in Storm (inter-thread on the same Storm node): LMAX Disruptor
+
+- Inter-worker communication (node-to-node across the network): ZeroMQ or Netty
+    
+
+- Inter-topology communication: nothing built into Storm, you must take care of this yourself with e.g. a messaging system such as Kafka/RabbitMQ, a database, etc.
+
+---
+
+## What is a worker process in storm ?
+
+- A worker process executes a subset of a topology, and runs in its own JVM. A worker process belongs to a specific topology and may run one or more executors for one or more components (spouts or bolts) of this topology. A running topology consists of many such processes running on many machines within a Storm cluster.
+
+- To manage its incoming and outgoing messages each worker process has a single receive thread that listens on the workers TCP port (as configured via supervisor.slots.ports). 
+
+- The parameter topology.receiver.buffer.size determines the batch size that the receive thread uses to place incoming messages into the incoming queues of the workers executor threads. 
+
+- Each worker has a single send thread that is responsible for reading messages from the workers transfer queue and sending them over the network to downstream consumers. 
+
+- The size of the transfer queue is configured via topology.transfer.buffer.size.
+
+
+---
+
+## What are executors in Storm?
+
+- An executor is a thread that is spawned by a worker process and runs within the workers JVM. An executor may run one or more tasks for the same component (spout or bolt). An executor always has one thread that it uses for all of its tasks, which means that tasks run serially on an executor.
+
+- Each worker process controls one or more executor threads. 
+
+- Each executor thread has its own incoming queue and outgoing queue.  
+
+- Each executor has its dedicated send thread that moves an executors outgoing messages from its outgoing queue to the parent workers transfer queue. 
+
+- The sizes of the executors incoming and outgoing queues are configured via topology.executor.receive.buffer.size and topology.executor.send.buffer.size, respectively.
+
+- Each executor thread has a single thread that handles the user logic for the spout/bolt (application code), and a single send thread which moves messages from the executors outgoing queue to the workers transfer queue.
+
+
+---
+## What is a task in Storm?
+
+- A task is a unit of work that will be sent to one executor. A task performs the actual data processing and is run within its parent executors thread of execution.
+
+
+---
+
+## What are the spout implementations in Storm?
+
+- storm-kestrel: Adapter to use Kestrel as a spout
+ 
+- storm-amqp-spout: Adapter to use AMQP source as a spout
+    
+- storm-jms: Adapter to use a JMS source as a spout
+    
+- storm-redis-pubsub: A spout that subscribes to a Redis pubsub stream
+    
+- storm-beanstalkd-spout: A spout that subscribes to a beanstalkd queue
+
+---
+
+## Waht are common patterns in Storm topologies.
+
+- A streaming join combines two or more data streams together based on some common field. Whereas a normal database join has finite input and clear semantics for a join, a streaming join has infinite input and unclear semantics for what a join should be.
+
+- The join type you need will vary per application. Some applications join all tuples for two streams over a finite window of time, whereas other applications expect exactly one tuple for each side of the join for each join field. Other applications may do the join completely differently. 
+
+- The common pattern among all these join types is partitioning multiple input streams in the same way. This is easily accomplished in Storm by using a fields grouping on the same fields for many input streams to the joiner bolt.
+
+
+- builder.setBolt("join", new MyJoiner(), parallelism)
+
+  .fieldsGrouping("1", new Fields("joinfield1", "joinfield2"))
+
+  .fieldsGrouping("2", new Fields("joinfield1", "joinfield2"))
+
+  .fieldsGrouping("3", new Fields("joinfield1", "joinfield2"));
+
+---
+
+## Testing: Storm unit testing?
+
+<iframe src = 'http://storm.apache.org/2012/09/06/storm081-released.html' height='600px'></iframe>
+
+
+---
+## Testing: Error handling in storm trident topologies?
+
+<iframe src = 'https://svendvanderveken.wordpress.com/2014/02/05/error-handling-in-storm-trident-topologies/' height='600px'></iframe>
+
+---
+
+## Compare Apache storm and apache spark?
+
+<iframe src = 'http://xinhstechblog.blogspot.in/2014/06/storm-vs-spark-streaming-side-by-side.html' height='600px'><iframe>
+
