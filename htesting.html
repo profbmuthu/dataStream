@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BigData - Data managment</title>
+  <meta charset="utf-8">
+  <meta name="description" content="BigData - Data managment">
+  <meta name="author" content="Dr.BM">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>BigData - Data managment</h1>
+    <h2>focus on testing</h2>
+    <p>Dr.BM<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is Hadoop Testing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Testing and debugging multi threaded programs is hard. </p></li>
+<li><p>Now take the same programs and massively distribute them across multiple JVMs deployed on a cluster of machines and the complexity goes off the roof. </p></li>
+<li><p>One way to overcome this complexity is to do testing in isolation and catch as many bugs as possible locally. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Hadoop testing with Jmeter?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='http://jmeter-plugins.org/wiki/Start/' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What is the use of MRUnit?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>With MRUnit, you can craft test input, push it through your mapper and/or reducer, and verify it&#39;s output all in a JUnit test.  </p></li>
+<li><p>As do other JUnit tests, this allows you to debug your code using the JUnit test as a driver.  </p></li>
+<li><p>A map/reduce pair can be tested using MRUnit&#39;s MapReduceDriver.  </p></li>
+<li><p>A combiner can be tested using MapReduceDriver as well.  A PipelineMapReduceDriver allows you to test a workflow of map/reduce jobs</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>What is MRUnit testing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='https://cwiki.apache.org/confluence/display/MRUNIT/MRUnit+Tutorial' height= '600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Download and build MRUnit?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><iframe src='https://github.com/apache/mrunit' height=600px'><iframe></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Howto Test with MRUNIT?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='https://dzone.com/articles/testing-mapreduce-mrunit' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Developing and testing pig latin scripts?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='http://chimera.labs.oreilly.com/books/1234000001811/ch07.html' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>What is PigUnit?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src= 'http://pig.apache.org/docs/r0.8.1/pigunit.html' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Advanced pigunit testing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><iframe src='https://github.com/Telenet/nifty-pigunit' height='600px'>&lt;/iframe?</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>HBase Testing ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='http://hbase.apache.org/0.94/book/hbase.tests.html' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>What is flume testing?</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src='https://github.com/mpercy/flume-load-gen' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>WebSphere Transformation Extender for z/OS</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src = 'ftp://public.dhe.ibm.com/software/integration/wdatastagetx/library/GI11_2870_05.pdf' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Transform Legacy Data to XML - WTX -1</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src = 'http://www.ibm.com/developerworks/websphere/library/techarticles/ind-wsesb-wste-part1/ind-wsesb-wste-part1-pdf.pdf' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Transform Legacy Data to XML - WTX -2</h2>
+  </hgroup>
+  <article data-timings="">
+    <iframe src = 'http://www.ibm.com/developerworks/websphere/library/techarticles/ind-wsesb-wste-part2/ind-wsesb-wste-part2-pdf.pdf' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is Hadoop Testing?'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Hadoop testing with Jmeter?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What is the use of MRUnit?'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='What is MRUnit testing?'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Download and build MRUnit?'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Howto Test with MRUNIT?'>
+         6
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=7 title='Developing and testing pig latin scripts?'>
+         7
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=8 title='What is PigUnit?'>
+         8
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=9 title='Advanced pigunit testing?'>
+         9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='HBase Testing ?'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='What is flume testing?'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='WebSphere Transformation Extender for z/OS'>
+         12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Transform Legacy Data to XML - WTX -1'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Transform Legacy Data to XML - WTX -2'>
+         14
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
