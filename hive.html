@@ -34,7 +34,7 @@
   <hgroup class="auto-fadein">
     <h1>Apache Hive foundations</h1>
     <h2>Focus on DB</h2>
-    <p>Dr.B.Muthukumaran<br/></p>
+    <p>Dr.B.Muthukumaran<br/>http://</p>
   </hgroup>
   <article></article>  
 </slide>
@@ -42,6 +42,16 @@
 
     <!-- SLIDES -->
     <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h1>HIVE</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
   <hgroup>
     <h2>What is Hive? (1/2)</h2>
   </hgroup>
@@ -60,20 +70,23 @@
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-2" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>What is Hive? (2/2)</h2>
   </hgroup>
   <article data-timings="">
     <ul>
-<li>Hive structures data into the well-understood database concepts like tables, columns, rows, and partitions. </li>
+<li><p>Hive structures data into the well-understood database concepts like tables, columns, rows, and partitions. </p></li>
+<li><p>Hive is an open source volunteer project under the Apache Software Foundation.</p></li>
 </ul>
+
+<p>-The Hive GIT repository for the most recent Hive code is located here: git clone <a href="https://git-wip-us.apache.org/repos/asf/hive.git">https://git-wip-us.apache.org/repos/asf/hive.git</a> (the master branch).</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>What is the use of hive?</h2>
   </hgroup>
@@ -88,7 +101,7 @@ fast response times are not required, and when the data is not changing rapidly.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
     <h2>What are the limitations of Hive?</h2>
   </hgroup>
@@ -106,7 +119,7 @@ relatively small data sets.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>What are the primitive data types supported by Hive? (1/3)</h2>
   </hgroup>
@@ -122,7 +135,7 @@ double(double precision) (c) String</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>What are the primitive data types supported by Hive? (2/3)</h2>
   </hgroup>
@@ -137,18 +150,22 @@ double(double precision) (c) String</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>What are the primitive data types supported by Hive? (3/3)</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src = 'https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types' height='600px'></iframe>
+    <ul>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types"> Language anual</a></li>
+</ul>
+
+<iframe src = 'https://cwiki.apache.org/confluence/display/Hive/LanguageManual+Types' height='600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-9" style="background:;">
   <hgroup>
     <h2>What are collection data types?</h2>
   </hgroup>
@@ -164,35 +181,7 @@ double(double precision) (c) String</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
-  <hgroup>
-    <h2>What is schema on write?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>When you write data to a traditional database, either through loading external data, writing the output of a query, doing UPDATE statements, etc., the database has total control over the storage. </p></li>
-<li><p>The database is the &quot;gatekeeper.&quot; An important implication of this control is that the database can enforce the schema as data is written. This is called schema on write.</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
 <slide class="" id="slide-10" style="background:;">
-  <hgroup>
-    <h2>What is schema on read?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>Hive has no such control over the underlying storage. </p></li>
-<li><p>There are many ways to create, modify, and even damage the data that Hive will query. Therefore, Hive can only enforce queries on read. This is called schema on read.</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>What Is Inside Hive? (1/3)</h2>
   </hgroup>
@@ -208,7 +197,7 @@ hive command-line interface (CLI). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>What Is Inside Hive? (2/3)</h2>
   </hgroup>
@@ -224,7 +213,7 @@ hive command-line interface (CLI). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>What Is Inside Hive? (3/3)</h2>
   </hgroup>
@@ -238,7 +227,7 @@ hive command-line interface (CLI). </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>What is .hiverc file? (1/2)</h2>
   </hgroup>
@@ -254,7 +243,7 @@ commands for the CLI to run as it starts, before showing you the prompt. </p></l
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>What is .hiverc file? (2/2)</h2>
   </hgroup>
@@ -271,7 +260,7 @@ commands for the CLI to run as it starts, before showing you the prompt. </p></l
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>What is a database in Hive?</h2>
   </hgroup>
@@ -289,7 +278,35 @@ commands for the CLI to run as it starts, before showing you the prompt. </p></l
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>What is schema on write?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>When you write data to a traditional database, either through loading external data, writing the output of a query, doing UPDATE statements, etc., the database has total control over the storage. </p></li>
+<li><p>The database is the &quot;gatekeeper.&quot; An important implication of this control is that the database can enforce the schema as data is written. This is called schema on write.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
 <slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>What is schema on read?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive has no such control over the underlying storage. </p></li>
+<li><p>There are many ways to create, modify, and even damage the data that Hive will query. Therefore, Hive can only enforce queries on read. This is called schema on read.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>How does Hive communicate to job tracker?</h2>
   </hgroup>
@@ -305,7 +322,7 @@ it&#39;s common to have edge nodes where tools like Hive run. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>What are the interfaces exposed by Hive?</h2>
   </hgroup>
@@ -321,7 +338,7 @@ Command Line Interface (CLI) and HiveServer. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>What does the interface do? (1/2)</h2>
   </hgroup>
@@ -337,7 +354,7 @@ Command Line Interface (CLI) and HiveServer. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>What does the interface do? (2/2)</h2>
   </hgroup>
@@ -353,7 +370,7 @@ data operation. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>What is the use of Derby SQL Server?</h2>
   </hgroup>
@@ -368,7 +385,94 @@ and other  metadata.  It is typically implemented using tables in a relational d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
+  <hgroup>
+    <h1>HIVEQL</h1>
+  </hgroup>
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>What is HiveQl? (1/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hive  supports queries expressed in a SQL-like declarative language - HiveQL, which are compiled into mapreduce jobs executed on Hadoop.</p></li>
+<li><p>In addition, HiveQL supports custom map-reduce scripts to be plugged into queries.  The language includes a type system with support for tables containing primitive types, collections  like  arrays  and  maps,  and  nested  compositions  of the same.  </p></li>
+<li><p>The underlying IO libraries can be extended to query data in custom formats.  Hive also includes a system
+catalog, Hive-Metastore, containing schemas and statistics, which is useful in data exploration and query optimization</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-25" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL? (2/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HiveQL is the Hive query language. </p></li>
+<li><p>it doesn&#39;t fully conform to any particular revision of the ANSI SQL standard. </p></li>
+<li><p>Hive offers no support for rowlevel inserts, updates, and deletes. </p></li>
+<li><p>Hive doesn&#39;t support transactions. </p></li>
+<li><p>Hive adds extensions to provide better performance in the context of Hadoop and to integrate with custom extensions and even external programs.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL? (3/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The Hive query language(HiveQL) comprises of a subset of SQL and some extensions that we have found useful in our environment. </p></li>
+<li><p>Traditional SQL features like from clause subqueries, various types of joins - inner, left outer, right outer and outer joins, cartesian products, group bys and aggregations, union all, create table as select and many useful functions on primitive and complex types make the language very SQL like.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL ? (4/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>HiveSql exposes its own dialect of SQL to users and translates data manipulation statements (queries) to a directed acyclic graph (DAG) of MapReduce jobs. </p></li>
+<li><p>With an SQL interface, users do not need to write tedious and sometimes difficult Map Reduce programs to manipulate data stored in Hadoop Distributed Filesystem (HDFS). </p></li>
+<li><p>This highly abstracted SQL interface significantly improves the productivity of data management in Hadoop and accelerates the adoption of Hive. </p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>What is HiveQL ? (5/5)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The efficiency and productivty of Hive are largely affected by how its data warehouse layer is designed, implemented, and optimized to best utilize the underlying data processing engine (e.g. Hadoop MapReduce) and HDFS. </p></li>
+<li><p>In order to make Hive continuously satisfy requirements of processing increasingly high volumes of data in a scalable and efficient way, we must improve both data storage as well as query execution aspect of Hive. First, Hive should be able to store datasets managed by it in an efficient way which guarantees both storage efficiency as well as fast data access. </p></li>
+<li><p>Second,Hive should be able to generate highly optimized query plans and execute them using a query execution model that utilizes hardware resources well</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>Explain the following database commands  in Hive? (1/3)</h2>
   </hgroup>
@@ -386,7 +490,7 @@ and other  metadata.  It is typically implemented using tables in a relational d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>Explain the following database commands  in Hive? (2/3)</h2>
   </hgroup>
@@ -402,7 +506,7 @@ and other  metadata.  It is typically implemented using tables in a relational d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>Explain the following database commands  in Hive? (3/3)</h2>
   </hgroup>
@@ -417,54 +521,7 @@ and other  metadata.  It is typically implemented using tables in a relational d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
-  <hgroup>
-    <h2>What is HiveQl?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>Hive  supports queries expressed in a SQL-like declarative language - HiveQL, which are compiled into mapreduce jobs executed on Hadoop.</p></li>
-<li><p>In addition, HiveQL supports custom map-reduce scripts to be plugged into queries.  The language includes a type system with support for tables containing primitive types, collections  like  arrays  and  maps,  and  nested  compositions  of the same.  </p></li>
-<li><p>The underlying IO libraries can be extended to query data in custom formats.  Hive also includes a system
-catalog, Hive-Metastore, containing schemas and statistics, which is useful in data exploration and query optimization</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-26" style="background:;">
-  <hgroup>
-    <h2>What is HiveQL?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>HiveQL is the Hive query language. </p></li>
-<li><p>it doesn&#39;t fully conform to any particular revision of the ANSI SQL standard. </p></li>
-<li><p>Hive offers no support for rowlevel inserts, updates, and deletes. </p></li>
-<li><p>Hive doesn&#39;t support transactions. </p></li>
-<li><p>Hive adds extensions to provide better performance in the context of Hadoop and to integrate with custom extensions and even external programs.</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-27" style="background:;">
-  <hgroup>
-    <h2>What is HiveQL?</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>The Hive query language(HiveQL) comprises of a subset of SQL and some extensions that we have found useful in our environment. </p></li>
-<li><p>Traditional SQL features like from clause subqueries, various types of joins - inner, left outer, right outer and outer joins, cartesian products, group bys and aggregations, union all, create table as select and many useful functions on primitive and complex types make the language very SQL like.</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>What is metastore?</h2>
   </hgroup>
@@ -479,7 +536,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>What is a table?</h2>
   </hgroup>
@@ -496,7 +553,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>What is a partition?</h2>
   </hgroup>
@@ -514,37 +571,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
-  <hgroup>
-    <h2>What is Hive SQL ? (1/2)</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>HiveSql exposes its own dialect of SQL to users and translates data manipulation statements (queries) to a directed acyclic graph (DAG) of MapReduce jobs. </p></li>
-<li><p>With an SQL interface, users do not need to write tedious and sometimes difficult Map Reduce programs to manipulate data stored in Hadoop Distributed Filesystem (HDFS). </p></li>
-<li><p>This highly abstracted SQL interface significantly improves the productivity of data management in Hadoop and accelerates the adoption of Hive. </p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-32" style="background:;">
-  <hgroup>
-    <h2>What is Hive SQL ? (2/2)</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li><p>The efficiency and productivty of Hive are largely affected by how its data warehouse layer is designed, implemented, and optimized to best utilize the underlying data processing engine (e.g. Hadoop MapReduce) and HDFS. </p></li>
-<li><p>In order to make Hive continuously satisfy requirements of processing increasingly high volumes of data in a scalable and efficient way, we must improve both data storage as well as query execution aspect of Hive. First, Hive should be able to store datasets managed by it in an efficient way which guarantees both storage efficiency as well as fast data access. </p></li>
-<li><p>Second,Hive should be able to generate highly optimized query plans and execute them using a query execution model that utilizes hardware resources well</p></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>Take me to Hive Editor?</h2>
   </hgroup>
@@ -557,7 +584,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>Take me to metastore manager?</h2>
   </hgroup>
@@ -570,7 +597,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>What are the available HIVE APIs</h2>
   </hgroup>
@@ -583,7 +610,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>What are Hive Limitations</h2>
   </hgroup>
@@ -600,7 +627,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>Apache Hive Unit testing? (1/3)</h2>
   </hgroup>
@@ -611,7 +638,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>Discuss Open Source unit test framework for hadoop hive queries? (2/3)</h2>
   </hgroup>
@@ -622,7 +649,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-39" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>Discuss HIVE unit testing? (3/3)</h2>
   </hgroup>
@@ -635,20 +662,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-40" style="background:;">
-  <hgroup>
-    <h2>What is the mark logic data connector ?</h2>
-  </hgroup>
-  <article data-timings="">
-    <p><a href="https://docs.marklogic.com/guide/mapreduce.pdf">MarkLogic Connector for Hadoop  Developer&#39;s Guide</a></p>
-
-<iframe src = 'https://docs.marklogic.com/guide/mapreduce.pdf' height = '600px'></iframe>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-41" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h1>HCATALOG</h1>
   </hgroup>
@@ -658,7 +672,7 @@ catalog, Hive-Metastore, containing schemas and statistics, which is useful in d
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-42" style="background:;">
+<slide class="" id="slide-43" style="background:;">
   <hgroup>
     <h2>What Is Metadata?</h2>
   </hgroup>
@@ -674,7 +688,7 @@ applications, or apps. </p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-43" style="background:;">
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>Examples of Meta Data?</h2>
   </hgroup>
@@ -691,7 +705,7 @@ times accessed, or date last accessed</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-44" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>USe of Metadata (1/2)</h2>
   </hgroup>
@@ -707,7 +721,7 @@ times accessed, or date last accessed</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-45" style="background:;">
+<slide class="" id="slide-46" style="background:;">
   <hgroup>
     <h2>USe of Metadata (1/2)</h2>
   </hgroup>
@@ -724,7 +738,7 @@ times accessed, or date last accessed</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-46" style="background:;">
+<slide class="" id="slide-47" style="background:;">
   <hgroup>
     <h2>What is Hive SerDes (1/2)</h2>
   </hgroup>
@@ -742,7 +756,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-47" style="background:;">
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>What is Hive SerDes (2/2)</h2>
   </hgroup>
@@ -757,7 +771,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-48" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>What is HCatalog ? (1/4)</h2>
   </hgroup>
@@ -774,7 +788,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-49" style="background:;">
+<slide class="" id="slide-50" style="background:;">
   <hgroup>
     <h2>What is HCatalog? (2/4)</h2>
   </hgroup>
@@ -789,7 +803,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-50" style="background:;">
+<slide class="" id="slide-51" style="background:;">
   <hgroup>
     <h2>What is HCatalog ? (3/4)</h2>
   </hgroup>
@@ -805,7 +819,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-51" style="background:;">
+<slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>What is HCatalog? (4/4)</h2>
   </hgroup>
@@ -822,7 +836,105 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-52" style="background:;">
+<slide class="" id="slide-53" style="background:;">
+  <hgroup>
+    <h2>HCatalog require installation before using?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Yes, you need to install and start HCatalog server. HCatalog should come with the latest Hive tar package.</p></li>
+<li><p>Setup MySQL database for HCatalog</p></li>
+<li><p>Run server install script</p></li>
+<li><p>share/hcatalog/scripts/hcat server install.sh -r root -d dbroot -h hadoop_home -p portnum</p></li>
+<li><p>Start the HCatalog server</p></li>
+<li><p>export HIVE_ HOME=hive_ home $HIVE_ HOME/sbin/hcat_server.sh start</p></li>
+<li><p>you do not need to install hcatalog separately if you are working with hive 0.12 or later versions.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-54" style="background:;">
+  <hgroup>
+    <h2>Why Did We Create HCatalog? (1/4)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Out of the box Hadoop provides the HDFS file system for users to store their data. </p></li>
+<li><p>File systems are nice because they provide a simple interface. Users can easily copy data into the file system and run jobs against that data. </p></li>
+<li><p>For more complex data processing tasks, the file system abstraction is not rich enough. It forces users to know where data is located, what format it is stored in, how it is compressed, and what its schema is.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-55" style="background:;">
+  <hgroup>
+    <h2>Why Did We Create HCatalog? (2/4)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Considering a stored data set, If the grid administrator needs to move this data to a new location, or compact multiple files into an archive (such as har), or the data producer changes the schema or starts writing it compressed, Pig Latin script will need to be changed. </p></li>
+<li><p>Lack of data storage independence is exacerbated by the fact that in most large Hadoop installations there will be users using different tools to access their data. </p></li>
+<li><p>A change in storage format will ripple through multiple groups and require coordination across disparate data processing tools.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-56" style="background:;">
+  <hgroup>
+    <h2>Why Did We Create HCatalog? (3/4)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>The fact that in many Hadoop installations different users will be using different tools brings up another issue. </p></li>
+<li><p>These tools do not share a common notion of schemas or data types. Pig and Hive have different, though similar, data models. </p></li>
+<li><p>MapReduce leaves data types to its users. This can make sharing a data set across users with different tools difficult and error prone.</p></li>
+<li><p>When data consumers are building new applications or want to query new data sets, finding the data in a file system is difficult. </p></li>
+<li><p>Generally, a user has to contact the group that produces the data and ask them where they write their data, what format it is in, and what its schema is.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-57" style="background:;">
+  <hgroup>
+    <h2>Why Did We Create HCatalog? (4/4)</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>In a complex data processing environment there will be many users waiting for the availability of a given data set. </p></li>
+<li><p>This is particularly true of the foundational data sets that form the basis for much of an organization&#39;s data processing. </p></li>
+<li><p>With a file system, the only way to know if data is available is to do an &#39;ls&#39;. Hundreds of users banging away with &#39;ls&#39; commands every few seconds does not help HDFS&#39; performance.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-58" style="background:;">
+  <hgroup>
+    <h2>How HCatalog addresses these Issues?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>Hadoop needs a better abstraction for data storage, and it needs a metadata service. HCatalog addresses these issues. </p></li>
+<li><p>It presents users with a table abstraction. This frees them from knowing where or how their data is stored. </p></li>
+<li><p>It allows data producers to change how they write data while still supporting existing data in the old format so that data consumers do not have to change their processes. </p></li>
+<li><p>It provides a shared schema and data model for Pig, Hive, and MapReduce. It will enable notifications of data availability. </p></li>
+<li><p>It will provide a place to store state information about the data so that data cleaning and archiving tools can know which data sets are eligible for their services.</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-59" style="background:;">
   <hgroup>
     <h2>HCatalog interfaces ? (1/5)</h2>
   </hgroup>
@@ -839,7 +951,7 @@ format; for example, JavaScript Object Notation (JSON), comma separated value (C
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-53" style="background:;">
+<slide class="" id="slide-60" style="background:;">
   <hgroup>
     <h2>HCatalog interfaces? (2/5)</h2>
   </hgroup>
@@ -861,7 +973,7 @@ metastore.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-54" style="background:;">
+<slide class="" id="slide-61" style="background:;">
   <hgroup>
     <h2>HCatalog interfaces? (3/5)</h2>
   </hgroup>
@@ -876,7 +988,7 @@ metastore.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-55" style="background:;">
+<slide class="" id="slide-62" style="background:;">
   <hgroup>
     <h2>HCatalog interfaces? (4/5)</h2>
   </hgroup>
@@ -891,7 +1003,7 @@ metastore.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-56" style="background:;">
+<slide class="" id="slide-63" style="background:;">
   <hgroup>
     <h2>HCatalog interfaces? (5/5)</h2>
   </hgroup>
@@ -906,34 +1018,74 @@ metastore.</p></li>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-57" style="background:;">
+<slide class="" id="slide-64" style="background:;">
   <hgroup>
     <h2>What are HCatalog load / store interfaces ?</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/loadstore.pdf' height='600px'></iframe>
+    <ul>
+<li><a href="https://hive.apache.org/javadocs/hcat-r0.5.0/loadstore.pdf"> Load Store</a></li>
+</ul>
+
+<iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/loadstore.pdf' height='600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-58" style="background:;">
+<slide class="" id="slide-65" style="background:;">
   <hgroup>
     <h2>HCatalog input and Output interfaces ?</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/inputoutput.pdf' height='600px'></iframe>
+    <ul>
+<li><a href="https://hive.apache.org/javadocs/hcat-r0.5.0/inputoutput.pdf"> Input-Output</a></li>
+</ul>
+
+<iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/inputoutput.pdf' height='600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-59" style="background:;">
+<slide class="" id="slide-66" style="background:;">
   <hgroup>
     <h2>HCatalog Rest API?</h2>
   </hgroup>
   <article data-timings="">
-    <iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/rest.pdf' height='600px'></iframe>
+    <ul>
+<li><a href="https://hive.apache.org/javadocs/hcat-r0.5.0/rest.pdf"> Rest API</a></li>
+</ul>
+
+<iframe src='https://hive.apache.org/javadocs/hcat-r0.5.0/rest.pdf' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-67" style="background:;">
+  <hgroup>
+    <h2>WwbHCat Api ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/WebHCat"> WebHcat</a></li>
+</ul>
+
+<iframe src ='https://cwiki.apache.org/confluence/display/Hive/WebHCat' height='600px'></iframe>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-68" style="background:;">
+  <hgroup>
+    <h2>What is the mark logic data connector ?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><a href="https://docs.marklogic.com/guide/mapreduce.pdf">MarkLogic Connector for Hadoop  Developer&#39;s Guide</a></p>
+
+<iframe src = 'https://docs.marklogic.com/guide/mapreduce.pdf' height = '600px'></iframe>
 
   </article>
   <!-- Presenter Notes -->
@@ -945,265 +1097,265 @@ metastore.</p></li>
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='What is Hive? (1/2)'>
+        data-slide=1 title='HIVE'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='What is Hive? (2/2)'>
+        data-slide=2 title='What is Hive? (1/2)'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='What is the use of hive?'>
+        data-slide=3 title='What is Hive? (2/2)'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='What are the limitations of Hive?'>
+        data-slide=4 title='What is the use of hive?'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='What are the primitive data types supported by Hive? (1/3)'>
+        data-slide=5 title='What are the limitations of Hive?'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='What are the primitive data types supported by Hive? (2/3)'>
+        data-slide=6 title='What are the primitive data types supported by Hive? (1/3)'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='What are the primitive data types supported by Hive? (3/3)'>
+        data-slide=7 title='What are the primitive data types supported by Hive? (2/3)'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='What are collection data types?'>
+        data-slide=8 title='What are the primitive data types supported by Hive? (3/3)'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='What is schema on write?'>
+        data-slide=9 title='What are collection data types?'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='What is schema on read?'>
+        data-slide=10 title='What Is Inside Hive? (1/3)'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='What Is Inside Hive? (1/3)'>
+        data-slide=11 title='What Is Inside Hive? (2/3)'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='What Is Inside Hive? (2/3)'>
+        data-slide=12 title='What Is Inside Hive? (3/3)'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='What Is Inside Hive? (3/3)'>
+        data-slide=13 title='What is .hiverc file? (1/2)'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='What is .hiverc file? (1/2)'>
+        data-slide=14 title='What is .hiverc file? (2/2)'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='What is .hiverc file? (2/2)'>
+        data-slide=15 title='What is a database in Hive?'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='What is a database in Hive?'>
+        data-slide=16 title='What is schema on write?'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='How does Hive communicate to job tracker?'>
+        data-slide=17 title='What is schema on read?'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='What are the interfaces exposed by Hive?'>
+        data-slide=18 title='How does Hive communicate to job tracker?'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='What does the interface do? (1/2)'>
+        data-slide=19 title='What are the interfaces exposed by Hive?'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='What does the interface do? (2/2)'>
+        data-slide=20 title='What does the interface do? (1/2)'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='What is the use of Derby SQL Server?'>
+        data-slide=21 title='What does the interface do? (2/2)'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Explain the following database commands  in Hive? (1/3)'>
+        data-slide=22 title='What is the use of Derby SQL Server?'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Explain the following database commands  in Hive? (2/3)'>
+        data-slide=23 title='HIVEQL'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Explain the following database commands  in Hive? (3/3)'>
+        data-slide=24 title='What is HiveQl? (1/5)'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='What is HiveQl?'>
+        data-slide=25 title='What is HiveQL? (2/5)'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='What is HiveQL?'>
+        data-slide=26 title='What is HiveQL? (3/5)'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='What is HiveQL?'>
+        data-slide=27 title='What is HiveQL ? (4/5)'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='What is metastore?'>
+        data-slide=28 title='What is HiveQL ? (5/5)'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='What is a table?'>
+        data-slide=29 title='Explain the following database commands  in Hive? (1/3)'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='What is a partition?'>
+        data-slide=30 title='Explain the following database commands  in Hive? (2/3)'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='What is Hive SQL ? (1/2)'>
+        data-slide=31 title='Explain the following database commands  in Hive? (3/3)'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='What is Hive SQL ? (2/2)'>
+        data-slide=32 title='What is metastore?'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='Take me to Hive Editor?'>
+        data-slide=33 title='What is a table?'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='Take me to metastore manager?'>
+        data-slide=34 title='What is a partition?'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='What are the available HIVE APIs'>
+        data-slide=35 title='Take me to Hive Editor?'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='What are Hive Limitations'>
+        data-slide=36 title='Take me to metastore manager?'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='Apache Hive Unit testing? (1/3)'>
+        data-slide=37 title='What are the available HIVE APIs'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Discuss Open Source unit test framework for hadoop hive queries? (2/3)'>
+        data-slide=38 title='What are Hive Limitations'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='Discuss HIVE unit testing? (3/3)'>
+        data-slide=39 title='Apache Hive Unit testing? (1/3)'>
          39
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=40 title='What is the mark logic data connector ?'>
+        data-slide=40 title='Discuss Open Source unit test framework for hadoop hive queries? (2/3)'>
          40
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='HCATALOG'>
+        data-slide=41 title='Discuss HIVE unit testing? (3/3)'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='What Is Metadata?'>
+        data-slide=42 title='HCATALOG'>
          42
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='Examples of Meta Data?'>
+        data-slide=43 title='What Is Metadata?'>
          43
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=44 title='USe of Metadata (1/2)'>
+        data-slide=44 title='Examples of Meta Data?'>
          44
       </a>
     </li>
@@ -1215,86 +1367,140 @@ metastore.</p></li>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='What is Hive SerDes (1/2)'>
+        data-slide=46 title='USe of Metadata (1/2)'>
          46
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='What is Hive SerDes (2/2)'>
+        data-slide=47 title='What is Hive SerDes (1/2)'>
          47
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='What is HCatalog ? (1/4)'>
+        data-slide=48 title='What is Hive SerDes (2/2)'>
          48
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='What is HCatalog? (2/4)'>
+        data-slide=49 title='What is HCatalog ? (1/4)'>
          49
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=50 title='What is HCatalog ? (3/4)'>
+        data-slide=50 title='What is HCatalog? (2/4)'>
          50
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=51 title='What is HCatalog? (4/4)'>
+        data-slide=51 title='What is HCatalog ? (3/4)'>
          51
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=52 title='HCatalog interfaces ? (1/5)'>
+        data-slide=52 title='What is HCatalog? (4/4)'>
          52
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=53 title='HCatalog interfaces? (2/5)'>
+        data-slide=53 title='HCatalog require installation before using?'>
          53
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=54 title='HCatalog interfaces? (3/5)'>
+        data-slide=54 title='Why Did We Create HCatalog? (1/4)'>
          54
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=55 title='HCatalog interfaces? (4/5)'>
+        data-slide=55 title='Why Did We Create HCatalog? (2/4)'>
          55
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=56 title='HCatalog interfaces? (5/5)'>
+        data-slide=56 title='Why Did We Create HCatalog? (3/4)'>
          56
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=57 title='What are HCatalog load / store interfaces ?'>
+        data-slide=57 title='Why Did We Create HCatalog? (4/4)'>
          57
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=58 title='HCatalog input and Output interfaces ?'>
+        data-slide=58 title='How HCatalog addresses these Issues?'>
          58
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=59 title='HCatalog Rest API?'>
+        data-slide=59 title='HCatalog interfaces ? (1/5)'>
          59
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=60 title='HCatalog interfaces? (2/5)'>
+         60
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=61 title='HCatalog interfaces? (3/5)'>
+         61
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=62 title='HCatalog interfaces? (4/5)'>
+         62
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=63 title='HCatalog interfaces? (5/5)'>
+         63
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=64 title='What are HCatalog load / store interfaces ?'>
+         64
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=65 title='HCatalog input and Output interfaces ?'>
+         65
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=66 title='HCatalog Rest API?'>
+         66
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=67 title='WwbHCat Api ?'>
+         67
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=68 title='What is the mark logic data connector ?'>
+         68
       </a>
     </li>
   </ul>
