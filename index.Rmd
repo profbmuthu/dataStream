@@ -16,20 +16,6 @@ knit        : slidify::knit2slides
 
 
 
---- #myslide
-
-## Test
-
-<script>
-$('#myslide').on('slideenter', function(){
-  $(this).find('article')
-    .append('<iframe src="http://bl.ocks.org/mbostock/raw/1256572/"></iframe>')
-});
-$('#myslide').on('slideleave', function(){
-  $(this).find('iframe').remove();
-});
-</script>
-
 --- .class #id 
 
 ## What is Big data?
