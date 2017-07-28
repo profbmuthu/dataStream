@@ -30,7 +30,8 @@ knit        : slidify::knit2slides
 - Its about placing an ad on a website while someone is reading a specific article. 
 - It’s about combining and analyzing data so you can take the right action, at the right time, and at the right place.
 
----#myslide
+--- #myslide
+
 ## Test
 
 <script>
